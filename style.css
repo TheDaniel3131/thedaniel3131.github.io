@@ -202,6 +202,13 @@ section {
   text-align: center;
 }
 
+.section__text__p1 a:hover {
+  color: grey;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  text-decoration-color: rgb(181, 181, 181);
+}
+
 .section__text__p2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
