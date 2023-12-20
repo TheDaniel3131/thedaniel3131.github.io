@@ -70,9 +70,9 @@ a:hover {
   transition: color 0.3s ease-in-out;
 }
 
-.role:hover {
-  color: red;
-}
+/* .role:hover {
+  color: blue;
+} */
 
 /* HAMBURGER MENU */
 
