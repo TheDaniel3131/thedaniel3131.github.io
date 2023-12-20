@@ -66,6 +66,14 @@ a:hover {
   cursor: default;
 }
 
+.role {
+  transition: color 0.3s ease-in-out;
+}
+
+.role:hover {
+  color: red;
+}
+
 /* HAMBURGER MENU */
 
 #hamburger-nav {
