@@ -358,17 +358,31 @@ section {
   flex-direction: row;
   gap: 2.5rem;
   justify-content: space-around;
+  max-width: 800px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container */
 }
 
 article {
   display: flex;
-  width: 10rem;
-  justify-content: space-around;
-  gap: 0.5rem;
+  align-items: left; /* Left content vertically */
+  width: 100%;
+  max-width: 200px;
+  gap: 2em;
+  text-align: left; /* Left content horizontally */;
 }
 
 article .icon {
   cursor: default;
+
+}
+
+/* Adjust the styling of text inside the articles */
+article h3 {
+  margin-bottom: 0.5rem;
+}
+
+article p {
+  margin: 0;
 }
 
 /* PROJECTS SECTION */
