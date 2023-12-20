@@ -389,6 +389,7 @@ article p {
 
 #projects {
   position: relative;
+  margin-bottom: 18em;
 }
 
 .color-container {
@@ -410,6 +411,11 @@ article p {
 .project-btn {
   color: black;
   border-color: rgb(163, 163, 163);
+}
+
+.project-description{
+  margin-bottom: 3rem;
+  color: black;
 }
 
 /* CONTACT */
