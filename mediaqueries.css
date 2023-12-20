@@ -18,6 +18,9 @@
     height: 350px;
   }
 
+  #contacts {
+    margin-top: 5em;
+  }
 }
 
 @media screen and (max-width: 1200px) {

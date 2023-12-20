@@ -282,6 +282,7 @@ section {
 
 .about-containers {
   gap: 2rem;
+  flex-wrap: wrap;
   margin-bottom: 3rem;
   margin-top: 0rem;
 }
@@ -389,7 +390,8 @@ article p {
 
 #projects {
   position: relative;
-  margin-bottom: 18em;
+  margin-bottom: 20em;
+  height: 200vh;
 }
 
 .color-container {
@@ -425,7 +427,9 @@ article p {
   justify-content: center;
   flex-direction: column;
   height: 70vh;
+  position: relative;
 }
+
 
 .contact-info-upper-container {
   display: flex;
