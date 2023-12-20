@@ -40,7 +40,7 @@ nav {
 }
 
 .nav-links {
-  gap: 2rem;
+  gap: 3.5rem;
   list-style: none;
   font-size: 1.5rem;
 }
@@ -59,7 +59,8 @@ a:hover {
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  font-weight: 850;
 }
 
 .logo:hover {
@@ -179,9 +180,13 @@ section {
 
 .section__pic-container {
   display: flex;
-  height: 400px;
+  height: 350px;
   width: 400px;
   margin: auto 0;
+}
+
+.section__pic-container img{
+  border-radius: 50%;
 }
 
 .section__text {
@@ -210,7 +215,7 @@ section {
 #socials-container {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
   gap: 1rem;
 }
 
@@ -277,8 +282,8 @@ section {
 
 .about-containers {
   gap: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 0rem;
 }
 
 .about-details-container {
@@ -312,7 +317,7 @@ section {
 }
 
 .section-container {
-  gap: 4rem;
+  gap: 8rem;
   height: 80%;
 }
 
@@ -320,6 +325,10 @@ section {
   height: 400px;
   width: 400px;
   margin: auto 0;
+}
+
+.text-container p {
+  text-align: justify;
 }
 
 /* EXPERIENCE SECTION */
@@ -339,6 +348,7 @@ section {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-top: 3rem;
 }
 
 .article-container {
