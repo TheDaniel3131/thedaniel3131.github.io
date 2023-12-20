@@ -424,6 +424,7 @@ article p {
 .contact-info-upper-container {
   display: flex;
   justify-content: center;
+  flex-wrap: none; /* Wrap the items to the next line on smaller screens */
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
@@ -438,10 +439,13 @@ article p {
   justify-content: center;
   gap: 0.5rem;
   margin: 1rem;
+  width: 100%; /* Make each container take up the full width on smaller screens */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
 }
 
 .contact-info-container p {
   font-size: larger;
+  text-align: center; /* Center the text on smaller screens */
 }
 
 .contact-icon {

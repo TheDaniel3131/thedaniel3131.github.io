@@ -17,6 +17,7 @@
     width: auto;
     height: 350px;
   }
+
 }
 
 @media screen and (max-width: 1200px) {
@@ -52,16 +53,24 @@
   .about-containers {
     margin-top: 0;
   }
+  .contact-info-upper-container {
+    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .contact-info-upper-container {
+    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
+  }
 }
 
 @media screen and (max-width: 600px) {
   #contact,
-  footer {
-    height: 40vh;
-  }
+  #projects,
+  #experience,
   #profile {
-    height: 83vh;
-    margin-bottom: 0;
+    /* height: 83vh; */
+    margin-bottom: 4em;
   }
   article {
     font-size: 1rem;
@@ -109,5 +118,15 @@
     text-align: justify;
   }
 
+  .contact-info-upper-container {
+    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
+  }
 
+  .contact-info-container {
+    margin: 1rem 0; /* Add space between the contact info containers */
+  }
+
+  .contact-info-container p {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+  }
 }
