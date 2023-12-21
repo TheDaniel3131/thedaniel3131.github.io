@@ -49,6 +49,13 @@
                 <li><a href="#experience" onclick="toggleMenu()">经验</a></li>
                 <li><a href="#projects" onclick="toggleMenu()">项目</a></li>
                 <li><a href="#contact" onclick="toggleMenu()">联系</a></li>
+                <li class="language-dropdown">
+                    <label for="language"></label>
+                    <select id="language" onchange="changeLanguage(this.value)">
+                        <option value="zh">中文</option>
+                        <option value="en">English</option>
+                    </select>
+                </li><br><br>
             </div>
         </div>
     </nav>

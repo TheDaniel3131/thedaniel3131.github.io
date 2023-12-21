@@ -111,6 +111,9 @@ a:hover {
   max-height: 0;
   overflow: hidden;
   transition: all 0.3 ease-in-out;
+  padding-bottom: 20px;
+  margin-right: 35px;
+ 
 }
 
 .menu-links a {
@@ -123,6 +126,8 @@ a:hover {
   text-decoration: none;
   transition: all 0.3 ease-in-out;
   width: 150px; /* Updated width */
+  overflow: hidden;
+  max-height: 200px;
 }
 
 .menu-links li {

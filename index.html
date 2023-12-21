@@ -48,6 +48,13 @@
           <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
           <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+          <li class="language-dropdown">
+            <label for="language"></label>
+            <select id="language" onchange="changeLanguage(this.value)">
+              <option value="en" id="eng">English</option>
+              <option value="zh" id="chi">中文</option>
+            </select>
+          </li><br><br>
         </div>
       </div>
     </nav>
