@@ -541,6 +541,7 @@ body::-webkit-scrollbar-thumb:after {
 
 }
 
+
 /* Style the select element */
 select {
   padding: 8px;
@@ -566,7 +567,6 @@ select:focus {
 /* Style the select options */
 select option {
   outline: none;
-  
 }
 
 /* Style the select arrow */

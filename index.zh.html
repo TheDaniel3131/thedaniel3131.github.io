@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页 | 欢迎来到我的个人作品集！</title>
+    <link rel="stylesheet" href="style.zh.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+    <!-- <link rel="stylesheet" href="darkmode.css" id="dark-mode-stylesheet" />
+        <script src="darkmode.js"></script> -->
+    <script src="switchEnglishLang.js"></script>
+    <link rel="icon" href="./assets/daniel.png" type="image/x-icon" />
+</head>
+
+<body>
+    <nav id="desktop-nav">
+        <div class="logo" onclick="location.reload()" style="cursor: pointer;">Zephrous&nbsp;&#8484;</div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#experience">经验</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#contact">联系我</a></li>
+                <li class="language-dropdown">
+                    <label for="language"></label>
+                    <select id="language" onchange="changeLanguage(this.value)">
+                        <option value="zh">中文</option>
+                        <option value="en">English</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="dark-mode-switch">
+                    <input type="checkbox" id="dark-mode-toggle" />
+                    <label for="dark-mode-toggle"></label>
+            </div> -->
+    </nav>
+    <nav id="hamburger-nav">
+        <div class="logo" onclick="location.reload()" style="cursor: pointer;">DPTF</div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="#about" onclick="toggleMenu()">关于</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">经验</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">项目</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">联系</a></li>
+            </div>
+        </div>
+    </nav>
+    <section id="profile">
+        <div class="section__pic-container">
+            <img src="./assets/daniel.png" alt="DPTF个人照片" style="border-radius: 25%;" />
+        </div>
+        <div class="section__text">
+            <p class="section__text__p1">你好，我是</p>
+            <h1 class="title">Daniel Poh Ting Fong</h1>
+            <p class="section__text__p2">
+                <span class="role">软件工程学生</span>
+            </p>
+            <div class="btn-container">
+                <button <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://drive.google.com/file/d/1KLTQOu91ZDNuBv3he3hEzrNRc2L96Ro3/view?usp=sharing')">阅读我的简历
+                </button>
+                </button>
+                <button class="btn btn-color-1" onclick="location.href='./#contact'">
+                    联系信息
+                </button>
+            </div>
+            <div id="socials-container">
+                <img src="./assets/linkedin.png" alt="我的LinkedIn个人资料" class="icon"
+                    onclick="window.open('https://linkedin.com/in/danielpohtingfong', '_blank')" />
+                <img src="./assets/github.png" alt="我的Github个人资料" class="icon"
+                    onclick="window.open('https://github.com/TheDaniel3131', '_blank')" />
+            </div>
+        </div>
+    </section>
+    <section id="about">
+        <p class="section__text__p1">更多了解</p>
+        <h1 class="title">关于我</h1>
+        <div class="section-container">
+            <div class="section__pic-container">
+                <img src="./assets/scenery.png" alt="个人照片" class="about-pic" />
+            </div>
+            <div class="about-details-container">
+                <div class="about-containers">
+                    <div class="details-container">
+                        <img src="./assets/experience.png" alt="经验图标" class="icon" />
+                        <h3>经验</h3><br>
+                        <p>3+年 <br />软件与网页开发</p>
+                    </div>
+                    <div class="details-container">
+                        <img src="./assets/education.png" alt="教育图标" class="icon" />
+                        <h3>教育</h3><br>
+                        <p>软件工程学士学位(Degree)<br />软件工程文凭(Diploma)</p>
+                    </div>
+                </div>
+                <div class="text-container">
+                    <p>
+                        我叫Daniel Poh Ting Fong，是一名热爱软件工程的学生，在APU学习。在我的学术之旅中，我致力于学习和磨练各种技术和框架，包括HTML、CSS、JavaScript、PHP、MySQL、Python、Java、C++等等。此外，我还在业余时间或研讨会上学习Flutter、React、Next.js、Tailwind
+                        CSS等等。此外，在我空闲的时间里，我还喜欢玩电子游戏（国际象棋、Osu!..）、听音乐和播客，这些是我最喜欢做的事情。所以，是的，我有很多爱好，因为我喜欢探索和学习新事物。
+                        <!-- 除了我的前端技能，我还涉足了令人兴奋的区块链开发领域。我熟练掌握Solidity，能够为去中心化应用程序构建智能合约。作为一个热衷于解决问题的人，我积极参与锦标赛和比赛，主要作为前端开发人员。然而，我的技能不仅限于前端任务，我经常承担额外的责任，展示我的多才多艺和致力于提供全面解决方案的精神。 -->
+                    </p>
+                </div>
+            </div>
+        </div>
+        <img src="./assets/arrow.png" alt="箭头图标" class="icon arrow" onclick="location.href='./#experience'" />
+    </section>
+    <section id="experience">
+        <p class="section__text__p1">探索我的</p>
+        <h1 class="title">经验</h1>
+        <div class="experience-details-container">
+            <div class="about-containers">
+                <div class="details-container">
+                    <h2 class="experience-sub-title">编程语言</h2>
+                    <div class="article-container">
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>HTML</h3>
+                                <p>中级</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>CSS</h3>
+                                <p>中级</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>JavaScript</h3>
+                                <p>中级</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>Python</h3>
+                                <p>中级</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>Java</h3>
+                                <p>中级</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>C++</h3>
+                                <p>基础</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <h2 class="experience-sub-title">其他</h2>
+                    <div class="article-container">
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>MySQL</h3>
+                                <p>中级</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>Node.js</h3>
+                                <p>基础</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>ReactJS</h3>
+                                <p>基础</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>ExpressJS</h3>
+                                <p>基础</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>Git</h3>
+                                <p>基础</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="./assets/checkmark.png" alt="经验图标" class="icon" />
+                            <div>
+                                <h3>Figma</h3>
+                                <p>基础</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="./assets/arrow.png" alt="箭头图标" class="icon arrow" onclick="location.href='./#projects'" />
+    </section>
+    <section id="projects">
+        <p class="section__text__p1">查看我的<a href="https://github.com/TheDaniel3131?tab=repositories">更多</a>最新项目</p>
+        <h1 class="title">项目</h1>
+        <div class="experience-details-container">
+            <div class="about-containers">
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/project1.jpg" alt="项目 1" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Barking Lot - 宠物领养网站</h2>
+                    <p class="project-description">
+                        汪汪乐园是一个宠物领养网站，旨在将潜在的宠物主人与他们完美的伴侣连接起来。该项目使用网络编程语言编写。我们的平台提供了一个用户友好的界面，用于浏览和搜索可用的宠物，了解它们的特点和需求等等。加入我们，为这些可爱的动物找到温暖的家！
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://github.com/TheDaniel3131/BarkingLot'">
+                            Github
+                        </button>
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://barkinglot.vercel.app/'">
+                            在线演示
+                        </button>
+                    </div>
+                </div>
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/project2.jpg" alt="项目 2" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Logistics Web - 物流协会网站</h2>
+                    <p class="project-description">
+                        物流协会网站是一个旨在连接物流专业人士和爱好者的平台。它提供了一个分享知识、讨论行业趋势和与志同道合的人交流的空间。对于这个项目，我的团队使用HTML、CSS、JavaScript、PHP、MySQL和Bootstrap作为基础。加入我们，探索令人兴奋的物流世界！
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'">
+                            Github
+                        </button>
+                        <button class="btn btn-color-2 project-btn" disabled
+                            style="background-color: grey; color: white;">
+                            不可用
+                        </button>
+                    </div>
+                </div>
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/project4.jpg" alt="项目 4" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">蜘蛛侠在线食品服务（SOFS）</h2>
+                    <p class="project-description">
+                        SOFS是一个允许用户订购食品并将其送到家门口的应用程序。该平台使用Java构建。通过用户友好的界面，客户可以浏览各种菜单选项，定制订单，并实时跟踪交付状态。SOFS旨在提供便利和高效的蜘蛛侠在线食品服务体验。加入我们，享受美食的便捷！
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://github.com/TheDaniel3131/SOFS-Java  '">
+                            Github
+                        </button>
+                        <button class="btn btn-color-2 project-btn" disabled
+                            style="background-color: grey; color: white;">
+                            不可用
+                        </button>
+                    </div>
+                </div>
+
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/project5.jpg" alt="项目 5" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">航空航班系统</h2>
+                    <p class="project-description">
+                        航空航班系统是一个命令行应用程序，为管理航班预订和预约提供了一个用户友好的界面。该项目使用Python构建，允许用户搜索航班、预订机票和查看航班详情。它还包括了航班状态更新等功能。加入我们，探索航空世界的航班系统命令行界面！
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://github.com/TheDaniel3131/AirFlightSystem'">
+                            Github
+                        </button>
+                        <button class="btn btn-color-2 project-btn" disabled
+                            style="background-color: grey; color: white;">
+                            不可用
+                        </button>
+                    </div>
+                </div>
+
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/project6.jpg" alt="项目 6" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">待办事项应用</h2>
+                    <p class="project-description">
+                        待办事项应用是一个使用Flutter开发的移动应用程序。它允许用户创建和管理任务，并设置和跟踪任务的进度。它帮助用户保持组织和提高工作效率。无论您是学生、还是任何希望保持任务管理和提高生产力的人，这个应用程序都能简化您的任务管理。快来试试吧！
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://github.com/TheDaniel3131/todoapp-flutter'">
+                            Github
+                        </button>
+                        <button class="btn btn-color-2 project-btn" disabled
+                            style="background-color: grey; color: white;">
+                            进行中
+                        </button>
+                    </div>
+                </div>
+
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/project3.jpg" alt="项目 3" class="project-img blur-image" // 添加 "blur-image"
+                            类 />
+                    </div>
+                    <h2 class="experience-sub-title project-title">即将推出的个人网站</h2>
+                    <p class="project-description">
+                        一个即将推出的个人网站项目，进一步展示我的技能、项目和经验。它使用ReactJS和Next.js构建，这是用于构建现代Web应用程序的流行框架。该网站目前使用Vercel进行部署，Vercel是一个用于静态站点和无服务器函数的云平台。该网站开发项目仍在进行中。
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://github.com/TheDaniel3131/Hackthletes-workshop-nextjs-portfolio'">
+                            Github
+                        </button>
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://danielpohtingfong-portfolio.vercel.app/'">
+                            在线演示
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="./assets/arrow.png" alt="箭头图标" class="icon arrow" onclick="location.href='./#contact'" />
+    </section>
+    <section id="contact">
+        <p class="section__text__p1">联系我</p>
+        <h1 class="title">联系方式</h1>
+        <div class="contact-info-upper-container">
+            <div class="contact-info-container">
+                <img src="./assets/email.png" alt="电子邮件图标" class="icon contact-icon email-icon" />
+                <p><a href="mailto:danielpohtingfong@gmail.com">danielpohtingfong@gmail.com</a></p>
+            </div>
+            <div class="contact-info-container">
+                <img src="./assets/linkedin.png" alt="领英图标" class="icon contact-icon" />
+                <p><a href="https://www.linkedin.com/in/danielpohtingfong/">领英</a></p>
+            </div>
+            <div class="contact-info-container">
+                <img src="./assets/github.png" alt="GitHub图标" class="icon contact-icon" />
+                <p><a href="https://github.com/TheDaniel3131">GitHub</a></p>
+            </div>
+            <div class="contact-info-container">
+                <img src="./assets/whatsapp.png" alt="WhatsApp图标" class="icon contact-icon" />
+                <p><a href="https://wa.me/60108483602">WhatsApp</a></p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <nav>
+            <div class="nav-links-container">
+                <ul class="nav-links">
+                    <li><a href="#about">关于</a></li>
+                    <li><a href="#experience">经历</a></li>
+                    <li><a href="#projects">项目</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>版权所有 &#169; 2023 Daniel Poh Ting Fong。&nbsp; 保留所有权利。</p><br><br>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
