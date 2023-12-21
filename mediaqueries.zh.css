@@ -108,6 +108,7 @@
   .nav-links {
     flex-direction: column;
     gap: 0.5rem;
+    word-break: break-word;
     text-align: center;
   }
   .section__pic-container {
