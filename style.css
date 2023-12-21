@@ -484,3 +484,50 @@ footer {
 footer p {
   text-align: center;
 }
+
+/* Scrollbar Styles */
+body::-webkit-scrollbar {
+  width: 18px; /* width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #888; /* color of the thumb */
+  border-radius: 8px; /* roundness of the thumb */
+  border: 3px solid #f1f1f1; /* border around the thumb */
+  transition: background-color 0.3s, border-color 0.3s; /* smooth transition on color change */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* color of the thumb on hover */
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: #555; /* color of the thumb on click */
+}
+
+/* Optional: Add a subtle pulse animation when scrolling */
+body::-webkit-scrollbar-thumb:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  background-color: #888;
+  animation: pulse 1.5s infinite alternate; /* pulse animation */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
