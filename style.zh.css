@@ -603,3 +603,9 @@ select:focus {
   text-align: center;
   align-items: center;
 }
+
+/* Hidden Secret Egg */
+
+.hidden-secret {
+  display: none;
+}
