@@ -1,7 +1,12 @@
+@media screen and (max-width){
+  /* iphone 15 max pro*/
+}
+
+
 @media screen and (max-width: 1400px) {
   #profile {
     height: 100vh;
-    margin-bottom: 5rem;
+    margin-bottom: 1rem;
   }
 
   .about-containers {
