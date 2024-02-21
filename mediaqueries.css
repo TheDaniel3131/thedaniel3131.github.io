@@ -72,6 +72,25 @@
   }
 }
 
+@media screen and (max-width: 800px){
+  #profile {
+    height: 40vh;
+    margin-bottom: 2rem;
+  }
+
+  #about,
+  #contact,
+  #projects,
+  #experience{
+    /* height: 83vh; */
+    margin-bottom: 2em;
+  }
+  .contact-info-upper-container {
+    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
+  }
+}
+
+
 @media screen and (max-width: 600px) {
   #about,
   #contact,
