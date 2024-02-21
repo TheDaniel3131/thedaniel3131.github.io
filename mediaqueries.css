@@ -142,3 +142,13 @@
     font-size: 1.2rem; /* Adjust font size for smaller screens */
   }
 }
+
+@media screen and (width < 600px) {
+  #profile {
+    height: 53vh;
+    margin-bottom: 3rem;
+  }
+  .contact-info-upper-container {
+    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
+  }
+}
