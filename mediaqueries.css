@@ -27,7 +27,9 @@
 
 @media screen and (max-width: 1280px) {
   #profile {
-    height: 65vh;
+    height: 50vh;
+    margin-bottom: 20em;
+
 }
 
 @media screen and (max-width: 1200px) {
