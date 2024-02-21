@@ -30,7 +30,7 @@
     height: 100%;
     width: auto;
     margin-bottom: 1em;
-
+}
 }
 
 @media screen and (max-width: 1200px) {
@@ -149,5 +149,4 @@
     font-size: 1.2rem; /* Adjust font size for smaller screens */
   }
 
-}
 }
