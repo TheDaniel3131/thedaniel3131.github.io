@@ -73,6 +73,7 @@
 }
 
 @media screen and (max-width: 600px) {
+  #about,
   #contact,
   #projects,
   #experience{
@@ -151,6 +152,7 @@
   .contact-info-upper-container {
     flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
   }
+  #about,
   #contact,
   #projects,
   #experience{
