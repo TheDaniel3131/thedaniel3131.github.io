@@ -151,4 +151,10 @@
   .contact-info-upper-container {
     flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
   }
+  #contact,
+  #projects,
+  #experience{
+    /* height: 83vh; */
+    margin-bottom: 3em;
+  }
 }
