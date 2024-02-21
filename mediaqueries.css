@@ -8,12 +8,12 @@
     flex-wrap: wrap;
   }
 
-  #about,
   #experience,
   #contact,
   #projects {
     height: fit-content;
   }
+
   .section__pic-container {
     width: auto;
     height: 350px;
