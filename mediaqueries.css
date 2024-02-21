@@ -6,7 +6,7 @@
 @media screen and (max-width: 1400px) {
   #profile {
     height: 83vh;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
   .about-containers {
@@ -76,14 +76,14 @@
 @media screen and (max-width: 600px) {
   #contact,
   #projects,
-  #experience,
-  #profile {
+  #experience{
     /* height: 83vh; */
     margin-bottom: 2em;
   }
 
   #profile{
-    height: 83vh;
+    height: 53vh;
+    margin-bottom: 1em;
   }
   article {
     font-size: 1rem;
