@@ -222,10 +222,10 @@ section {
   margin-bottom: 1rem;
 }
 
-.title {
+.section__text__title {
   font-size: 3rem;
   text-align: center;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 }
 
 #socials-container {
