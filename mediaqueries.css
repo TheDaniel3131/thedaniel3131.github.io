@@ -1,7 +1,8 @@
 @media screen and (max-width: 1400px) {
   #profile {
-    height: 83vh;
-    margin-bottom: 3rem;
+    height: 50vh;
+    padding: 5rem;
+    margin-bottom: 20em;
   }
 
   .about-containers {
@@ -31,11 +32,7 @@
   #hamburger-nav {
     display: flex;
   }
-
-  #profile{
-    height: 50vh;
-
-  }
+  
   #experience,
   .experience-details-container {
     margin-top: 2rem;
