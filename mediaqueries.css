@@ -68,6 +68,10 @@
 }
 
 @media screen and (max-width: 1000px){
+  #profile {
+    height: 53vh;
+    margin-bottom: 3rem;
+  }
   .contact-info-upper-container {
     flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
   }
