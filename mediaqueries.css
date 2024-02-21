@@ -64,7 +64,7 @@
 
 @media screen and (max-width: 1000px){
   #profile {
-    height: 50vh;
+    height: 40vh;
     margin-bottom: 3rem;
   }
   .contact-info-upper-container {
