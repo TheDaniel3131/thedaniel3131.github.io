@@ -31,6 +31,11 @@
   #hamburger-nav {
     display: flex;
   }
+
+  #profile{
+    height: 50vh;
+
+  }
   #experience,
   .experience-details-container {
     margin-top: 2rem;
