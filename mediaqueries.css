@@ -8,12 +8,12 @@
     flex-wrap: wrap;
   }
 
+  #about,
   #experience,
   #contact,
   #projects {
     height: fit-content;
   }
-
   .section__pic-container {
     width: auto;
     height: 350px;
@@ -63,46 +63,22 @@
 }
 
 @media screen and (max-width: 1000px){
-  #profile {
-    height: 40vh;
-    margin-bottom: 2rem;
-  }
   .contact-info-upper-container {
     flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
   }
 }
-
-@media screen and (max-width: 800px){
-  #profile {
-    height: 40vh;
-    margin-bottom: 2rem;
-  }
-
-  #about,
-  #contact,
-  #projects,
-  #experience{
-    /* height: 83vh; */
-    margin-bottom: 2em;
-  }
-  .contact-info-upper-container {
-    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
-  }
-}
-
 
 @media screen and (max-width: 600px) {
-  #about,
   #contact,
   #projects,
-  #experience{
+  #experience,
+  #profile {
     /* height: 83vh; */
     margin-bottom: 2em;
   }
 
   #profile{
-    height: 40vh;
-    margin-bottom: 1em;
+    height: 83vh;
   }
   article {
     font-size: 1rem;
@@ -132,6 +108,7 @@
   .nav-links {
     flex-direction: column;
     gap: 0.5rem;
+    word-break: break-word;
     text-align: center;
   }
   .section__pic-container {
@@ -161,21 +138,5 @@
   .contact-info-container p {
     font-size: 1.2rem; /* Adjust font size for smaller screens */
   }
-}
 
-@media screen and (max-width < 600px) {
-  #profile {
-    height: 53vh;
-    margin-bottom: 3rem;
-  }
-  .contact-info-upper-container {
-    flex-wrap: wrap; /* Wrap the items to the next line on smaller screens */
-  }
-  #about,
-  #contact,
-  #projects,
-  #experience{
-    /* height: 83vh; */
-    margin-bottom: 3em;
-  }
 }
