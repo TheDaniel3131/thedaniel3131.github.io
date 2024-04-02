@@ -163,6 +163,10 @@ a:hover {
   transform: none;
 }
 
+#chi {
+  font-family: "Noto Sans SC", sans-serif;
+}
+
 /* SECTIONS */
 
 section {
