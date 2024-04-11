@@ -93,7 +93,8 @@
   }
 
   #profile{
-    height: 25vh;
+    height: 50vh;
+    margin-top: -20em;
   }
   article {
     font-size: 1rem;
