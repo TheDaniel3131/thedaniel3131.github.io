@@ -1,6 +1,6 @@
 @media screen and (max-width: 1400px) {
   #profile {
-    height: 50vh;
+    height: 60vh;
     padding: 5rem;
     margin-bottom: 20em;
   }
@@ -90,7 +90,8 @@
   }
 
   #profile{
-    height: 83vh;
+    height: 50vh;
+    margin-top: -5em;
   }
   article {
     font-size: 1rem;
@@ -125,7 +126,7 @@
   }
   .section__pic-container {
     width: auto;
-    height: 46vw;
+    height: 50vw;
     justify-content: center;
     
   }
