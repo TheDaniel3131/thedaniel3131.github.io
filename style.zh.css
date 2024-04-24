@@ -187,12 +187,14 @@ section {
 #profile {
   display: flex;
   justify-content: center;
-  gap: 5rem;
+  gap: 15rem;
   height: 80vh;
   margin-bottom: 5rem;
 }
 
 .section__pic-container {
+  text-align: center;
+  align-self: center;
   display: flex;
   height: 350px;
   width: 400px;
@@ -206,6 +208,7 @@ section {
 .section__text {
   align-self: center;
   text-align: center;
+  margin: auto 0;
 }
 
 .section__text p {
