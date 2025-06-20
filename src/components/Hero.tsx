@@ -42,18 +42,18 @@ const Hero = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12">
-      <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+    <div className="container mx-auto px-4 pt-20 sm:pt-24 md:pt-28 pb-6 sm:pb-8 md:pb-12">
+      <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 md:gap-12">
         {/* Text Content */}
         <div className="text-center md:text-left md:w-1/2 order-2 md:order-1">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4">
             <span className="block">Hello, I&apos;m</span>
-            <span className="text-[hsl(var(--primary))] whitespace-nowrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            <span className="text-[hsl(var(--primary))] whitespace-nowrap text-3xl sm:text-4xl md:text-5xl lg:text-5xl">
               Daniel Poh Ting Fong
             </span>
           </h1>
 
-          <div className="h-6 sm:h-8 md:h-10 mb-3 sm:mb-4 md:mb-6">
+          <div className="h-6 sm:h-8 md:h-10 mb-2 sm:mb-3 md:mb-6">
             <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-[hsl(var(--muted-foreground))] animate-fade-in">
               <span className="profession-text">{profession}</span>
             </h2>
@@ -93,7 +93,7 @@ const Hero = () => {
             <div className="absolute -inset-1 sm:-inset-2 bg-[hsl(var(--primary))]/10 rounded-2xl transform -rotate-3"></div>
 
             {/* Main image container - Smaller on mobile */}
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-80 md:h-80 lg:w-96 lg:h-96">
               <div className="hero-image-container relative overflow-hidden rounded-2xl border-2 sm:border-4 border-[hsl(var(--primary))]/30 shadow-2xl bg-[hsl(var(--card))]">
                 {!imgError ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -139,7 +139,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll down button - positioned relative to container */}
-      <div className="flex justify-center mt-8 sm:mt-12 md:mt-16">
+      <div className="flex justify-center mt-6 sm:mt-8 md:mt-16">
         <button
           onClick={scrollToAbout}
           className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors animate-bounce"

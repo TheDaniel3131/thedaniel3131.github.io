@@ -12,7 +12,7 @@ const CustomCursor = () => {
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY })
 
-      // Check if cursor is over a clickable element
+      // Check if cursor is over a clickable element or scrollbar
       const target = e.target as HTMLElement
       const isClickable = !!(
         target.tagName.toLowerCase() === "button" ||
@@ -22,8 +22,12 @@ const CustomCursor = () => {
         window.getComputedStyle(target).cursor === "pointer"
       )
 
-      setIsPointer(isClickable)
+      // Check if cursor is over scrollbar area
+      const isOverScrollbar = e.clientX > window.innerWidth - 20
+
+      setIsPointer(isClickable || isOverScrollbar)
     }
+
     const handleMouseDown = () => setIsClicking(true)
     const handleMouseUp = () => setIsClicking(false)
     const handleMouseEnter = () => setIsVisible(true)
@@ -54,23 +58,47 @@ const CustomCursor = () => {
     }
   }, [])
 
+  // Don't render on mobile/touch devices
+  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+    return null
+  }
+
   return (
     <>
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           body {
             cursor: none !important;
           }
           a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
             cursor: none !important;
           }
-        `
-      }} />
+          /* Show default cursor on scrollbar */
+          ::-webkit-scrollbar {
+            cursor: default !important;
+          }
+          ::-webkit-scrollbar-thumb {
+            cursor: default !important;
+          }
+          ::-webkit-scrollbar-track {
+            cursor: default !important;
+          }
+          /* Ensure scrollbar area shows default cursor */
+          html::-webkit-scrollbar,
+          body::-webkit-scrollbar {
+            cursor: default !important;
+          }
+        `,
+        }}
+      />
       <div
         className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
+          // Hide custom cursor when over scrollbar area
+          display: position.x > window.innerWidth - 20 ? "none" : "block",
         }}
       >
         {/* Outer ring */}

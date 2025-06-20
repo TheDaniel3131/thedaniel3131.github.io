@@ -1,7 +1,22 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Github, Linkedin, Menu, X, Moon, Sun, Mail, MessageCircle } from "lucide-react"
+import {
+  Github,
+  Linkedin,
+  Menu,
+  X,
+  Moon,
+  Sun,
+  Mail,
+  MessageCircle,
+  User,
+  Wrench,
+  Briefcase,
+  FolderOpen,
+  Phone,
+  Code,
+} from "lucide-react"
 import { useTheme } from "./theme-provider"
 
 const Navbar = () => {
@@ -43,7 +58,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
-            <a href="#" className="text-2xl font-bold flex items-center">
+            <a href="#" className="text-2xl font-bold flex items-center gap-2">
+              <Code className="h-6 w-6 text-[hsl(var(--primary))]" />
               <span className="text-[hsl(var(--primary))]">DPTF</span>
             </a>
           </div>
@@ -110,22 +126,6 @@ const Navbar = () => {
               <Linkedin className="h-6 w-6" />
               <span className="sr-only">LinkedIn</span>
             </a>
-            {/* <a
-              href="mailto:danielpohtingfong@gmail.com"
-              className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
-            >
-              <Mail className="h-6 w-6" />
-              <span className="sr-only">Email</span>
-            </a>
-            <a
-              href="https://api.whatsapp.com/send/?phone=60108483602&text&type=phone_number&app_absent=0"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
-            >
-              <MessageCircle className="h-6 w-6" />
-              <span className="sr-only">WhatsApp</span>
-            </a> */}
           </div>
 
           {/* Mobile Menu Button and Theme Toggle */}
@@ -151,38 +151,43 @@ const Navbar = () => {
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <button
               onClick={() => scrollToSection("about")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))]"
+              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
             >
+              <User className="h-5 w-5" />
               About
             </button>
             <button
               onClick={() => scrollToSection("skills")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))]"
+              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
             >
+              <Wrench className="h-5 w-5" />
               Skills
             </button>
             <button
               onClick={() => scrollToSection("experience")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))]"
+              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
             >
+              <Briefcase className="h-5 w-5" />
               Experience
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))]"
+              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
             >
+              <FolderOpen className="h-5 w-5" />
               Projects
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))]"
+              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
             >
+              <Phone className="h-5 w-5" />
               Contact
             </button>
 
-            <div className="flex space-x-4 pt-2">
+            <div className="flex justify-center space-x-6 pt-4">
               <a
-                href="https://github.com/TheDaniel3131"
+                href="https://github.com/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"

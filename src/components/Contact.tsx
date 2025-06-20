@@ -98,7 +98,7 @@ const Contact = () => {
           <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Let's connect</h3>
 
           <p className="text-[hsl(var(--muted-foreground))] mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-            I'm interested in internship opportunities, entry-level positions, and collaborative projects. Whether you
+            I am interested in full time opportunities, entry-level/junior positions, and collaborative projects as a Software Developer. Whether you
             have a project idea, want to discuss technology, or just want to connect, don't hesitate to reach out!
           </p>
 
