@@ -41,7 +41,15 @@ const Navbar = () => {
     setMobileMenuOpen(false)
     const section = document.getElementById(sectionId)
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" })
+      // Account for fixed navbar height (80px) plus some extra padding
+      const navbarHeight = 80
+      const extraPadding = 20
+      const elementPosition = section.offsetTop - navbarHeight - extraPadding
+
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      })
     }
   }
 
