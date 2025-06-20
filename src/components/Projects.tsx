@@ -239,7 +239,7 @@ const Projects = () => {
                   Live Demo
                 </a>
               ) : (
-                <span className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[hsl(var(--muted-foreground))] opacity-50">
+                <span className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[hsl(var(--muted-foreground))] opacity-75">
                   <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
                   Not Available
                 </span>
