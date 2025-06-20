@@ -30,7 +30,15 @@ const Hero = () => {
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact")
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" })
+      // Account for fixed navbar height (80px) plus some extra padding
+      const navbarHeight = 20
+      const extraPadding = 20
+      const elementPosition = contactSection.offsetTop - navbarHeight - extraPadding
+
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      })
     }
   }
 

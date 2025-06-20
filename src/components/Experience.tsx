@@ -70,7 +70,7 @@ const Experience = () => {
                       <h3 className="text-lg sm:text-xl font-semibold mb-1">{exp.title}</h3>
                       <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">{exp.company}</p>
                     </div>
-                    <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full whitespace-nowrap">
+                    <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
                       <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
                       <span>{exp.period}</span>
                     </div>
