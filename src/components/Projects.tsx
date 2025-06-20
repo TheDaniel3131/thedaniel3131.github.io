@@ -43,8 +43,8 @@ const Projects = () => {
         "A comprehensive full-stack car marketplace platform using Next.js, React, and Tailwind CSS, enabling secure peer-to-peer vehicle transactions with user authentication, profile management, and secure payment processing.",
       image: "/assets/project0.jpg",
       technologies: ["Next.js", "React", "Tailwind CSS", "Supabase", "shadcn/ui", "TypeScript", "Node.js"],
-      liveUrl: "https://carmine-marketplace.vercel.app",
-      githubUrl: "https://github.com/danielpohtingfong/carmine",
+      liveUrl: "https://carmine-my.vercel.app/",
+      githubUrl: "https://github.com/TheDaniel3131/CarMine",
       category: "web",
     },
     {
@@ -54,7 +54,7 @@ const Projects = () => {
       image: "/assets/project1.jpg",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js"],
       liveUrl: "https://myst3r10us.vercel.app/",
-      githubUrl: "https://github.com/danielpohtingfong/myst3r10us",
+      githubUrl: "https://github.com/TheDaniel3131/CTFTeam",
       category: "web",
     },
     {
@@ -64,7 +64,7 @@ const Projects = () => {
       image: "/assets/project2.jpg",
       technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Bootstrap", "jQuery", "Font Awesome", "AJAX"],
       liveUrl: "https://barkinglot.netlify.app",
-      githubUrl: "https://github.com/danielpohtingfong/barking-lot",
+      githubUrl: "https://github.com/TheDaniel3131/BarkingLot",
       category: "web",
     },
     {
@@ -74,7 +74,7 @@ const Projects = () => {
       image: "/assets/project3.jpg",
       technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Bootstrap", "jQuery", "Font Awesome", "AJAX"],
       liveUrl: "#",
-      githubUrl: "https://github.com/danielpohtingfong/logistic-website",
+      githubUrl: "https://github.com/TheDaniel3131/WDTAssignment",
       category: "web",
     },
     {
@@ -84,7 +84,7 @@ const Projects = () => {
       image: "/assets/project4.jpg",
       technologies: ["Java", "MySQL"],
       liveUrl: "#",
-      githubUrl: "https://github.com/danielpohtingfong/sofs",
+      githubUrl: "https://github.com/TheDaniel3131/SOFS-Java",
       category: "app",
     },
     {
@@ -94,7 +94,7 @@ const Projects = () => {
       image: "/assets/project5.jpg",
       technologies: ["Python"],
       liveUrl: "#",
-      githubUrl: "https://github.com/danielpohtingfong/flight-system",
+      githubUrl: "https://github.com/TheDaniel3131/AirFlightSystem",
       category: "app",
     },
   ]
