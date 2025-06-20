@@ -38,7 +38,7 @@ const Hero = () => {
     const aboutSection = document.getElementById("about")
     if (aboutSection) {
       // Account for fixed navbar height (80px) plus some extra padding
-      const navbarHeight = 80
+      const navbarHeight = 20
       const extraPadding = 20
       const elementPosition = aboutSection.offsetTop - navbarHeight - extraPadding
 
@@ -56,7 +56,7 @@ const Hero = () => {
         <div className="text-center md:text-left md:w-1/2 order-2 md:order-1">
           <h1 className="font-bold mb-2 sm:mb-3 md:mb-4">
             <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Hello, I&apos;m</span>
-            <span className="text-[hsl(var(--primary))] whitespace-nowrap text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+            <span className="text-[hsl(var(--primary))] whitespace-nowrap text-3xl sm:text-4xl md:text-5xl lg:text-5xl">
               Daniel Poh Ting Fong
             </span>
           </h1>
@@ -101,7 +101,7 @@ const Hero = () => {
             <div className="absolute -inset-1 sm:-inset-2 bg-[hsl(var(--primary))]/10 rounded-2xl transform -rotate-3"></div>
 
             {/* Main image container - Optimized for mobile */}
-            <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-80 md:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-100 h-100 sm:w-56 sm:h-56 md:w-80 md:h-80 lg:w-96 lg:h-96">
               <div className="hero-image-container relative overflow-hidden rounded-2xl border-2 sm:border-4 border-[hsl(var(--primary))]/30 shadow-2xl bg-[hsl(var(--card))]">
                 {!imgError ? (
                   // eslint-disable-next-line @next/next/no-img-element
