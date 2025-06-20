@@ -1,11 +1,16 @@
+// Full Working Contact Form with reCAPTCHA shown after validation
+
 "use client"
 
 import type React from "react"
 import { useState, useEffect, useRef, type FormEvent } from "react"
 import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle, AlertCircle } from "lucide-react"
+import ReCAPTCHA from "react-google-recaptcha"
 
 const Contact = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,8 +19,10 @@ const Contact = () => {
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
   const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(null)
   const [errorMessage, setErrorMessage] = useState("")
+  const [showRecaptcha, setShowRecaptcha] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,7 +33,7 @@ const Contact = () => {
           }
         })
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll")
@@ -40,41 +47,51 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [id]: value }))
   }
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus(null)
-
-    // Validate form
+  const validateForm = () => {
     if (!formData.name || !formData.email || !formData.message) {
-      setIsSubmitting(false)
       setSubmitStatus("error")
       setErrorMessage("Please fill in all required fields")
-      return
+      return false
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
-      setIsSubmitting(false)
       setSubmitStatus("error")
       setErrorMessage("Please enter a valid email address")
-      return
+      return false
     }
 
+    return true
+  }
+
+  const handlePreSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    setSubmitStatus(null)
+
+    if (validateForm()) {
+      setShowRecaptcha(true)
+    }
+  }
+
+  const handleCaptchaChange = async (token: string | null) => {
+    if (!token) return
+
+    setRecaptchaToken(token)
+    setIsSubmitting(true)
+
     try {
-      // Using Formspree API - replace with your form ID
       const response = await fetch("https://formspree.io/f/xdkzdqln", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
 
       if (response.ok) {
         setSubmitStatus("success")
         setFormData({ name: "", email: "", subject: "", message: "" })
+        setRecaptchaToken(null)
+        setShowRecaptcha(false)
+        recaptchaRef.current?.reset()
       } else {
         throw new Error("Failed to submit form")
       }
@@ -90,7 +107,9 @@ const Contact = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8" ref={sectionRef}>
       <div className="text-center mb-12 sm:mb-16 animate-on-scroll">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Contact Me</h2>
-        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">Please reach out to me with the contact information below</p>
+        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
+          Please reach out to me with the contact information below
+        </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
@@ -98,10 +117,10 @@ const Contact = () => {
           <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Let's connect</h3>
 
           <p className="text-[hsl(var(--muted-foreground))] mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-            I am interested in full time opportunities, entry-level/junior positions, and collaborative projects as a Software Developer. Whether you
-            have a project idea, want to discuss technology, or just want to connect, don't hesitate to reach out!
+            I am interested in full time opportunities, entry-level/junior positions, and collaborative projects as a Software Developer. Whether you have a project idea, want to discuss technology, or just want to connect, don't hesitate to reach out!
           </p>
 
+          {/* Contact details */}
           <div className="space-y-4 sm:space-y-6">
             <div className="flex items-start gap-3 sm:gap-4 group">
               <div className="bg-[hsl(var(--primary))]/10 p-2 sm:p-3 rounded-full group-hover:bg-[hsl(var(--primary))]/20 transition-colors flex-shrink-0">
@@ -109,9 +128,7 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="font-medium text-sm sm:text-base">Location</h4>
-                <p className="text-[hsl(var(--muted-foreground))] text-xs sm:text-sm">
-                  Bandar Mahkota Cheras, Selangor, Malaysia
-                </p>
+                <p className="text-[hsl(var(--muted-foreground))] text-xs sm:text-sm">Bandar Mahkota Cheras, Selangor, Malaysia</p>
               </div>
             </div>
 
@@ -164,6 +181,7 @@ const Contact = () => {
           </div>
         </div>
 
+        {/* Form Component */}
         <div className="bg-[hsl(var(--card))] rounded-lg shadow-md border border-[hsl(var(--border))] p-4 sm:p-6 hover:border-[hsl(var(--primary))]/50 transition-colors animate-on-scroll">
           <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Send me a message</h3>
 
@@ -182,7 +200,7 @@ const Contact = () => {
               </button>
             </div>
           ) : (
-            <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-3 sm:space-y-4" onSubmit={handlePreSubmit}>
               {submitStatus === "error" && (
                 <div className="p-3 sm:p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-800 rounded-md flex items-start gap-3 text-red-800 dark:text-red-400">
                   <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 mt-0.5 flex-shrink-0" />
@@ -190,6 +208,7 @@ const Contact = () => {
                 </div>
               )}
 
+              {/* Form fields */}
               <div className="space-y-1 sm:space-y-2">
                 <label htmlFor="name" className="text-xs sm:text-sm font-medium">
                   Name <span className="text-red-500">*</span>
@@ -250,14 +269,35 @@ const Contact = () => {
                 ></textarea>
               </div>
 
+              {showRecaptcha && (
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="6LcB22crAAAAAG1tSD2tYTDo4PAX2P2chTf5Zzbn"
+                    onChange={handleCaptchaChange}
+                  />
+                </div>
+              )}
+
+              {!showRecaptcha && (
               <button
                 type="submit"
-                disabled={isSubmitting}
                 className="px-4 sm:px-6 py-2 sm:py-3 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] rounded-md font-medium flex items-center justify-center gap-2 hover:bg-[hsl(var(--primary))]/90 transition-all duration-300 hover:scale-105 w-full disabled:opacity-70 text-sm sm:text-base"
-              >
+                disabled={isSubmitting}>
                 {isSubmitting ? "Sending..." : "Send Message"}
                 <Send className="h-3 w-3 sm:h-4 sm:w-4" />
               </button>
+              )}
+              {recaptchaToken && (
+                <p className="text-center text-xs text-[hsl(var(--muted-foreground))] mt-2">
+                  reCAPTCHA verified
+                </p>
+              )}
+              {showRecaptcha && (
+                <p className="text-center text-xs text-[hsl(var(--muted-foreground))]">
+                  Please complete the reCAPTCHA to send your message
+                </p>
+              )}
             </form>
           )}
         </div>
