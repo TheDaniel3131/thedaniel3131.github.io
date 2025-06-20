@@ -146,7 +146,11 @@ const Navbar = () => {
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
 
-            <button className="text-[hsl(var(--foreground))]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button 
+              className="text-[hsl(var(--foreground))]" 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
