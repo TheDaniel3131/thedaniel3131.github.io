@@ -127,7 +127,7 @@ const Skills = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8" ref={sectionRef}>
       <div className="text-center mb-12 sm:mb-16 animate-on-scroll">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Skills & Technologies</h2>
-        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">My technical expertise</p>
+        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">A comprehensive overview of my technical skills, programming languages, frameworks, and soft skills that drive my development journey</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">

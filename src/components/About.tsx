@@ -41,18 +41,13 @@ const About = () => {
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
         <div className="animate-on-scroll">
           <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">My Introduction</h3>
+            <p className="text-[hsl(var(--muted-foreground))] mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
+            My Name is Daniel Poh Ting Fong, I am a Software Engineer with a Bachelor&apos;s degree in Software Engineering from Asia Pacific University. I have gained valuable hands-on experience through multiple internships in web development, UI/UX design, and software testing. I specialize in full-stack development using React, Next.js, and modern web technologies.
+            </p>
 
-          <p className="text-[hsl(var(--muted-foreground))] mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
-            I&apos;m Daniel Poh Ting Fong, and I am a passionate Software Engineering student at Asia Pacific University. I
-            have completed two internships that gave me hands-on experience in web development, UI/UX design, and
-            software testing. I specialize in full-stack development with React, Next.js, and modern web technologies.
-          </p>
-
-          <p className="text-[hsl(var(--muted-foreground))] mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-            With a strong foundation in computer science and a passion for learning new technologies, I&apos;m constantly
-            pushing my limits through self-learning and participation in hackathons like Solana Hackfest and various CTF
-            competitions.
-          </p>
+            <p className="text-[hsl(var(--muted-foreground))] mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
+            With a solid foundation in software engineering principles and a passion for emerging technologies, I continuously expand my skills through self-directed learning and active participation in various hackathons & competitions.
+            </p>
 
           <div className="mb-6 sm:mb-8 space-y-4">
             <h4 className="text-lg sm:text-xl font-medium mb-4 flex items-center gap-2">

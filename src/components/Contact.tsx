@@ -90,7 +90,7 @@ const Contact = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8" ref={sectionRef}>
       <div className="text-center mb-12 sm:mb-16 animate-on-scroll">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Contact Me</h2>
-        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">Get in touch</p>
+        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">Please reach out to me with the contact information below</p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">

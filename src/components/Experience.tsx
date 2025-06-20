@@ -47,7 +47,7 @@ const Experience = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8" ref={sectionRef}>
       <div className="text-center mb-12 sm:mb-16 animate-on-scroll">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Experience</h2>
-        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">My professional journey</p>
+        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">Discover my professional journey that have shaped my career</p>
       </div>
 
       <div className="max-w-4xl mx-auto">
