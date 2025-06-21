@@ -16,6 +16,7 @@ import {
   FolderOpen,
   Phone,
   Code,
+  Award,
 } from "lucide-react"
 import { useTheme } from "./theme-provider"
 
@@ -159,74 +160,87 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[hsl(var(--background))]/90 backdrop-blur-md">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] duration-300 hover:scale-105 transition-colors"
-            >
-              <User className="h-5 w-5" />
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("skills")}
-              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
-            >
-              <Wrench className="h-5 w-5" />
-              Skills
-            </button>
-            <button
-              onClick={() => scrollToSection("experience")}
-              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
-            >
-              <Briefcase className="h-5 w-5" />
-              Experience
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
-            >
-              <FolderOpen className="h-5 w-5" />
-              Projects
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
-            >
-              <Phone className="h-5 w-5" />
-              Contact
-            </button>
+        <div className="md:hidden bg-[hsl(var(--background))]/95 backdrop-blur-md">
+          <div className="container mx-auto px-4 py-4">
+        {/* Navigation Grid - 2x2 layout */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <button
+            onClick={() => scrollToSection("about")}
+            className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 hover:text-[hsl(var(--primary))] transition-colors"
+          >
+            <User className="h-5 w-5" />
+            About
+          </button>
+          <button
+            onClick={() => scrollToSection("skills")}
+            className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 hover:text-[hsl(var(--primary))] transition-colors"
+          >
+            <Wrench className="h-5 w-5" />
+            Skills
+          </button>
+          <button
+            onClick={() => scrollToSection("experience")}
+            className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 hover:text-[hsl(var(--primary))] transition-colors"
+          >
+            <Briefcase className="h-5 w-5" />
+            Experience
+          </button>
+          <button
+            onClick={() => scrollToSection("projects")}
+            className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 hover:text-[hsl(var(--primary))] transition-colors"
+          >
+            <FolderOpen className="h-5 w-5" />
+            Projects
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 hover:text-[hsl(var(--primary))] transition-colors"
+          >
+            <Phone className="h-5 w-5" />
+            Contact
+          </button>
+          <a
+            href="https://www.credly.com/users/dptf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 hover:text-[hsl(var(--primary))] transition-colors"
+          >
+            <Award className="h-5 w-5" />
+            Credly
+          </a>
+        </div>
 
-            <div className="flex justify-center space-x-6 pt-4 mt-4 border-t border-[hsl(var(--border))]/30">
+            {/* Social Icons */}
+            <div className="flex justify-center space-x-6 pt-4 border-t border-[hsl(var(--border))]/30">
               <a
                 href="https://github.com/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
               >
-                <Github className="h-5 w-5" />
+                <Github className="h-6 w-6" />
               </a>
               <a
                 href="https://linkedin.com/in/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-6 w-6" />
               </a>
               <a
                 href="mailto:danielpohtingfong@gmail.com"
-                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
               >
-                <Mail className="h-5 w-5" />
+                <Mail className="h-6 w-6" />
               </a>
               <a
                 href="https://api.whatsapp.com/send/?phone=60108483602&text&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
               >
-                <MessageCircle className="h-5 w-5" />
+                <MessageCircle className="h-6 w-6" />
               </a>
             </div>
           </div>
