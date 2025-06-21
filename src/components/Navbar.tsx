@@ -146,8 +146,8 @@ const Navbar = () => {
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
 
-            <button 
-              className="text-[hsl(var(--foreground))]" 
+            <button
+              className="text-[hsl(var(--foreground))]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
@@ -159,74 +159,74 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[hsl(var(--background))]/95 backdrop-blur-md">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <div className="md:hidden bg-[hsl(var(--background))]/90 backdrop-blur-md">
+          <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
             <button
               onClick={() => scrollToSection("about")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
+              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] duration-300 hover:scale-105 transition-colors"
             >
               <User className="h-5 w-5" />
               About
             </button>
             <button
               onClick={() => scrollToSection("skills")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
+              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
             >
               <Wrench className="h-5 w-5" />
               Skills
             </button>
             <button
               onClick={() => scrollToSection("experience")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
+              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
             >
               <Briefcase className="h-5 w-5" />
               Experience
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
+              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
             >
               <FolderOpen className="h-5 w-5" />
               Projects
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-base font-medium py-2 text-[hsl(var(--foreground))] flex items-center gap-3"
+              className="text-base font-medium py-3 px-4 text-[hsl(var(--foreground))] flex items-center gap-3 rounded-lg bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 hover:bg-[hsl(var(--primary))]/10 hover:text-[hsl(var(--primary))] transition-all duration-300 hover:scale-105"
             >
               <Phone className="h-5 w-5" />
               Contact
             </button>
 
-            <div className="flex justify-center space-x-6 pt-4">
+            <div className="flex justify-center space-x-6 pt-4 mt-4 border-t border-[hsl(var(--border))]/30">
               <a
                 href="https://github.com/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
+                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
               >
-                <Github className="h-6 w-6" />
+                <Github className="h-5 w-5" />
               </a>
               <a
                 href="https://linkedin.com/in/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
+                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
               >
-                <Linkedin className="h-6 w-6" />
+                <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="mailto:danielpohtingfong@gmail.com"
-                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
+                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
               >
-                <Mail className="h-6 w-6" />
+                <Mail className="h-5 w-5" />
               </a>
               <a
                 href="https://api.whatsapp.com/send/?phone=60108483602&text&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
+                className="p-3 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/10 transition-all duration-300 hover:scale-110"
               >
-                <MessageCircle className="h-6 w-6" />
+                <MessageCircle className="h-5 w-5" />
               </a>
             </div>
           </div>
