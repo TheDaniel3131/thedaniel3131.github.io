@@ -211,12 +211,12 @@ const Navbar = () => {
             </div>
 
             {/* Social Icons */}
-            <div className="flex justify-center space-x-6 pt-4 border-t border-[hsl(var(--border))]/30">
+            <div className="flex justify-center space-x-6 pt-4">
               <a
                 href="https://github.com/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
               >
                 <Github className="h-6 w-6" />
               </a>
@@ -224,13 +224,13 @@ const Navbar = () => {
                 href="https://linkedin.com/in/danielpohtingfong"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
               >
                 <Linkedin className="h-6 w-6" />
               </a>
               <a
                 href="mailto:danielpohtingfong@gmail.com"
-                className="p-2 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
               >
                 <Mail className="h-6 w-6" />
               </a>
@@ -238,7 +238,7 @@ const Navbar = () => {
                 href="https://api.whatsapp.com/send/?phone=60108483602&text&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-[hsl(var(--background))]/80 backdrop-blur-sm border border-[hsl(var(--border))]/30 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))]"
               >
                 <MessageCircle className="h-6 w-6" />
               </a>
