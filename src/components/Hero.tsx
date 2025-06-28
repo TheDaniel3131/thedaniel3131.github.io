@@ -109,7 +109,7 @@ const Hero = () => {
             <div className="absolute -inset-1 sm:-inset-2 bg-[hsl(var(--primary))]/10 rounded-2xl transform -rotate-3"></div>
 
             {/* Main image container - Optimized for mobile */}
-            <div className="relative landscape:w-36 landscape:h-36 w-50 h-50 sm:w-56 sm:h-56 md:w-80 md:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 landscape:w-32 landscape:h-32">
               <div className="hero-image-container relative overflow-hidden rounded-2xl border-2 sm:border-4 border-[hsl(var(--primary))]/30 shadow-2xl bg-[hsl(var(--card))]">
                 {!imgError ? (
                   // eslint-disable-next-line @next/next/no-img-element
