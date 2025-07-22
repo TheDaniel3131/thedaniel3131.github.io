@@ -81,7 +81,7 @@ const Skills = () => {
       category: "Other Skills",
       icon: <Lightbulb className="h-4 w-4 sm:h-5 sm:w-5" />,
       skills: [
-        { name: "Responsive Design", level: "Interediate", icon: "📱" },
+        { name: "Responsive Design", level: "Intermediate", icon: "📱" },
         { name: "UI/UX Design", level: "Intermediate", icon: "🎨" },
         { name: "API Development", level: "Intermediate", icon: "🔌" },
         { name: "Testing & Debugging", level: "Intermediate", icon: "🐛" },
