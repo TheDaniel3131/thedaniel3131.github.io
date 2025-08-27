@@ -27,7 +27,7 @@ const Experience = () => {
   const experiences = [
     {
       title: "Software Engineer",
-      company: "LINKK ",
+      company: "Linkk Busway Systems (M) Sdn Bhd",
       period: "Aug 2025 - Present",
       description: "WIP",
       technologies: [
