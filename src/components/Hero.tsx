@@ -79,8 +79,8 @@ export default function Hero() {
 
           <p className="text-sm sm:text-base md:text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto md:mx-0 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
             I am a Software Engineer who is passionate about building projects
-            and bringing ideas to life. about building projects and bringing
-            ideas to life. Feel free to reach out for any inquiries.
+            and bringing ideas to life. Feel free to reach out for any
+            inquiries.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
