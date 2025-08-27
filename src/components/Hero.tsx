@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { ArrowRight, ArrowDown } from "lucide-react"
+import { useState, useEffect } from "react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 
-const Hero = () => {
-  const [profession, setProfession] = useState("Software Engineer")
-  const [imgError, setImgError] = useState(false)
+export default function Hero() {
+  const [profession, setProfession] = useState("Software Engineer");
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const professions = [
@@ -16,46 +16,46 @@ const Hero = () => {
       "AI Enthusiast",
       "Software Developer",
       "Problem Solver",
-    ]
+    ];
 
-    let currentIndex = 0
+    let currentIndex = 0;
     const interval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % professions.length
-      setProfession(professions[currentIndex])
-    }, 3000)
+      currentIndex = (currentIndex + 1) % professions.length;
+      setProfession(professions[currentIndex]);
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToContact = () => {
-    const contactSection = document.getElementById("contact")
+    const contactSection = document.getElementById("contact");
     if (contactSection) {
-      // Account for fixed navbar height (80px) plus some extra padding
-      const navbarHeight = 20
-      const extraPadding = 20
-      const elementPosition = contactSection.offsetTop - navbarHeight - extraPadding
+      const navbarHeight = 20;
+      const extraPadding = 20;
+      const elementPosition =
+        contactSection.offsetTop - navbarHeight - extraPadding;
 
       window.scrollTo({
         top: elementPosition,
         behavior: "smooth",
-      })
+      });
     }
-  }
+  };
 
   const scrollToAbout = () => {
-    const aboutSection = document.getElementById("about")
+    const aboutSection = document.getElementById("about");
     if (aboutSection) {
-      // Account for fixed navbar height (80px) plus some extra padding
-      const navbarHeight = 20
-      const extraPadding = 20
-      const elementPosition = aboutSection.offsetTop - navbarHeight - extraPadding
+      const navbarHeight = 20;
+      const extraPadding = 20;
+      const elementPosition =
+        aboutSection.offsetTop - navbarHeight - extraPadding;
 
       window.scrollTo({
         top: elementPosition,
         behavior: "smooth",
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="container mx-auto px-4 pt-16 sm:pt-20 md:pt-28 pb-4 sm:pb-6 md:pb-12">
@@ -63,7 +63,9 @@ const Hero = () => {
         {/* Text Content */}
         <div className="text-center md:text-left md:w-1/2 order-2 md:order-1">
           <h1 className="font-bold mb-2 sm:mb-3 md:mb-4">
-            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Hello, I&apos;m</span>
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+              Hello, I&apos;m
+            </span>
             <span className="text-[hsl(var(--primary))] whitespace-nowrap text-3xl sm:text-4xl md:text-5xl lg:text-5xl">
               Daniel Poh Ting Fong
             </span>
@@ -76,9 +78,9 @@ const Hero = () => {
           </div>
 
           <p className="text-sm sm:text-base md:text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto md:mx-0 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
-            I am a recent fresh graduate majoring in Software Engineering. I am passionate about building projects and
-            bringing ideas to life. Feel free to reach out to me for job interviews, project collaborations, or
-            freelance opportunities.
+            I am a Software Engineer who is passionate about building projects
+            and bringing ideas to life. about building projects and bringing
+            ideas to life. Feel free to reach out for any inquiries.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
@@ -136,7 +138,9 @@ const Hero = () => {
                           />
                         </svg>
                       </div>
-                      <p className="text-xs sm:text-sm text-[hsl(var(--muted-foreground))]">Profile Photo</p>
+                      <p className="text-xs sm:text-sm text-[hsl(var(--muted-foreground))]">
+                        Profile Photo
+                      </p>
                     </div>
                   </div>
                 )}
@@ -165,7 +169,5 @@ const Hero = () => {
         </button>
       </div>
     </div>
-  )
+  );
 }
-
-export default Hero

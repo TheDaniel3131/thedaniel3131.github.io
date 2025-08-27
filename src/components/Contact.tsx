@@ -1,112 +1,126 @@
 // Full Working Contact Form with reCAPTCHA shown after validation
 
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect, useRef, type FormEvent } from "react"
-import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle, AlertCircle } from "lucide-react"
-import ReCAPTCHA from "react-google-recaptcha"
+import type React from "react";
+import { useState, useEffect, useRef, type FormEvent } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  MessageCircle,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
-  const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(null)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [showRecaptcha, setShowRecaptcha] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(
+    null
+  );
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up")
+            entry.target.classList.add("animate-fade-in-up");
           }
-        })
+        });
       },
       { threshold: 0.1 }
-    )
+    );
 
-    const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll")
-    elements?.forEach((el) => observer.observe(el))
+    const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
+    elements?.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target
-    setFormData((prev) => ({ ...prev, [id]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
 
   const validateForm = () => {
     if (!formData.name || !formData.email || !formData.message) {
-      setSubmitStatus("error")
-      setErrorMessage("Please fill in all required fields")
-      return false
+      setSubmitStatus("error");
+      setErrorMessage("Please fill in all required fields");
+      return false;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setSubmitStatus("error")
-      setErrorMessage("Please enter a valid email address")
-      return false
+      setSubmitStatus("error");
+      setErrorMessage("Please enter a valid email address");
+      return false;
     }
 
-    return true
-  }
+    return true;
+  };
 
   const handlePreSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    setSubmitStatus(null)
+    e.preventDefault();
+    setSubmitStatus(null);
 
     if (validateForm()) {
-      setShowRecaptcha(true)
+      setShowRecaptcha(true);
     }
-  }
+  };
 
   const handleCaptchaChange = async (token: string | null) => {
-    if (!token) return
+    if (!token) return;
 
-    setRecaptchaToken(token)
-    setIsSubmitting(true)
+    setRecaptchaToken(token);
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("https://formspree.io/f/xdkzdqln", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
+      });
 
       if (response.ok) {
-        setSubmitStatus("success")
-        setFormData({ name: "", email: "", subject: "", message: "" })
-        setRecaptchaToken(null)
-        setShowRecaptcha(false)
-        recaptchaRef.current?.reset()
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setRecaptchaToken(null);
+        setShowRecaptcha(false);
+        recaptchaRef.current?.reset();
       } else {
-        throw new Error("Failed to submit form")
+        throw new Error("Failed to submit form");
       }
     } catch (error) {
-      setSubmitStatus("error")
-      setErrorMessage("Failed to send message. Please try again later.")
+      setSubmitStatus("error");
+      setErrorMessage("Failed to send message. Please try again later.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8" ref={sectionRef}>
       <div className="text-center mb-12 sm:mb-16 animate-on-scroll">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Contact Me</h2>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">
+          Contact Me
+        </h2>
         <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
           Please reach out to me with the contact information below
         </p>
@@ -114,10 +128,15 @@ const Contact = () => {
 
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
         <div className="animate-on-scroll">
-          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Let's connect</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
+            Let's connect
+          </h3>
 
           <p className="text-[hsl(var(--muted-foreground))] mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-            I am interested in full time opportunities, entry-level/junior positions, and collaborative projects as a Software Developer. Whether you have a project idea, want to discuss technology, or just want to connect, don't hesitate to reach out!
+            I am interested in working on collaborative projects as a Software
+            Engineer. Whether you have a project idea, discuss about
+            technologies, networking, or any other opportunities, please do not
+            hesitate to reach out!
           </p>
 
           {/* Contact details */}
@@ -128,7 +147,9 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="font-medium text-sm sm:text-base">Location</h4>
-                <p className="text-[hsl(var(--muted-foreground))] text-xs sm:text-sm">Bandar Mahkota Cheras, Selangor, Malaysia</p>
+                <p className="text-[hsl(var(--muted-foreground))] text-xs sm:text-sm">
+                  Bandar Mahkota Cheras, Selangor, Malaysia
+                </p>
               </div>
             </div>
 
@@ -183,14 +204,19 @@ const Contact = () => {
 
         {/* Form Component */}
         <div className="bg-[hsl(var(--card))] rounded-lg shadow-md border border-[hsl(var(--border))] p-4 sm:p-6 hover:border-[hsl(var(--primary))]/50 transition-colors animate-on-scroll">
-          <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Send me a message</h3>
+          <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">
+            Send me a message
+          </h3>
 
           {submitStatus === "success" ? (
             <div className="flex flex-col items-center justify-center py-8 sm:py-10 text-center">
               <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-500 mb-4" />
-              <h4 className="text-lg sm:text-xl font-semibold mb-2">Message Sent!</h4>
+              <h4 className="text-lg sm:text-xl font-semibold mb-2">
+                Message Sent!
+              </h4>
               <p className="text-[hsl(var(--muted-foreground))] mb-4 sm:mb-6 text-sm sm:text-base">
-                Thank you for reaching out. I'll get back to you as soon as possible.
+                Thank you for reaching out. I'll get back to you as soon as
+                possible.
               </p>
               <button
                 onClick={() => setSubmitStatus(null)}
@@ -210,7 +236,10 @@ const Contact = () => {
 
               {/* Form fields */}
               <div className="space-y-1 sm:space-y-2">
-                <label htmlFor="name" className="text-xs sm:text-sm font-medium">
+                <label
+                  htmlFor="name"
+                  className="text-xs sm:text-sm font-medium"
+                >
                   Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -225,7 +254,10 @@ const Contact = () => {
               </div>
 
               <div className="space-y-1 sm:space-y-2">
-                <label htmlFor="email" className="text-xs sm:text-sm font-medium">
+                <label
+                  htmlFor="email"
+                  className="text-xs sm:text-sm font-medium"
+                >
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -240,7 +272,10 @@ const Contact = () => {
               </div>
 
               <div className="space-y-1 sm:space-y-2">
-                <label htmlFor="subject" className="text-xs sm:text-sm font-medium">
+                <label
+                  htmlFor="subject"
+                  className="text-xs sm:text-sm font-medium"
+                >
                   Subject <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -255,7 +290,10 @@ const Contact = () => {
               </div>
 
               <div className="space-y-1 sm:space-y-2">
-                <label htmlFor="message" className="text-xs sm:text-sm font-medium">
+                <label
+                  htmlFor="message"
+                  className="text-xs sm:text-sm font-medium"
+                >
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -280,13 +318,14 @@ const Contact = () => {
               )}
 
               {!showRecaptcha && (
-              <button
-                type="submit"
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] rounded-md font-medium flex items-center justify-center gap-2 hover:bg-[hsl(var(--primary))]/90 transition-all duration-300 hover:scale-105 w-full disabled:opacity-70 text-sm sm:text-base"
-                disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
-                <Send className="h-3 w-3 sm:h-4 sm:w-4" />
-              </button>
+                <button
+                  type="submit"
+                  className="px-4 sm:px-6 py-2 sm:py-3 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] rounded-md font-medium flex items-center justify-center gap-2 hover:bg-[hsl(var(--primary))]/90 transition-all duration-300 hover:scale-105 w-full disabled:opacity-70 text-sm sm:text-base"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  <Send className="h-3 w-3 sm:h-4 sm:w-4" />
+                </button>
               )}
               {recaptchaToken && (
                 <p className="text-center text-xs text-[hsl(var(--muted-foreground))] mt-2">
@@ -303,7 +342,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
