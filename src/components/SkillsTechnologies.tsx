@@ -1,18 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-  Code,
-  Database,
-  Wrench,
-  Lightbulb,
-  Heart,
-  Users,
-  MessageCircle,
-  Target,
-} from "lucide-react";
+import { Code, Database, Wrench, Lightbulb } from "lucide-react";
 
-const Skills = () => {
+export default function Skills() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -95,16 +86,16 @@ const Skills = () => {
   ];
 
   const softSkills = [
-    { name: "Communication", icon: <MessageCircle className="h-4 w-4" /> },
-    { name: "Teamwork", icon: <Users className="h-4 w-4" /> },
-    { name: "Problem Solving", icon: <Target className="h-4 w-4" /> },
+    { name: "Communication", icon: "💬" },
+    { name: "Teamwork", icon: "🎯" },
+    { name: "Problem Solving", icon: "🤔" },
     { name: "Time Management", icon: "⏰" },
     { name: "Adaptability", icon: "🔄" },
     { name: "Creativity", icon: "💡" },
     { name: "Critical Thinking", icon: "🧠" },
     { name: "Attention to Detail", icon: "🔍" },
     { name: "Leadership", icon: "👑" },
-    { name: "Emotional Intelligence", icon: <Heart className="h-4 w-4" /> },
+    { name: "Emotional Intelligence", icon: "🩵" },
     { name: "Self-Learning", icon: "📚" },
     { name: "Analytical Thinking", icon: "📈" },
   ];
@@ -198,16 +189,11 @@ const Skills = () => {
         <h3 className="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8 text-center">
           Soft Skills
         </h3>
-        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
-          A comprehensive overview of my technical skills, programming
-          languages, frameworks, and soft skills that drive my development
-          journey
-        </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {softSkills.map((skill, index) => (
             <div
               key={index}
-              className="bg-[hsl(var(--card))] p-3 sm:p-4 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105 text-center group"
+              className="flex flex-col items-center bg-[hsl(var(--card))] p-3 sm:p-4 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105 text-center group"
             >
               <div className="flex justify-center mb-2">
                 <div className="p-2 bg-[hsl(var(--primary))]/10 rounded-full text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))]/20 transition-colors">
@@ -218,7 +204,7 @@ const Skills = () => {
                   )}
                 </div>
               </div>
-              <span className="text-xs sm:text-sm font-medium">
+              <span className="text-xs sm:text-sm font-medium text-center">
                 {skill.name}
               </span>
             </div>
@@ -227,6 +213,4 @@ const Skills = () => {
       </div>
     </div>
   );
-};
-
-export default Skills;
+}
