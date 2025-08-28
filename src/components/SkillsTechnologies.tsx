@@ -198,6 +198,11 @@ const Skills = () => {
         <h3 className="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8 text-center">
           Soft Skills
         </h3>
+        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
+          A comprehensive overview of my technical skills, programming
+          languages, frameworks, and soft skills that drive my development
+          journey
+        </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {softSkills.map((skill, index) => (
             <div
