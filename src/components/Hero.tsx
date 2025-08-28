@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight, ArrowDown, ScanSearch } from "lucide-react";
 
 export default function Hero() {
   const [profession, setProfession] = useState("Software Engineer");
@@ -96,9 +96,9 @@ export default function Hero() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2 sm:py-3 bg-transparent border border-[hsl(var(--border))] rounded-md font-medium hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))] transition-colors text-center text-sm sm:text-base"
+              className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-transparent border border-[hsl(var(--border))] rounded-md font-medium hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))] transition-colors text-center text-sm sm:text-base"
             >
-              View Resume
+              View Resume <ScanSearch className="h-4 w-4 sm:h-5 sm:w-5" />
             </a>
           </div>
         </div>
