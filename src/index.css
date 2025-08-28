@@ -259,8 +259,8 @@ html {
 
 /* Smooth transitions for all interactive elements */
 * {
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s
-    ease;
+  transition: color 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Custom scrollbar */
@@ -278,5 +278,6 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary)) / 80;
+  transition: background-color 0.8s ease;
+  background: hsl(var(--primary-foreground));
 }
