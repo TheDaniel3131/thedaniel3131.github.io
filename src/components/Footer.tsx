@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, MessageCircle, Code } from "lucide-react";
+import { Github, Linkedin, Mail, MessageCircle, Terminal } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <a href="#" className="text-2xl font-bold flex items-center gap-2">
-              <Code className="h-6 w-6 text-[hsl(var(--primary))]" />
+              <Terminal className="h-6 w-6 text-[hsl(var(--primary))]" />
               <span className="text-[hsl(var(--primary))]">DPTF</span>
             </a>
           </div>
