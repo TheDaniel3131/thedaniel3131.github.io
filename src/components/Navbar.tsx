@@ -15,7 +15,7 @@ import {
   Briefcase,
   FolderOpen,
   Phone,
-  Terminal,
+  Codesandbox,
   Award,
 } from "lucide-react";
 import { useTheme } from "./theme-provider";
@@ -69,8 +69,11 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
-            <a href="#" className="text-2xl font-bold flex items-center gap-2">
-              <Terminal className="h-6 w-6 text-[hsl(var(--primary))]" />
+            <a
+              href="#"
+              className="text-2xl font-bold flex items-center gap-2 align-middle"
+            >
+              <Codesandbox className="h-6 w-6 text-[hsl(var(--primary))]" />
               <span className="text-[hsl(var(--primary))]">DPTF</span>
             </a>
           </div>
