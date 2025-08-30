@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Briefcase, Calendar } from "lucide-react";
 
-const Experience = () => {
+export default function Experience() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -137,6 +137,4 @@ const Experience = () => {
       </div>
     </div>
   );
-};
-
-export default Experience;
+}

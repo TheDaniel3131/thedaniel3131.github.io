@@ -1,6 +1,6 @@
-import { Github, Linkedin, Mail, MessageCircle, Code } from "lucide-react"
+import { Github, Linkedin, Mail, MessageCircle, Code } from "lucide-react";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="bg-[hsl(var(--background))] border-t border-[hsl(var(--border))] py-12 mt-20">
       <div className="container mx-auto px-6">
@@ -61,7 +61,5 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
-export default Footer

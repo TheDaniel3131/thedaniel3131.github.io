@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   Github,
   Linkedin,
@@ -17,51 +17,53 @@ import {
   Phone,
   Code,
   Award,
-} from "lucide-react"
-import { useTheme } from "./theme-provider"
+} from "lucide-react";
+import { useTheme } from "./theme-provider";
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
-    setMobileMenuOpen(false)
-    const section = document.getElementById(sectionId)
+    setMobileMenuOpen(false);
+    const section = document.getElementById(sectionId);
     if (section) {
       // Account for fixed navbar height (80px) plus some extra padding
-      const navbarHeight = 80
-      const extraPadding = 20
-      const elementPosition = section.offsetTop - navbarHeight - extraPadding
+      const navbarHeight = 80;
+      const extraPadding = 20;
+      const elementPosition = section.offsetTop - navbarHeight - extraPadding;
 
       window.scrollTo({
         top: elementPosition,
         behavior: "smooth",
-      })
+      });
     }
-  }
+  };
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[hsl(var(--background))]/90 backdrop-blur-md shadow-md" : "bg-transparent"
+        isScrolled
+          ? "bg-[hsl(var(--background))]/90 backdrop-blur-md shadow-md"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -112,9 +114,15 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-colors"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              aria-label={`Switch to ${
+                theme === "dark" ? "light" : "dark"
+              } mode`}
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </button>
 
             <a
@@ -142,9 +150,15 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-colors"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              aria-label={`Switch to ${
+                theme === "dark" ? "light" : "dark"
+              } mode`}
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </button>
 
             <button
@@ -152,7 +166,11 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -199,6 +217,7 @@ const Navbar = () => {
                 <Phone className="h-5 w-5" />
                 Contact
               </button>
+              {/* Hidden on Desktop */}
               <a
                 href="https://www.credly.com/users/dptf"
                 target="_blank"
@@ -247,7 +266,5 @@ const Navbar = () => {
         </div>
       )}
     </header>
-  )
+  );
 }
-
-export default Navbar

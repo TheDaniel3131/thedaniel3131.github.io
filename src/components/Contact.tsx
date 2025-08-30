@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const Contact = () => {
+export default function Contact(){
   const sectionRef = useRef<HTMLDivElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
@@ -344,5 +344,3 @@ const Contact = () => {
     </div>
   );
 };
-
-export default Contact;
