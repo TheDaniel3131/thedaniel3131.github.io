@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Code, Database, Wrench, Lightbulb } from "lucide-react";
 
-export default function Skills() {
+export default function SkillsTechnologies() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
