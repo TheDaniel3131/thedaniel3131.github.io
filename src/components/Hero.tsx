@@ -91,14 +91,13 @@ export default function Hero() {
               Contact Me
               <ArrowRight className="h-4 w-4" />
             </button>
-
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-transparent border border-[hsl(var(--border))] rounded-md font-medium hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))] transition-colors text-center text-sm sm:text-base"
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-transparent border border-[hsl(var(--border))] rounded-md font-medium hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))] transition-colors text-center text-sm sm:text-base"
             >
-              View Resume <ScanSearch className="h-4 w-4 sm:h-5 sm:w-5" />
+              View Resume <ScanSearch className="h-4 w-4 " />
             </a>
           </div>
         </div>
