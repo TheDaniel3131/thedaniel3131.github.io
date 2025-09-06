@@ -44,6 +44,7 @@ export default function Experience() {
         "Swagger API",
         "Redis",
         "WebSocket",
+        "Lark",
       ],
     },
     {
