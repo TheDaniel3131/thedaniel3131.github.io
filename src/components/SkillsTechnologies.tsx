@@ -49,6 +49,7 @@ export default function SkillsTechnologies() {
         { name: "Next.js", level: "Intermediate", icon: "▲" },
         { name: "Tailwind CSS", level: "Intermediate", icon: "💨" },
         { name: "Bootstrap", level: "Intermediate", icon: "🅱️" },
+        { name: "ASP.NET", level: "Intermediate", icon: "🌐" },
         { name: "jQuery", level: "Basic", icon: "💫" },
         { name: "Vue.js", level: "Basic", icon: "☘️" },
         { name: "Laravel", level: "Basic", icon: "⚡" },
