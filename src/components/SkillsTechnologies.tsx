@@ -73,15 +73,19 @@ export default function SkillsTechnologies() {
       ],
     },
     {
-      category: "Other Skills",
+      category: "Others",
       icon: <Lightbulb className="h-4 w-4 sm:h-5 sm:w-5" />,
       skills: [
+        { name: "Version Control", level: "Advanced", icon: "📋" },
+        { name: "Web Development", level: "Advanced", icon: "🌍" },
         { name: "Responsive Design", level: "Intermediate", icon: "📱" },
         { name: "UI/UX Design", level: "Intermediate", icon: "🎨" },
         { name: "API Development", level: "Intermediate", icon: "🔌" },
         { name: "Testing & Debugging", level: "Intermediate", icon: "🐛" },
         { name: "Agile Methodology", level: "Intermediate", icon: "🔄" },
-        { name: "Version Control", level: "Advanced", icon: "📋" },
+        { name: "Cloud Computing", level: "Basic", icon: "☁️" },
+        { name: "CI/CD", level: "Basic", icon: "🚀" },
+        { name: "SEO Basics", level: "Basic", icon: "🔍" },
       ],
     },
   ];
