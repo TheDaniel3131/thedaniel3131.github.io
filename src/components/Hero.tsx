@@ -115,7 +115,7 @@ export default function Hero() {
                 {!imgError ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src="/assets/hero.jpg"
+                    src="/assets/hero.webp"
                     alt="Daniel Poh Ting Fong"
                     className="object-cover w-full h-full transition-transform duration-700 hover:scale-110"
                     loading="lazy"
@@ -161,7 +161,7 @@ export default function Hero() {
       <div className="flex justify-center mt-4 sm:mt-6 md:mt-16">
         <button
           onClick={scrollToAbout}
-          className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors animate-bounce"
+          className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors animate-bounce repeat-infinite"
           aria-label="Scroll down"
         >
           <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
