@@ -85,7 +85,7 @@ export default function SkillsTechnologies() {
         { name: "Agile Methodology", level: "Intermediate", icon: "🔄" },
         { name: "Cloud Computing", level: "Basic", icon: "☁️" },
         { name: "CI/CD", level: "Basic", icon: "🚀" },
-        { name: "SEO Basics", level: "Basic", icon: "🔍" },
+        // { name: "SEO Basics", level: "Basic", icon: "🔍" },
       ],
     },
   ];
