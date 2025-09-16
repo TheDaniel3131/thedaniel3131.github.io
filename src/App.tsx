@@ -9,8 +9,10 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
 import ScrollToTop from "./components/ScrollToTop";
+import { useAnalytics } from "@/hooks/google-analytics/GoogleAnalytics";
 
 function App() {
+  useAnalytics(import.meta.env.VITE_GA_MEASUREMENT_ID || "");
   return (
     <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
       <div className="min-h-screen bg-[hsl(var(--background))]">
