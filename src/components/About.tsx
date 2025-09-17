@@ -154,7 +154,7 @@ export default function About() {
                 Mandarin (Native)
               </span>
               <span className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm">
-                Malay (Intermediate)
+                Malay (Basic)
               </span>
             </div>
           </div>
