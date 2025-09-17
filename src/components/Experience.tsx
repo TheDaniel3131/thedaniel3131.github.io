@@ -30,7 +30,7 @@ export default function Experience() {
       company: "Linkk Busway Systems (M) Sdn Bhd",
       period: "Aug 2025 - Present",
       description:
-        "Develop and maintain web application for Linkk Busway. WIP.",
+        "Develop and maintain web application for Linkk Busway Systems (M) Sdn Bhd.",
       technologies: [
         "HTML",
         "CSS",
