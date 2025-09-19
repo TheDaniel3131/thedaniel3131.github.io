@@ -39,6 +39,7 @@ export default function Experience() {
         "Vue.js",
         "Vuetify",
         "PHP",
+        "Python",
         "Laravel",
         "MySQL",
         "Git",
@@ -58,7 +59,14 @@ export default function Experience() {
       period: "Jan 2024 - May 2024",
       description:
         "Assisted in frontend development of internal web applications & contributed to UI enhancements, responsive design, maintenance and optimization of projects which improved user experience and performance. Conducted debugging and testing activities to identify and resolve technical issues during development sprints.",
-      technologies: ["HTML", "CSS", "JavaScript", "React", "Responsive Design"],
+      technologies: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Responsive Design",
+        "Web Development",
+      ],
     },
     {
       title: "Software & Design Intern",
@@ -67,11 +75,21 @@ export default function Experience() {
       description:
         "Collaborated with the Product Manager on research and technical documentation using Confluence. Assisted in the design and development of mobile UI prototypes, contributing to the overall user experience. Managed and organized digital content using Strapi CMS for web application integration.",
       technologies: [
+        "Web Development",
+        "Mobile Development",
         "UI/UX Design",
         "Strapi CMS",
         "Confluence",
         "Jira",
         "Prototyping",
+        "Figma",
+        "Documentation",
+        "Agile Methodology",
+        "Communication",
+        "Teamwork",
+        "Collaboration",
+        "Time Management",
+        "Problem-Solving",
       ],
     },
   ];
