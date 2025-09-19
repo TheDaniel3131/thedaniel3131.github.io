@@ -90,7 +90,7 @@ export default function Experience() {
       <div className="max-w-4xl mx-auto">
         <div className="relative ml-8 sm:ml-12">
           {/* Timeline line positioned to align with briefcase centers */}
-          <div className="absolute left-4 sm:left-5 top-0 bottom-0 w-0.5 bg-[hsl(var(--primary))]"></div>
+          <div className="absolute left-0 sm:left-0 top-0 bottom-0 transform translate-x-[-50%] w-0.5 bg-[hsl(var(--primary))]"></div>
 
           {experiences.map((exp, index) => (
             <div
@@ -98,11 +98,11 @@ export default function Experience() {
               className="relative pb-8 sm:pb-12 last:pb-0 animate-on-scroll"
             >
               {/* Timeline icon - positioned to align with the timeline line */}
-              <div className="absolute left-0 sm:left-1 top-16 w-8 h-8 sm:w-8 sm:h-8 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
+              <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 sm:w-8 sm:h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
                 <Briefcase className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
               </div>
 
-              <div className="ml-12 sm:ml-16">
+              <div className="ml-8 sm:ml-16">
                 <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
                   {/* Header with title, company and date in proper layout */}
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
