@@ -40,7 +40,7 @@ export default function Experience() {
         "Vuetify",
         "PHP",
         "Laravel",
-        "SQL",
+        "MySQL",
         "Git",
         "Gitlab",
         "Swagger API",
