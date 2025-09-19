@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function Contact(){
+export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
@@ -212,10 +212,10 @@ export default function Contact(){
             <div className="flex flex-col items-center justify-center py-8 sm:py-10 text-center">
               <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-500 mb-4" />
               <h4 className="text-lg sm:text-xl font-semibold mb-2">
-                Message Sent!
+                Message Sent Successfully!
               </h4>
               <p className="text-[hsl(var(--muted-foreground))] mb-4 sm:mb-6 text-sm sm:text-base">
-                Thank you for reaching out. I'll get back to you as soon as
+                Thank you for reaching out. Will get back to you as soon as
                 possible.
               </p>
               <button
@@ -302,7 +302,7 @@ export default function Contact(){
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] transition-colors resize-none text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] transition-colors resize-y text-sm sm:text-base min-h-[100px] max-h-[350px]"
                   required
                 ></textarea>
               </div>
@@ -343,4 +343,4 @@ export default function Contact(){
       </div>
     </div>
   );
-};
+}
