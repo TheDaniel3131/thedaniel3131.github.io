@@ -29,6 +29,7 @@ export default function Experience() {
       title: "Software Engineer",
       company: "Linkk Busway Systems (M) Sdn Bhd",
       period: "Aug 2025 - Present",
+      roleType: "Full Time",
       description:
         "Develop and maintain web application for Linkk Busway Systems (M) Sdn Bhd.",
       technologies: [
@@ -53,10 +54,24 @@ export default function Experience() {
       ],
     },
     {
-      title: "Web Developer Intern",
+      title: "Freelance Software Developer / Full Stack Developer",
+      company: "Undisclosed",
+      period: "Feb 2025 - Present",
+      roleType: "Freelance",
+      description:
+        "Providing freelance software development services, specializing in web & mobile application development using modern technologies and frameworks to deliver high-quality solutions tailored to client needs.",
+      technologies: [
+        "Software Development",
+        "Mobile Development",
+        "Web Development",
+      ],
+    },
+    {
+      title: "Web Developer",
       company:
         "SPARK Internship Programme @ APU Corporate Training & Career Centre",
       period: "Jan 2024 - May 2024",
+      roleType: "Internship",
       description:
         "Assisted in frontend development of internal web applications & contributed to UI enhancements, responsive design, maintenance and optimization of projects which improved user experience and performance. Conducted debugging and testing activities to identify and resolve technical issues during development sprints.",
       technologies: [
@@ -83,6 +98,7 @@ export default function Experience() {
       title: "Software & Design Intern",
       company: "Pickles Asia Sdn Bhd (Pickles Auctions)",
       period: "Oct 2022 - Jan 2023",
+      roleType: "Internship",
       description:
         "Collaborated with the Product Manager on research and technical documentation using Confluence. Assisted in the design and development of mobile UI prototypes, contributing to the overall user experience. Managed and organized digital content using Strapi CMS for web application integration.",
       technologies: [
@@ -137,7 +153,10 @@ export default function Experience() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
                     <div className="flex-1">
                       <h3 className="text-lg sm:text-xl font-semibold mb-1">
-                        {exp.title}
+                        {exp.title}{" "}
+                        <span className="text-[hsl(var(--muted-foreground))] text-xs xs:text-base pt-5">
+                          ({exp.roleType})
+                        </span>
                       </h3>
                       <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
                         {exp.company}
