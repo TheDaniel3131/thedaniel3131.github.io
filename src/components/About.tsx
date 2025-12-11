@@ -33,8 +33,8 @@ export default function About() {
 
   const stats = [
     {
-      label: "Years of Experience",
-      value: "~1",
+      label: "Years of Working Experience",
+      value: ">1",
       icon: <Briefcase className="h-4 w-4 sm:h-5 sm:w-5" />,
     },
     {
