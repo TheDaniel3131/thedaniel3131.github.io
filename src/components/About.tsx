@@ -76,7 +76,7 @@ export default function About() {
             University. I have gained valuable hands-on experience through
             multiple internships in web development, UI/UX design, and software
             testing. I specialize in full-stack development using React,
-            Next.js, and modern web technologies.
+            Next.js, and other programming languages & tools.
           </p>
 
           <p className="text-[hsl(var(--muted-foreground))] mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
