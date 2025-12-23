@@ -26,6 +26,19 @@ export default function Experience() {
 
   const experiences = [
     {
+      title: "Software Developer",
+      company: "Coming Soon",
+      period: "Jan 2026 - X",
+      roleType: "Contract",
+      description: "Coming Soon",
+      technologies: [
+        "Next.js",
+        "React",
+        "Web Development",
+        "Web Responsiveness",
+      ],
+    },
+    {
       title: "Software Engineer",
       company: "Linkk Busway Systems (M) Sdn Bhd",
       period: "Aug 2025 - Present",
