@@ -50,6 +50,8 @@ export default function Experience() {
         "Redis",
         "WebSocket",
         "Soketi",
+        "Apache ECharts",
+        "Vue ECharts",
         "Lark",
       ],
     },
