@@ -1,0 +1,28 @@
+# Development Stage
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy Package files
+COPY package*.json ./
+
+# Install Dependencies
+RUN npm install
+
+# Copy Project Files
+COPY . .
+
+# Development Server Port
+EXPOSE 5173
+
+# Health check (optional but useful)
+# HEALTHCHECK --interval=30s --timeout=3s --start-period=40s \
+#     CMD wget --no-verbose --tries=1 --spider http://localhost:5173 || exit 1
+
+# Run development server with hot reloading
+# CMD ["npm", "run", "dev"] - Normal Use Case
+
+# Tell Vite to listen on 0.0.0.0 instead of localhost, else
+# it will not be accessible from outside the container because not able to bind 
+# to that interface or forward the port.
+CMD ["npm", "run", "dev", "--", "--host"] 

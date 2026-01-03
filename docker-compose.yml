@@ -1,0 +1,16 @@
+name: dptf-portfolio
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    container_name: portfolio-dev
+    restart: unless-stopped
+    pull_policy: missing

@@ -1,0 +1,22 @@
+services:
+  portfolio-staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.staging
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=staging
+    container_name: portfolio-staging
+    restart: unless-stopped
+    pull_policy: missing
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
