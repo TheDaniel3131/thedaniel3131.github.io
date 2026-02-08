@@ -15,7 +15,7 @@ export default function Experience() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
@@ -25,19 +25,19 @@ export default function Experience() {
   }, []);
 
   const experiences = [
-    {
-      title: "Software Developer",
-      company: "Coming Soon",
-      period: "Jan 2026 - X",
-      roleType: "Contract",
-      description: "Coming Soon",
-      technologies: [
-        "Next.js",
-        "React",
-        "Web Development",
-        "Web Responsiveness",
-      ],
-    },
+    // {
+    //   title: "Software Developer",
+    //   company: "Coming Soon",
+    //   period: "Jan 2026 - X",
+    //   roleType: "Contract",
+    //   description: "Coming Soon",
+    //   technologies: [
+    //     "Next.js",
+    //     "React",
+    //     "Web Development",
+    //     "Web Responsiveness",
+    //   ],
+    // },
     {
       title: "Software Engineer",
       company: "Linkk Busway Systems (M) Sdn Bhd",
@@ -68,19 +68,19 @@ export default function Experience() {
         "Lark",
       ],
     },
-    {
-      title: "Freelance Software Developer / Full Stack Developer",
-      company: "Undisclosed",
-      period: "Feb 2025 - Present",
-      roleType: "Freelance",
-      description:
-        "Providing freelance software development services, specializing in web & mobile application development using modern technologies and frameworks to deliver high-quality solutions tailored to client needs.",
-      technologies: [
-        "Software Development",
-        "Mobile Development",
-        "Web Development",
-      ],
-    },
+    // {
+    //   title: "Freelance Software Developer / Full Stack Developer",
+    //   company: "Undisclosed",
+    //   period: "Feb 2025 - Present",
+    //   roleType: "Freelance",
+    //   description:
+    //     "Providing freelance software development services, specializing in web & mobile application development using modern technologies and frameworks to deliver high-quality solutions tailored to client needs.",
+    //   technologies: [
+    //     "Software Development",
+    //     "Mobile Development",
+    //     "Web Development",
+    //   ],
+    // },
     {
       title: "Web Developer",
       company:
