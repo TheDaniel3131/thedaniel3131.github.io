@@ -16,7 +16,7 @@ export default function Projects() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
@@ -87,7 +87,8 @@ export default function Projects() {
         "Font Awesome",
         "AJAX",
       ],
-      liveUrl: "https://barkinglot.netlify.app",
+      // liveUrl: "https://barkinglot.netlify.app",
+      liveUrl: "#",
       githubUrl: "https://github.com/TheDaniel3131/BarkingLot",
       category: "web",
     },
