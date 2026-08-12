@@ -44,7 +44,7 @@ export default function Experience() {
       period: "Aug 2025 - Present",
       roleType: "Full Time",
       description:
-        "Develop and maintain web application for Linkk Busway Systems (M) Sdn Bhd.",
+        "Develop and build scalable internal systems for clients using modern web technologies. Collaborate with cross-functional teams to design, implement, and maintain software solutions that meet business requirements. Participate in code reviews, testing, and debugging to ensure high-quality deliverables.",
       technologies: [
         "HTML",
         "CSS",
