@@ -22,7 +22,7 @@ export default function About() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
@@ -34,7 +34,7 @@ export default function About() {
   const stats = [
     {
       label: "Years of Working Experience",
-      value: "~1",
+      value: ">1",
       icon: <Briefcase className="h-4 w-4 sm:h-5 sm:w-5" />,
     },
     {

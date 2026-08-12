@@ -115,7 +115,8 @@ export default function Hero() {
                 {!imgError ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src="/assets/hero.webp"
+                    // src="/assets/hero.webp"
+                    src="/assets/me-2-enhance8x.webp"
                     alt="Daniel Poh Ting Fong"
                     className="object-cover w-full h-full transition-transform duration-700 hover:scale-110"
                     loading="lazy"

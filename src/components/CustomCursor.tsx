@@ -10,6 +10,13 @@ const CustomCursor = () => {
   const [isOverScrollbar, setIsOverScrollbar] = useState(false); // New state
 
   useEffect(() => {
+    // Initialize cursor to a natural starting position (center of viewport)
+    if (typeof window !== "undefined") {
+      setPosition({
+        x: Math.round(window.innerWidth / 2),
+        y: Math.round(window.innerHeight / 2),
+      });
+    }
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
 
