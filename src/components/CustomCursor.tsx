@@ -1,22 +1,53 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isOverScrollbar, setIsOverScrollbar] = useState(false); // New state
+  const [isDragging, setIsDragging] = useState(false);
+  const [isOverScrollbar, setIsOverScrollbar] = useState(false);
+
+  const isMouseDownRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const dragStartRef = useRef({ x: 0, y: 0 });
+
+  // Drag-to-scroll refs
+  const lastYRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const velocityRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Initialize cursor to a natural starting position (center of viewport)
     if (typeof window !== "undefined") {
       setPosition({
         x: Math.round(window.innerWidth / 2),
         y: Math.round(window.innerHeight / 2),
       });
     }
+
+    const cancelMomentum = () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+
+    const runMomentum = () => {
+      velocityRef.current *= 0.92;
+
+      if (Math.abs(velocityRef.current) < 0.5) {
+        velocityRef.current = 0;
+        rafRef.current = null;
+        return;
+      }
+
+      window.scrollBy(0, velocityRef.current);
+      rafRef.current = requestAnimationFrame(runMomentum);
+    };
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
 
@@ -31,39 +62,112 @@ const CustomCursor = () => {
 
       const isScrollbarArea = e.clientX > window.innerWidth - 20;
 
-      // Update new state
-      setIsOverScrollbar(isScrollbarArea);
+      if (isMouseDownRef.current && !isDraggingRef.current) {
+        const dx = Math.abs(e.clientX - dragStartRef.current.x);
+        const dy = Math.abs(e.clientY - dragStartRef.current.y);
+        if (dx > 4 || dy > 4) {
+          isDraggingRef.current = true;
+          setIsDragging(true);
+          cancelMomentum();
+        }
+      }
 
-      // Only set isPointer if not over the scrollbar
+      // Drag-to-scroll: scroll the page as the user drags
+      if (isDraggingRef.current) {
+        const now = performance.now();
+        const dy = e.clientY - lastYRef.current;
+        const dt = now - lastTimeRef.current;
+
+        // Scroll opposite to drag direction (drag down = scroll up)
+        window.scrollBy(0, -dy);
+
+        // Track velocity (px/ms → px/frame at ~60fps)
+        if (dt > 0) {
+          velocityRef.current = (-dy / dt) * 16;
+        }
+
+        lastYRef.current = e.clientY;
+        lastTimeRef.current = now;
+      }
+
+      setIsOverScrollbar(isScrollbarArea);
       setIsPointer(isClickable && !isScrollbarArea);
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
+    const handleMouseDown = (e: MouseEvent) => {
+      // Don't hijack clicks on interactive elements
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName.toLowerCase() === "button" ||
+        target.tagName.toLowerCase() === "a" ||
+        target.closest("button") ||
+        target.closest("a")
+      ) {
+        return;
+      }
+
+      isMouseDownRef.current = true;
+      isDraggingRef.current = false;
+      dragStartRef.current = { x: e.clientX, y: e.clientY };
+      lastYRef.current = e.clientY;
+      lastTimeRef.current = performance.now();
+      velocityRef.current = 0;
+      cancelMomentum();
+      setIsClicking(true);
+      setIsDragging(false);
+    };
+
+    const handleMouseUp = () => {
+      isMouseDownRef.current = false;
+
+      // Kick off momentum if there's velocity
+      if (isDraggingRef.current && Math.abs(velocityRef.current) > 0.5) {
+        rafRef.current = requestAnimationFrame(runMomentum);
+      }
+
+      isDraggingRef.current = false;
+      setIsClicking(false);
+      setIsDragging(false);
+    };
+
     const handleMouseEnter = () => setIsVisible(true);
-    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+      cancelMomentum();
+    };
+
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setIsVisible(false);
+        cancelMomentum();
       }
+    };
+
+    const handleNativeDragStart = (e: DragEvent) => {
+      e.preventDefault();
     };
 
     setIsVisible(true);
 
-    document.addEventListener("mousemove", updatePosition);
-    document.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", updatePosition, true);
+    document.addEventListener("mousedown", handleMouseDown, true);
+    document.addEventListener("mouseup", handleMouseUp, true);
     document.addEventListener("mouseenter", handleMouseEnter);
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("dragstart", handleNativeDragStart);
+    window.addEventListener("blur", handleMouseUp);
 
     return () => {
-      document.removeEventListener("mousemove", updatePosition);
-      document.removeEventListener("mousedown", handleMouseDown);
-      document.removeEventListener("mouseup", handleMouseUp);
+      cancelMomentum();
+      document.removeEventListener("mousemove", updatePosition, true);
+      document.removeEventListener("mousedown", handleMouseDown, true);
+      document.removeEventListener("mouseup", handleMouseUp, true);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("dragstart", handleNativeDragStart);
+      window.removeEventListener("blur", handleMouseUp);
     };
   }, []);
 
@@ -82,6 +186,7 @@ const CustomCursor = () => {
           __html: `
             body {
               cursor: ${isOverScrollbar ? "default" : "none"} !important;
+              ${isClicking ? "user-select: none !important;" : ""}
             }
             a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
               cursor: ${isOverScrollbar ? "default" : "none"} !important;
@@ -113,19 +218,23 @@ const CustomCursor = () => {
         {/* Outer ring */}
         <div
           className={`absolute rounded-full border border-[hsl(var(--primary))] transition-all duration-200 ${
-            isPointer
-              ? "w-8 h-8 -translate-x-4 -translate-y-4"
-              : "w-10 h-10 -translate-x-5 -translate-y-5"
-          } ${isClicking ? "scale-75 opacity-70" : "scale-100 opacity-100"}`}
+            isDragging
+              ? "w-9 h-9 -translate-x-[18px] -translate-y-[18px] scale-95 bg-[hsl(var(--primary))]/10"
+              : isPointer
+                ? "w-8 h-8 -translate-x-4 -translate-y-4"
+                : "w-10 h-10 -translate-x-5 -translate-y-5"
+          } ${isClicking && !isDragging ? "scale-75 opacity-70" : "scale-100 opacity-100"}`}
         ></div>
 
         {/* Inner dot */}
         <div
           className={`absolute bg-[hsl(var(--primary))] rounded-full transition-all duration-200 ${
-            isPointer
-              ? "w-2 h-2 -translate-x-1 -translate-y-1"
-              : "w-1 h-1 -translate-x-0.5 -translate-y-0.5"
-          } ${isClicking ? "scale-150 opacity-70" : "scale-100 opacity-100"}`}
+            isDragging
+              ? "w-3 h-3 -translate-x-1.5 -translate-y-1.5 opacity-90"
+              : isPointer
+                ? "w-2 h-2 -translate-x-1 -translate-y-1"
+                : "w-1 h-1 -translate-x-0.5 -translate-y-0.5"
+          } ${isClicking && !isDragging ? "scale-150 opacity-70" : "scale-100 opacity-100"}`}
         ></div>
       </div>
     </>
