@@ -36,7 +36,7 @@ const CustomCursor = () => {
     };
 
     const runMomentum = () => {
-      velocityRef.current *= 0.92;
+      velocityRef.current *= 0.96;
 
       if (Math.abs(velocityRef.current) < 0.5) {
         velocityRef.current = 0;
@@ -83,7 +83,7 @@ const CustomCursor = () => {
 
         // Track velocity (px/ms → px/frame at ~60fps)
         if (dt > 0) {
-          velocityRef.current = (-dy / dt) * 16;
+          velocityRef.current = (-dy / dt) * 28;
         }
 
         lastYRef.current = e.clientY;
