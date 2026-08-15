@@ -19,6 +19,7 @@ export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
+  // set up form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,7 +30,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(
-    null
+    null,
   );
   const [errorMessage, setErrorMessage] = useState("");
   const [showRecaptcha, setShowRecaptcha] = useState(false);
@@ -43,7 +44,7 @@ export default function Contact() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
@@ -53,7 +54,7 @@ export default function Contact() {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
