@@ -69,6 +69,8 @@ const CustomCursor = () => {
           isDraggingRef.current = true;
           setIsDragging(true);
           cancelMomentum();
+          // Freeze all hover:scale transforms while dragging
+          document.body.classList.add("is-dragging");
         }
       }
 
@@ -78,12 +80,10 @@ const CustomCursor = () => {
         const dy = e.clientY - lastYRef.current;
         const dt = now - lastTimeRef.current;
 
-        // Scroll opposite to drag direction (drag down = scroll up)
         window.scrollBy(0, -dy);
 
-        // Track velocity (px/ms → px/frame at ~60fps)
         if (dt > 0) {
-          velocityRef.current = (-dy / dt) * 28;
+          velocityRef.current = (-dy / dt) * 25;
         }
 
         lastYRef.current = e.clientY;
@@ -95,8 +95,9 @@ const CustomCursor = () => {
     };
 
     const handleMouseDown = (e: MouseEvent) => {
-      // Don't hijack clicks on interactive elements
       const target = e.target as HTMLElement;
+
+      // Don't hijack clicks on interactive elements
       if (
         target.tagName.toLowerCase() === "button" ||
         target.tagName.toLowerCase() === "a" ||
@@ -105,6 +106,9 @@ const CustomCursor = () => {
       ) {
         return;
       }
+
+      // Prevent browser's native drag on text, images, etc.
+      e.preventDefault();
 
       isMouseDownRef.current = true;
       isDraggingRef.current = false;
@@ -119,6 +123,7 @@ const CustomCursor = () => {
 
     const handleMouseUp = () => {
       isMouseDownRef.current = false;
+      document.body.classList.remove("is-dragging");
 
       // Kick off momentum if there's velocity
       if (isDraggingRef.current && Math.abs(velocityRef.current) > 0.5) {
@@ -160,6 +165,7 @@ const CustomCursor = () => {
 
     return () => {
       cancelMomentum();
+      document.body.classList.remove("is-dragging");
       document.removeEventListener("mousemove", updatePosition, true);
       document.removeEventListener("mousedown", handleMouseDown, true);
       document.removeEventListener("mouseup", handleMouseUp, true);
@@ -190,6 +196,12 @@ const CustomCursor = () => {
             }
             a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
               cursor: ${isOverScrollbar ? "default" : "none"} !important;
+            }
+            /* Freeze hover scale transforms while drag-scrolling so
+               scale transitions don't corrupt the mousemove dy delta */
+            body.is-dragging * {
+              transform: none !important;
+              transition: none !important;
             }
             ::-webkit-scrollbar {
               cursor: default !important;
