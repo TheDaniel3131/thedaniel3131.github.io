@@ -2,6 +2,36 @@
 
 import { useEffect, useRef } from "react";
 import { Code, Database, Wrench, Lightbulb } from "lucide-react";
+import {
+  SiHtml5,
+  SiCss,
+  SiJavascript,
+  SiTypescript,
+  SiPython,
+  SiPhp,
+  SiCplusplus,
+  SiR,
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiBootstrap,
+  SiDotnet,
+  SiJquery,
+  SiVuedotjs,
+  SiLaravel,
+  SiExpress,
+  SiCodeigniter,
+  SiGit,
+  SiDevbox, // SiVscode not exist
+  SiMysql,
+  SiPostgresql,
+  SiFigma,
+  SiSupabase,
+  SiPostman,
+  SiMongodb,
+} from "react-icons/si";
+import { FaJava, FaDAndD } from "react-icons/fa";
+import { VscAzure } from "react-icons/vsc";
 
 export default function SkillsTechnologies() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -15,7 +45,7 @@ export default function SkillsTechnologies() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
@@ -29,63 +59,210 @@ export default function SkillsTechnologies() {
       category: "Programming Languages",
       icon: <Code className="h-4 w-4 sm:h-5 sm:w-5" />,
       skills: [
-        { name: "HTML", level: "Advanced", icon: "🌐" },
-        { name: "CSS", level: "Advanced", icon: "🎨" },
-        { name: "JavaScript", level: "Intermediate", icon: "⚡" },
-        { name: "TypeScript", level: "Intermediate", icon: "📘" },
-        { name: "Python", level: "Intermediate", icon: "🐍" },
-        { name: "Java", level: "Intermediate", icon: "☕" },
-        { name: "PHP", level: "Basic", icon: "🐘" },
-        { name: "C#", level: "Basic", icon: "🔷" },
-        { name: "C++", level: "Basic", icon: "⚙️" },
-        { name: "R", level: "Basic", icon: "📊" },
+        {
+          name: "HTML",
+          level: "Advanced",
+          icon: <SiHtml5 className="text-[#E34F26]" />,
+        },
+        {
+          name: "CSS",
+          level: "Advanced",
+          icon: <SiCss className="text-[#1572B6]" />,
+        },
+        {
+          name: "JavaScript",
+          level: "Intermediate",
+          icon: <SiJavascript className="text-[#F7DF1E]" />,
+        },
+        {
+          name: "TypeScript",
+          level: "Intermediate",
+          icon: <SiTypescript className="text-[#3178C6]" />,
+        },
+        {
+          name: "Python",
+          level: "Intermediate",
+          icon: <SiPython className="text-[#3776AB]" />,
+        },
+        {
+          name: "Java",
+          level: "Intermediate",
+          icon: <FaJava className="text-[#ED8B00]" />,
+        },
+        {
+          name: "PHP",
+          level: "Basic",
+          icon: <SiPhp className="text-[#777BB4]" />,
+        },
+        {
+          name: "C#",
+          level: "Basic",
+          icon: <SiDotnet className="text-[#512BD4]" />,
+        },
+        {
+          name: "C++",
+          level: "Basic",
+          icon: <SiCplusplus className="text-[#00599C]" />,
+        },
+        { name: "R", level: "Basic", icon: <SiR className="text-[#276DC3]" /> },
       ],
     },
     {
       category: "Frameworks & Libraries",
       icon: <Database className="h-4 w-4 sm:h-5 sm:w-5" />,
       skills: [
-        { name: "React", level: "Intermediate", icon: "⚛️" },
-        { name: "Next.js", level: "Intermediate", icon: "▲" },
-        { name: "Tailwind CSS", level: "Intermediate", icon: "💨" },
-        { name: "Bootstrap", level: "Intermediate", icon: "🅱️" },
-        { name: "ASP.NET", level: "Intermediate", icon: "🌐" },
-        { name: "jQuery", level: "Basic", icon: "💫" },
-        { name: "Vue.js", level: "Basic", icon: "☘️" },
-        { name: "Laravel", level: "Basic", icon: "⚡" },
-        { name: "Express.js", level: "Basic", icon: "🚀" },
-        { name: "CodeIgniter", level: "Basic", icon: "🔥" },
+        {
+          name: "React",
+          level: "Intermediate",
+          icon: <SiReact className="text-[#61DAFB]" />,
+        },
+        {
+          name: "Next.js",
+          level: "Intermediate",
+          icon: <SiNextdotjs className="text-[hsl(var(--foreground))]" />,
+        },
+        {
+          name: "Tailwind CSS",
+          level: "Intermediate",
+          icon: <SiTailwindcss className="text-[#06B6D4]" />,
+        },
+        {
+          name: "Bootstrap",
+          level: "Intermediate",
+          icon: <SiBootstrap className="text-[#7952B3]" />,
+        },
+        {
+          name: "ASP.NET",
+          level: "Intermediate",
+          icon: <SiDotnet className="text-[#512BD4]" />,
+        },
+        {
+          name: "jQuery",
+          level: "Basic",
+          icon: <SiJquery className="text-[#0769AD]" />,
+        },
+        {
+          name: "Vue.js",
+          level: "Basic",
+          icon: <SiVuedotjs className="text-[#4FC08D]" />,
+        },
+        {
+          name: "Laravel",
+          level: "Basic",
+          icon: <SiLaravel className="text-[#FF2D20]" />,
+        },
+        {
+          name: "Express.js",
+          level: "Basic",
+          icon: <SiExpress className="text-[hsl(var(--foreground))]" />,
+        },
+        {
+          name: "CodeIgniter",
+          level: "Basic",
+          icon: <SiCodeigniter className="text-[#EF4223]" />,
+        },
       ],
     },
     {
       category: "Databases & Tools",
       icon: <Wrench className="h-4 w-4 sm:h-5 sm:w-5" />,
       skills: [
-        { name: "Git", level: "Advanced", icon: "📝" },
-        { name: "VS Code", level: "Advanced", icon: "💻" },
-        { name: "MySQL", level: "Intermediate", icon: "🗄️" },
-        { name: "PostgreSQL", level: "Intermediate", icon: "🐘" },
-        { name: "Figma", level: "Intermediate", icon: "🎨" },
-        { name: "Supabase", level: "Intermediate", icon: "⚡" },
-        { name: "Postman", level: "Basic", icon: "📮" },
-        { name: "DBeaver", level: "Basic", icon: "📊" },
-        { name: "MongoDB", level: "Basic", icon: "🍃" },
+        {
+          name: "Git",
+          level: "Advanced",
+          icon: <SiGit className="text-[#F05032]" />,
+        },
+        {
+          name: "VS Code",
+          level: "Advanced",
+          icon: <SiDevbox className="text-[#007ACC]" />,
+        },
+        {
+          name: "MySQL",
+          level: "Intermediate",
+          icon: <SiMysql className="text-[#4479A1]" />,
+        },
+        {
+          name: "PostgreSQL",
+          level: "Intermediate",
+          icon: <SiPostgresql className="text-[#4169E1]" />,
+        },
+        {
+          name: "Figma",
+          level: "Intermediate",
+          icon: <SiFigma className="text-[#F24E1E]" />,
+        },
+        {
+          name: "Supabase",
+          level: "Intermediate",
+          icon: <SiSupabase className="text-[#3ECF8E]" />,
+        },
+        {
+          name: "Postman",
+          level: "Basic",
+          icon: <SiPostman className="text-[#FF6C37]" />,
+        },
+        {
+          name: "DBeaver",
+          level: "Basic",
+          icon: <FaDAndD className="text-[hsl(var(--muted-foreground))]" />,
+        },
+        {
+          name: "MongoDB",
+          level: "Basic",
+          icon: <SiMongodb className="text-[#47A248]" />,
+        },
       ],
     },
     {
       category: "Others",
       icon: <Lightbulb className="h-4 w-4 sm:h-5 sm:w-5" />,
       skills: [
-        { name: "Version Control", level: "Advanced", icon: "📋" },
-        { name: "Web Development", level: "Advanced", icon: "🌍" },
-        { name: "Responsive Design", level: "Intermediate", icon: "📱" },
-        { name: "UI/UX Design", level: "Intermediate", icon: "🎨" },
-        { name: "API Development", level: "Intermediate", icon: "🔌" },
-        { name: "Testing & Debugging", level: "Intermediate", icon: "🐛" },
-        { name: "Agile Methodology", level: "Intermediate", icon: "🔄" },
-        { name: "Cloud Computing", level: "Basic", icon: "☁️" },
-        { name: "CI/CD", level: "Basic", icon: "🚀" },
-        // { name: "SEO Basics", level: "Basic", icon: "🔍" },
+        {
+          name: "Version Control",
+          level: "Advanced",
+          icon: <SiGit className="text-[#F05032]" />,
+        },
+        {
+          name: "Web Development",
+          level: "Advanced",
+          icon: <SiHtml5 className="text-[#E34F26]" />,
+        },
+        {
+          name: "Responsive Design",
+          level: "Intermediate",
+          icon: <SiCss className="text-[#1572B6]" />,
+        },
+        {
+          name: "UI/UX Design",
+          level: "Intermediate",
+          icon: <SiFigma className="text-[#F24E1E]" />,
+        },
+        {
+          name: "API Development",
+          level: "Intermediate",
+          icon: <SiPostman className="text-[#FF6C37]" />,
+        },
+        {
+          name: "Testing & Debugging",
+          level: "Intermediate",
+          icon: <SiDevbox className="text-[#007ACC]" />,
+        },
+        {
+          name: "Agile Methodology",
+          level: "Intermediate",
+          icon: <SiGit className="text-[#F05032]" />,
+        },
+        {
+          name: "Cloud Computing",
+          level: "Basic",
+          icon: <VscAzure className="text-[#0078D4]" />,
+        },
+        {
+          name: "CI/CD",
+          level: "Basic",
+          icon: <SiGit className="text-[#F05032]" />,
+        },
       ],
     },
   ];
@@ -164,7 +341,7 @@ export default function SkillsTechnologies() {
                 <div key={skillIndex}>
                   <div className="flex items-center justify-between mb-1 sm:mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm sm:text-base">{skill.icon}</span>
+                      <span className="text-lg sm:text-xl">{skill.icon}</span>
                       <span className="text-sm sm:text-base font-medium">
                         {skill.name}
                       </span>
@@ -175,11 +352,7 @@ export default function SkillsTechnologies() {
                   </div>
                   <div className="w-full bg-[hsl(var(--muted))] rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${getLevelColor(
-                        skill.level
-                      )} ${getLevelWidth(
-                        skill.level
-                      )} transition-all duration-1000 ease-in-out`}
+                      className={`h-2 rounded-full ${getLevelColor(skill.level)} ${getLevelWidth(skill.level)} transition-all duration-1000 ease-in-out`}
                     ></div>
                   </div>
                 </div>
@@ -202,11 +375,7 @@ export default function SkillsTechnologies() {
             >
               <div className="flex justify-center mb-2">
                 <div className="p-2 bg-[hsl(var(--primary))]/10 rounded-full text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))]/20 transition-colors">
-                  {typeof skill.icon === "string" ? (
-                    <span className="text-lg">{skill.icon}</span>
-                  ) : (
-                    skill.icon
-                  )}
+                  <span className="text-lg">{skill.icon}</span>
                 </div>
               </div>
               <span className="text-xs sm:text-sm font-medium text-center">

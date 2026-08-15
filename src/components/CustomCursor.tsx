@@ -197,10 +197,9 @@ const CustomCursor = () => {
             a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
               cursor: ${isOverScrollbar ? "default" : "none"} !important;
             }
-            /* Freeze hover scale transforms while drag-scrolling so
-               scale transitions don't corrupt the mousemove dy delta */
+            /* Disable transitions while drag-scrolling so hover effects
+               do not interfere — but do NOT freeze transform or layout */
             body.is-dragging * {
-              transform: none !important;
               transition: none !important;
             }
             ::-webkit-scrollbar {
