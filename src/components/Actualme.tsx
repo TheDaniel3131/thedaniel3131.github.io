@@ -146,7 +146,7 @@ export default function ActualMe() {
       className="min-h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))]"
     >
       {/* Navbar — same size as main Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--background))]/90 backdrop-blur-md shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--background))]/90 backdrop-blur-md">
         <div className="container mx-auto px-4">
           <div className="flex h-20 items-center justify-between">
             <Link
@@ -157,7 +157,10 @@ export default function ActualMe() {
               Back
             </Link>
 
-            <a href="/" className="flex items-center gap-2">
+            <a
+              href="/"
+              className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2"
+            >
               <Codesandbox className="h-6 w-6 text-[hsl(var(--primary))]" />
               <span className="text-[hsl(var(--primary))] font-bold text-2xl">
                 DPTF
