@@ -44,3 +44,6 @@ next-env.d.ts
 
 # dockerfiles
 Dockerfile-fixed.prod
+
+#secret
+/secret
