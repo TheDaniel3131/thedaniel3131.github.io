@@ -27,7 +27,7 @@ export default function Loader({ onDone }: { onDone: () => void }) {
           className="h-10 w-10 text-[hsl(var(--primary))] animate-pulse"
           strokeWidth={1.5}
         />
-        <span className="text-lg font-bold tracking-widest text-[hsl(var(--primary))]">
+        <span className="text-lg font-bold tracking-widest text-[hsl(var(--primary))] animate-pulse">
           DPTF
         </span>
       </div>

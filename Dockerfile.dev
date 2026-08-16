@@ -26,3 +26,22 @@ EXPOSE 5173
 # it will not be accessible from outside the container because not able to bind 
 # to that interface or forward the port.
 CMD ["npm", "run", "dev", "--", "--host"] 
+
+
+# pnpm version
+# FROM node:18-alpine
+
+# WORKDIR /app
+
+# # Install pnpm
+# RUN npm install -g pnpm
+
+# COPY package.json pnpm-lock.yaml ./
+
+# RUN pnpm install
+
+# COPY . .
+
+# EXPOSE 5173
+
+# CMD ["pnpm", "run", "dev", "--", "--host"]
