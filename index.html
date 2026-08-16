@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        const theme = localStorage.getItem("portfolio-theme");
+        if (theme === "dark" || (!theme && true)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
 
     <!-- Favicon -->
@@ -15,7 +23,7 @@
     />
 
     <!-- Primary Meta Tags -->
-    <title>DPTF | Portfolio</title>
+    <title>Daniel Poh | Portfolio</title>
     <meta name="title" content="DPTF | Portfolio" />
     <meta
       name="description"

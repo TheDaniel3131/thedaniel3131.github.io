@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -9,13 +10,21 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
 import ScrollToTop from "./components/ScrollToTop";
+import Loader from "./components/Loader";
 import { useAnalytics } from "@/hooks/google-analytics/GoogleAnalytics";
 
 function App() {
   useAnalytics(import.meta.env.VITE_GA_MEASUREMENT_ID || "");
+  const [loading, setLoading] = useState(true);
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-      <div className="min-h-screen bg-[hsl(var(--background))]">
+      {loading && <Loader onDone={() => setLoading(false)} />}
+      <div
+        className={`min-h-screen bg-[hsl(var(--background))] transition-opacity duration-300 ${
+          loading ? "opacity-0" : "opacity-100"
+        }`}
+      >
         <CustomCursor />
         <ScrollToTop />
         <Navbar />
