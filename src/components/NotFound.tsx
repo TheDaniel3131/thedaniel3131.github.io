@@ -61,11 +61,11 @@ export default function NotFound() {
       <main className="flex-1 flex items-center justify-center px-4">
         <div className="text-center max-w-lg mx-auto">
           {/* 404 number */}
-          <h1 className="text-[8rem] sm:text-[10rem] font-bold leading-none text-[hsl(var(--primary))]/10 select-none mb-0">
+          <h1 className="text-[6rem] sm:text-[8rem] font-bold leading-none text-[hsl(var(--primary))]/55 select-none mb-0">
             404
           </h1>
 
-          <div className="-mt-6 sm:-mt-8 mb-6">
+          <div className="mb-6">
             <h2 className="text-2xl sm:text-3xl font-bold mb-3">
               Page not found
             </h2>
@@ -83,12 +83,12 @@ export default function NotFound() {
               <ArrowLeft className="h-4 w-4" />
               Back to Home
             </Link>
-            <a
+            {/* <a
               href="mailto:danielpohtingfong@gmail.com"
               className="px-6 py-3 bg-transparent border border-[hsl(var(--border))] rounded-md font-medium hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))] transition-colors text-sm sm:text-base"
             >
               Contact Me
-            </a>
+            </a> */}
           </div>
         </div>
       </main>
