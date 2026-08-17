@@ -29,11 +29,14 @@ function App() {
         <ScrollToTop />
         <Navbar />
         <main>
-          <section id="home" className="min-h-screen flex items-center">
+          <section
+            id="home"
+            className="min-h-screen flex items-center scroll-mt-20"
+          >
             <Hero />
           </section>
 
-          <section id="about" className="py-16 sm:py-20">
+          <section id="about" className="py-16 sm:py-20 scroll-mt-20">
             <div className="animate-fade-in-up">
               <About />
             </div>
@@ -41,14 +44,14 @@ function App() {
 
           <section
             id="skills"
-            className="py-16 sm:py-20 bg-[hsl(var(--muted))]"
+            className="py-16 sm:py-20 bg-[hsl(var(--muted))] scroll-mt-20"
           >
             <div className="animate-fade-in-up">
               <SkillsTechnologies />
             </div>
           </section>
 
-          <section id="experience" className="py-16 sm:py-20">
+          <section id="experience" className="py-16 sm:py-20 scroll-mt-20">
             <div className="animate-fade-in-up">
               <Experience />
             </div>
@@ -56,14 +59,14 @@ function App() {
 
           <section
             id="projects"
-            className="py-16 sm:py-20 bg-[hsl(var(--muted))]"
+            className="py-16 sm:py-20 bg-[hsl(var(--muted))] scroll-mt-20"
           >
             <div className="animate-fade-in-up">
               <Projects />
             </div>
           </section>
 
-          <section id="contact" className="py-16 sm:py-20">
+          <section id="contact" className="py-16 sm:py-20 scroll-mt-20">
             <Contact />
           </section>
         </main>

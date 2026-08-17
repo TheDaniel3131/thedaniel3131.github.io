@@ -38,19 +38,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // old method
+  // const scrollToSection = (sectionId: string) => {
+  //   setMobileMenuOpen(false);
+  //   const section = document.getElementById(sectionId);
+  //   if (section) {
+  //     // Account for fixed navbar height (80px) plus some extra padding
+  //     const navbarHeight = 80;
+  //     const extraPadding = 20;
+  //     const elementPosition = section.offsetTop - navbarHeight - extraPadding;
+
+  //     window.scrollTo({
+  //       top: elementPosition,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
+
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
     const section = document.getElementById(sectionId);
     if (section) {
-      // Account for fixed navbar height (80px) plus some extra padding
-      const navbarHeight = 80;
-      const extraPadding = 20;
-      const elementPosition = section.offsetTop - navbarHeight - extraPadding;
-
-      window.scrollTo({
-        top: elementPosition,
-        behavior: "smooth",
-      });
+      section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
