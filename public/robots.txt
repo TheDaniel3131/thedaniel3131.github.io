@@ -1,6 +1,7 @@
 User-agent: *
-Disallow: /actualme
+Disallow:
 
 Sitemap: https://danielpoh.com/sitemap.xml
 Sitemap: https://danielpohtingfong.netlify.app/sitemap.xml
 Sitemap: https://danielpohtingfong.vercel.app/sitemap.xml
+
