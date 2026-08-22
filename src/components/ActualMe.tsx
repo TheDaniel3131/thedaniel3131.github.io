@@ -219,8 +219,8 @@ export default function ActualMe() {
 
           <p className="text-[hsl(var(--muted-foreground))] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             There are two sides of me: Software Developer by DAY and Gamer by
-            NIGHT. This page is where I share my introduction about myself,
-            passions, hobbies, and the things that make me who I truly am today.
+            NIGHT. This page is where I share the other side of me, passions,
+            hobbies, and the things that make me who I truly am today.
           </p>
         </div>
 
