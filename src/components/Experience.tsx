@@ -66,6 +66,7 @@ export default function Experience() {
         "Apache ECharts",
         "Vue ECharts",
         "Lark",
+        "Three.js",
       ],
     },
     // {

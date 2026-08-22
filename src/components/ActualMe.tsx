@@ -15,10 +15,19 @@ import {
   Moon,
   Codesandbox,
   ArrowLeft,
-  Laugh,
+  // Laugh,
+  // Chess,
+  Calendar,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SiLastdotfm, SiLichess, SiBehance } from "react-icons/si";
+import {
+  SiLastdotfm,
+  SiLichess,
+  SiBehance,
+  // SiPlayerfm,
+  // SiHackster,
+  SiIndiehackers,
+} from "react-icons/si";
 
 export default function ActualMe() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -54,35 +63,35 @@ export default function ActualMe() {
 
   const vibes = [
     { icon: <Youtube className="h-5 w-5" />, label: "Content Creator" },
-    { icon: <Twitch className="h-5 w-5" />, label: "Streamer (sometimes)" },
+    { icon: <Twitch className="h-5 w-5" />, label: "Streamer" },
     { icon: <Video className="h-5 w-5" />, label: "Video Editor" },
     { icon: <Palette className="h-5 w-5" />, label: "Graphic Designer" },
-    { icon: <Music className="h-5 w-5" />, label: "Music Enjoyer" },
+    { icon: <Music className="h-5 w-5" />, label: "Music Addict" },
     { icon: <GamepadIcon className="h-5 w-5" />, label: "Gamer" },
     { icon: <SiLichess className="h-5 w-5" />, label: "Chess Player" },
-    { icon: <Pen className="h-5 w-5" />, label: "Occasional Blogger" },
+    { icon: <Pen className="h-5 w-5" />, label: "Blogger (Sometimes)" },
   ];
 
   const funFacts = [
     {
       emoji: "🎮",
-      fact: "Games are basically interactive movies to me — the story matters more than the score.",
+      fact: "Games are my life basically. I play a lot of games and I play them casually and competitively, on and off.",
     },
     {
       emoji: "🎬",
-      fact: "I edit my own videos and care way too much about transitions and colour grading.",
+      fact: "I used to edit my own videos and care way too much about transitions and colour grading. Now, I am just a farmer.",
     },
     {
       emoji: "♟️",
-      fact: "I play chess casually but I will absolutely spend 30 minutes analysing why I lost a game.",
+      fact: "I play chess casually but I will absolutely spend every single analysing games that I play or watch.",
     },
     {
       emoji: "🎨",
-      fact: "Graphic design is something I picked up out of necessity and ended up genuinely enjoying.",
+      fact: "Graphic design is something I picked up out of necessity and ended up genuinely enjoying as a hobby.",
     },
     {
       emoji: "🌙",
-      fact: "Most of my best ideas and work happen after midnight. I am not a morning person.",
+      fact: "Most of my ideas and thoughts come to me the clearest at night. But I am still bad at brainstorming and ideation but I just have a lot of ideas that are not working.",
     },
     {
       emoji: "📺",
@@ -90,7 +99,7 @@ export default function ActualMe() {
     },
     {
       emoji: "🎵",
-      fact: "Lo-fi, city pop, and OSTs are my productivity stack. Check my Last.fm if you don't believe me.",
+      fact: "Electronic music is my productivity stack. Real mfs will know what I mean. Check my Last.fm if you don't believe me.",
     },
     {
       emoji: "😅",
@@ -100,18 +109,18 @@ export default function ActualMe() {
 
   const currentlyInto = [
     { label: "Watching", value: "Too many YouTube channels to list" },
-    { label: "Playing", value: "Whatever is trending or on sale" },
-    { label: "Chess", value: "Losing games and learning from it" },
-    { label: "Editing", value: "Random passion projects" },
-    { label: "Listening", value: "Lo-fi / City Pop / Game OSTs" },
-    { label: "Learning", value: "Always something new, always" },
+    { label: "Playing", value: "Same Old Games" },
+    { label: "Chess", value: "Chess is not boring" },
+    { label: "Editing", value: "Random and small projects" },
+    { label: "Listening", value: "EDM/Future Bass/Drum & Bass/Hip-Hop" },
+    { label: "Learning", value: "Always something new, and repetitively" },
   ];
 
   const links = [
     {
       label: "YouTube",
       description: "Multiple channels, various topics",
-      href: "https://www.youtube.com/@TheDaniel3131",
+      href: "https://www.youtube.com/@MORED3",
       icon: <Youtube className="h-5 w-5" />,
       color: "text-[#FF0000]",
     },
@@ -134,6 +143,20 @@ export default function ActualMe() {
       description: "Chess profile — come challenge me",
       href: "https://lichess.org/@/Daniel3131",
       icon: <SiLichess className="h-5 w-5" />,
+      color: "text-[hsl(var(--foreground))]",
+    },
+    {
+      label: "Blog",
+      description: "Random thoughts and ideas",
+      href: "https://z3phr0us.blogspot.com/",
+      icon: <Pen className="h-5 w-5" />,
+      color: "text-[hsl(var(--foreground))]",
+    },
+    {
+      label: "CTF Player",
+      description: "Sometimes I play CTFs and hack stuff for fun",
+      href: "https://ctftime.org/team/277613",
+      icon: <SiIndiehackers className="h-5 w-5" />,
       color: "text-[hsl(var(--foreground))]",
     },
   ];
@@ -184,27 +207,28 @@ export default function ActualMe() {
       <main className="pt-24 pb-20 container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         {/* Hero */}
         <div className="text-center mb-16 animate-on-scroll">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] text-xs font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] text-xs font-medium mb-6">
             <Flame className="h-3 w-3" />
-            you found the secret page
+            Looks like you have found my secret page...
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            The <span className="text-[hsl(var(--primary))]">actual</span> me
+            The <span className="text-[hsl(var(--primary))]">Actual, Real</span>{" "}
+            Me
           </h1>
 
           <p className="text-[hsl(var(--muted-foreground))] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Hey — so you actually found this. This isn't the polished portfolio
-            version of me. This is just... me. Daniel. Software engineer by day,
-            chaotic creative by night.
+            There are two sides of me: Software Developer by DAY and Gamer by
+            NIGHT. This page is where I share my introduction about myself,
+            passions, hobbies, and the things that make me who I truly am today.
           </p>
         </div>
 
         {/* What I actually am */}
         <div className="mb-16 animate-on-scroll">
           <div className="flex items-center gap-2 mb-6">
-            <Laugh className="h-5 w-5 text-[hsl(var(--primary))]" />
-            <h2 className="text-xl font-semibold">What I actually am</h2>
+            {/* <Laugh className="h-5 w-5 text-[hsl(var(--primary))]" /> */}
+            <h2 className="text-xl font-semibold">My Roles</h2>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -227,22 +251,18 @@ export default function ActualMe() {
         {/* The real intro */}
         <div className="mb-16 animate-on-scroll">
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-6 sm:p-8 hover:border-[hsl(var(--primary))]/50 transition-colors">
-            <h2 className="text-xl font-semibold mb-4">
-              So who actually is Daniel? 👀
-            </h2>
+            <h2 className="text-xl font-semibold mb-4">Real About Me</h2>
             <div className="space-y-4 text-[hsl(var(--muted-foreground))] text-sm sm:text-base leading-relaxed">
               <p>
-                Yeah I build software. But outside of that, I'm someone who
-                creates content, edits videos, designs things, plays chess,
-                games way too much, and somehow juggles all of it while staying
-                sane (barely).
+                Outside of work, I am someone who does content, edits videos,
+                designs things, plays chess, games way too much, and somehow
+                juggles all of it while staying sane (barely).
               </p>
               <p>
                 I run multiple YouTube channels across different topics because
                 one was never going to be enough. I got into content creation
-                because I genuinely enjoy making things that people actually
-                watch and feel something from — not just code that runs behind
-                the scenes.
+                because I genuinely enjoy making and recording things for fun —
+                not just coding.
               </p>
               <p>
                 Graphic design came in because I couldn't stand using templates.
@@ -251,8 +271,9 @@ export default function ActualMe() {
                 recent thing but I'm already way too invested in it.
               </p>
               <p>
-                I'm competitive, curious, and probably have too many interests
-                for my own good. But I wouldn't have it any other way.
+                I am quite competitive, curious, and probably have too many
+                interests for my own good. But I would not have it any other
+                way.
               </p>
             </div>
           </div>
@@ -283,6 +304,125 @@ export default function ActualMe() {
                 </div>
               </a>
             ))}
+          </div>
+        </div>
+
+        {/* Creative Experience */}
+        <div className="mb-16 animate-on-scroll">
+          <h2 className="text-xl font-semibold mb-6">Creative Experience</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative ml-8 sm:ml-12">
+              <div className="absolute left-0 top-0 bottom-0 transform translate-x-[-50%] w-0.5 bg-[hsl(var(--primary))]"></div>
+
+              {/* YouTuber / Streamer / Content Creator */}
+              <div className="relative pb-8 sm:pb-12 animate-on-scroll">
+                <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
+                  <Youtube className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
+                </div>
+                <div className="ml-8 sm:ml-16">
+                  <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-lg sm:text-xl font-semibold mb-1">
+                          YouTuber / Streamer / Content Creator{" "}
+                          <span className="text-[hsl(var(--muted-foreground))] text-xs">
+                            (Full Time passion)
+                          </span>
+                        </h3>
+                        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
+                          Self / Multiple Channels
+                        </p>
+                      </div>
+                      <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
+                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+                        <span>Sep 8, 2013 – Present</span>
+                      </div>
+                    </div>
+                    <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
+                      Started creating content in 2013 and never stopped. Run
+                      multiple YouTube channels across different topics —
+                      gaming, lifestyle, and whatever else catches my interest.
+                      Also streams occasionally. The editing, thumbnails,
+                      scripts, and strategy are all self-managed.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        "YouTube",
+                        "Twitch",
+                        "Video Editing",
+                        "Scriptwriting",
+                        "Thumbnail Design",
+                        "Content Strategy",
+                        "Community Management",
+                        "Streaming",
+                      ].map((tag, i) => (
+                        <span
+                          key={i}
+                          className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Graphic Designer */}
+              <div className="relative pb-0 animate-on-scroll">
+                <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
+                  <Palette className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
+                </div>
+                <div className="ml-8 sm:ml-16">
+                  <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-lg sm:text-xl font-semibold mb-1">
+                          Graphic Designer{" "}
+                          <span className="text-[hsl(var(--muted-foreground))] text-xs">
+                            (Freelance)
+                          </span>
+                        </h3>
+                        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
+                          Self / Various Clients
+                        </p>
+                      </div>
+                      <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
+                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+                        <span>2018 – Present</span>
+                      </div>
+                    </div>
+                    <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
+                      Started designing out of necessity — couldn't stand using
+                      generic templates. Picked up graphic design to create
+                      thumbnails, banners, and branding for my own content,
+                      which evolved into freelance work for others. Work spans
+                      social media assets, branding, and digital illustrations.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        "Photoshop",
+                        "Illustrator",
+                        "Figma",
+                        "Canva",
+                        "Branding",
+                        "Thumbnail Design",
+                        "Social Media Assets",
+                        "Typography",
+                        "Digital Illustration",
+                      ].map((tag, i) => (
+                        <span
+                          key={i}
+                          className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -329,11 +469,13 @@ export default function ActualMe() {
         {/* Footer note */}
         <div className="text-center animate-on-scroll">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] text-xs">
-            <span>if you made it here, you're probably cool</span>
+            <span>If you made it here, you are definitely a smart ass.</span>
+            {/* Knows about Sitemap Explorer & robots.txt */}
             <span>🤝</span>
           </div>
           <p className="mt-4 text-xs text-[hsl(var(--muted-foreground))]">
-            this page doesn't exist officially. you found it though. respect.
+            This page does not exist officially. If you manage to find it,
+            respect.
           </p>
         </div>
       </main>
