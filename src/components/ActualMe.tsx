@@ -335,7 +335,7 @@ export default function ActualMe() {
                       </div>
                       <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
                         <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
-                        <span>Sep 8, 2013 – Present</span>
+                        <span>2013 ~ Present</span>
                       </div>
                     </div>
                     <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
@@ -389,7 +389,7 @@ export default function ActualMe() {
                       </div>
                       <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
                         <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
-                        <span>2018 – Present</span>
+                        <span>2018 ~ Present</span>
                       </div>
                     </div>
                     <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
