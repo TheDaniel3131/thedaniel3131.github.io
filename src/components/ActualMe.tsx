@@ -15,18 +15,18 @@ import {
   Moon,
   Codesandbox,
   ArrowLeft,
-  // Laugh,
-  // Chess,
   Calendar,
+  Trophy,
+  Keyboard,
+  ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   SiLastdotfm,
   SiLichess,
   SiBehance,
-  // SiPlayerfm,
-  // SiHackster,
   SiIndiehackers,
+  SiOsu,
 } from "react-icons/si";
 
 export default function ActualMe() {
@@ -35,7 +35,6 @@ export default function ActualMe() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Prevent browser from restoring previous scroll position on refresh
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
@@ -69,6 +68,8 @@ export default function ActualMe() {
     { icon: <Music className="h-5 w-5" />, label: "Music Addict" },
     { icon: <GamepadIcon className="h-5 w-5" />, label: "Gamer" },
     { icon: <SiLichess className="h-5 w-5" />, label: "Chess Player" },
+    { icon: <SiOsu className="h-5 w-5" />, label: "osu! Player" },
+    { icon: <Keyboard className="h-5 w-5" />, label: "Speed Typist" },
     { icon: <Pen className="h-5 w-5" />, label: "Blogger (Sometimes)" },
   ];
 
@@ -125,6 +126,13 @@ export default function ActualMe() {
       color: "text-[#FF0000]",
     },
     {
+      label: "Twitch",
+      description: "Sometimes I stream on Twitch",
+      href: "https://www.twitch.tv/daniel3131",
+      icon: <Twitch className="h-5 w-5" />,
+      color: "text-[#9146FF]",
+    },
+    {
       label: "Last.fm",
       description: "What I've been listening to",
       href: "https://www.last.fm/user/TheDaniel3131",
@@ -146,10 +154,31 @@ export default function ActualMe() {
       color: "text-[hsl(var(--foreground))]",
     },
     {
+      label: "osu!",
+      description: "Rhythm game profile",
+      href: "https://osu.ppy.sh/users/11710477",
+      icon: <SiOsu className="h-5 w-5" />,
+      color: "text-[#FF66AA]",
+    },
+    {
+      label: "TypeRacer",
+      description: "Speed typing profile — 308 WPM",
+      href: "https://data.typeracer.com/pit/profile?user=daniel3131",
+      icon: <Keyboard className="h-5 w-5" />,
+      color: "text-[hsl(var(--foreground))]",
+    },
+    {
       label: "Blog",
       description: "Random thoughts and ideas",
       href: "https://z3phr0us.blogspot.com/",
       icon: <Pen className="h-5 w-5" />,
+      color: "text-[hsl(var(--foreground))]",
+    },
+    {
+      label: "Carrd",
+      description: "Another corner of the internet",
+      href: "https://daniel3131.carrd.co/",
+      icon: <ExternalLink className="h-5 w-5" />,
       color: "text-[hsl(var(--foreground))]",
     },
     {
@@ -168,10 +197,10 @@ export default function ActualMe() {
       ref={sectionRef}
       className="min-h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))]"
     >
-      {/* Navbar — same size as main Navbar */}
+      {/* Navbar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--background))]/90 backdrop-blur-md">
         <div className="container mx-auto px-4">
-          <div className="flex h-20 items-center justify-between">
+          <div className="relative flex h-20 items-center justify-between">
             <Link
               to="/"
               className="flex items-center gap-2 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors text-base font-medium"
@@ -211,12 +240,10 @@ export default function ActualMe() {
             <Flame className="h-3 w-3" />
             Looks like you have found my secret page...
           </div>
-
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             The <span className="text-[hsl(var(--primary))]">Actual, Real</span>{" "}
             Me
           </h1>
-
           <p className="text-[hsl(var(--muted-foreground))] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             There are two sides of me: Software Developer by DAY and Gamer by
             NIGHT. This page is where I share the other side of me, passions,
@@ -224,14 +251,10 @@ export default function ActualMe() {
           </p>
         </div>
 
-        {/* What I actually am */}
+        {/* My Roles */}
         <div className="mb-16 animate-on-scroll">
-          <div className="flex items-center gap-2 mb-6">
-            {/* <Laugh className="h-5 w-5 text-[hsl(var(--primary))]" /> */}
-            <h2 className="text-xl font-semibold">My Roles</h2>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <h2 className="text-xl font-semibold mb-6">My Roles</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {vibes.map((vibe, i) => (
               <div
                 key={i}
@@ -248,7 +271,7 @@ export default function ActualMe() {
           </div>
         </div>
 
-        {/* The real intro */}
+        {/* Real About Me */}
         <div className="mb-16 animate-on-scroll">
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-6 sm:p-8 hover:border-[hsl(var(--primary))]/50 transition-colors">
             <h2 className="text-xl font-semibold mb-4">Real About Me</h2>
@@ -310,118 +333,228 @@ export default function ActualMe() {
         {/* Creative Experience */}
         <div className="mb-16 animate-on-scroll">
           <h2 className="text-xl font-semibold mb-6">Creative Experience</h2>
-          <div className="max-w-4xl mx-auto">
-            <div className="relative ml-8 sm:ml-12">
-              <div className="absolute left-0 top-0 bottom-0 transform translate-x-[-50%] w-0.5 bg-[hsl(var(--primary))]"></div>
+          <div className="relative ml-8 sm:ml-12">
+            <div className="absolute left-0 top-0 bottom-0 transform translate-x-[-50%] w-0.5 bg-[hsl(var(--primary))]"></div>
 
-              {/* YouTuber / Streamer / Content Creator */}
-              <div className="relative pb-8 sm:pb-12 animate-on-scroll">
-                <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
-                  <Youtube className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
-                </div>
-                <div className="ml-8 sm:ml-16">
-                  <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-semibold mb-1">
-                          YouTuber / Streamer / Content Creator{" "}
-                          <span className="text-[hsl(var(--muted-foreground))] text-xs">
-                            (Full Time passion)
-                          </span>
-                        </h3>
-                        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
-                          Self / Multiple Channels
-                        </p>
-                      </div>
-                      <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
-                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
-                        <span>2013 ~ Present</span>
-                      </div>
-                    </div>
-                    <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
-                      Started creating content in 2013 and never stopped. Run
-                      multiple YouTube channels across different topics —
-                      gaming, lifestyle, and whatever else catches my interest.
-                      Also streams occasionally. The editing, thumbnails,
-                      scripts, and strategy are all self-managed.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "YouTube",
-                        "Twitch",
-                        "Video Editing",
-                        "Scriptwriting",
-                        "Thumbnail Design",
-                        "Content Strategy",
-                        "Community Management",
-                        "Streaming",
-                      ].map((tag, i) => (
-                        <span
-                          key={i}
-                          className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
-                        >
-                          {tag}
+            {/* YouTuber */}
+            <div className="relative pb-8 sm:pb-12 animate-on-scroll">
+              <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
+                <Youtube className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
+              </div>
+              <div className="ml-8 sm:ml-16">
+                <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-1">
+                        YouTuber / Streamer / Content Creator{" "}
+                        <span className="text-[hsl(var(--muted-foreground))] text-xs">
+                          (Full Time passion)
                         </span>
-                      ))}
+                      </h3>
+                      <p className="text-[hsl(var(--muted-foreground))] text-sm">
+                        Self / Multiple Channels
+                      </p>
                     </div>
+                    <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
+                      <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+                      <span>2013 ~ Present</span>
+                    </div>
+                  </div>
+                  <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
+                    Started creating content in 2013 and never stopped. Run
+                    multiple YouTube channels across different topics — gaming,
+                    lifestyle, and whatever else catches my interest. Also
+                    streams occasionally. The editing, thumbnails, scripts, and
+                    strategy are all self-managed.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "YouTube",
+                      "Twitch",
+                      "Video Editing",
+                      "Scriptwriting",
+                      "Thumbnail Design",
+                      "Content Strategy",
+                      "Community Management",
+                      "Streaming",
+                    ].map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Graphic Designer */}
-              <div className="relative pb-0 animate-on-scroll">
-                <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
-                  <Palette className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
-                </div>
-                <div className="ml-8 sm:ml-16">
-                  <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-semibold mb-1">
-                          Graphic Designer{" "}
-                          <span className="text-[hsl(var(--muted-foreground))] text-xs">
-                            (Freelance)
-                          </span>
-                        </h3>
-                        <p className="text-[hsl(var(--muted-foreground))] text-sm sm:text-base">
-                          Self / Various Clients
-                        </p>
-                      </div>
-                      <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
-                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
-                        <span>2018 ~ Present</span>
-                      </div>
-                    </div>
-                    <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
-                      Started designing out of necessity — couldn't stand using
-                      generic templates. Picked up graphic design to create
-                      thumbnails, banners, and branding for my own content,
-                      which evolved into freelance work for others. Work spans
-                      social media assets, branding, and digital illustrations.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Photoshop",
-                        "Illustrator",
-                        "Figma",
-                        "Canva",
-                        "Branding",
-                        "Thumbnail Design",
-                        "Social Media Assets",
-                        "Typography",
-                        "Digital Illustration",
-                      ].map((tag, i) => (
-                        <span
-                          key={i}
-                          className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
-                        >
-                          {tag}
+            {/* Graphic Designer */}
+            <div className="relative pb-8 sm:pb-12 animate-on-scroll">
+              <div className="absolute left-0 top-36 sm:top-16 w-8 h-8 transform -translate-x-1/2 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center border-4 border-[hsl(var(--background))]">
+                <Palette className="h-3 w-3 sm:h-4 sm:w-4 text-[hsl(var(--primary-foreground))]" />
+              </div>
+              <div className="ml-8 sm:ml-16">
+                <div className="bg-[hsl(var(--card))] p-4 sm:p-6 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-1">
+                        Graphic Designer{" "}
+                        <span className="text-[hsl(var(--muted-foreground))] text-xs">
+                          (Freelance)
                         </span>
-                      ))}
+                      </h3>
+                      <p className="text-[hsl(var(--muted-foreground))] text-sm">
+                        Self / Various Clients
+                      </p>
                     </div>
+                    <div className="flex items-center text-[hsl(var(--muted-foreground))] text-xs sm:text-sm bg-[hsl(var(--muted))] px-3 py-1 rounded-full sm:whitespace-nowrap">
+                      <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+                      <span>2018 ~ Present</span>
+                    </div>
+                  </div>
+                  <p className="mb-4 text-[hsl(var(--foreground))] text-sm sm:text-base leading-relaxed">
+                    Started designing out of necessity — couldn't stand using
+                    generic templates. Picked up graphic design to create
+                    thumbnails, banners, and branding for my own content, which
+                    evolved into freelance work for others. Work spans social
+                    media assets, branding, and digital illustrations.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "Photoshop",
+                      "Illustrator",
+                      "Figma",
+                      "Canva",
+                      "Branding",
+                      "Thumbnail Design",
+                      "Social Media Assets",
+                      "Typography",
+                      "Digital Illustration",
+                    ].map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Competitive & Gaming */}
+        <div className="mb-16 animate-on-scroll">
+          <h2 className="text-xl font-semibold mb-6">Competitive & Gaming</h2>
+          <div className="space-y-4">
+            {/* osu! */}
+            <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-6 hover:border-[hsl(var(--primary))]/50 transition-colors">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[#FF66AA]/10 rounded-full">
+                  <SiOsu className="h-5 w-5 text-[#FF66AA]" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-base">
+                    osu! — Rhythm Game
+                  </h3>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))]">
+                    Player: Daniel3131
+                  </p>
+                </div>
+                <a
+                  href="https://osu.ppy.sh/users/11710477"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-auto text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
+              <p className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed mb-4">
+                Active osu! player. Primarily plays standard mode. Also competed
+                in the 4 Digit Catch World Cup (4CWC) 2021 tournament
+                representing Team Malaysia.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "osu!standard",
+                  "osu!catch",
+                  "4CWC 2021",
+                  "Tournament Player",
+                  "Rhythm Game",
+                ].map((tag, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* TypeRacer */}
+            <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-6 hover:border-[hsl(var(--primary))]/50 transition-colors">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-[hsl(var(--primary))]/10 rounded-full">
+                  <Trophy className="h-5 w-5 text-[hsl(var(--primary))]" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-base">
+                    TypeRacer — Speed Typing Record
+                  </h3>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))]">
+                    Profile: daniel3131
+                  </p>
+                </div>
+                <a
+                  href="https://data.typeracer.com/pit/profile?user=daniel3131"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-auto text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
+
+              {/* Record highlight */}
+              <div className="bg-[hsl(var(--primary))]/5 border border-[hsl(var(--primary))]/20 rounded-xl p-4 mb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Trophy className="h-4 w-4 text-yellow-500" />
+                  <span className="text-sm font-semibold text-yellow-500">
+                    Malaysian Record
+                  </span>
+                </div>
+                <p className="text-2xl font-bold text-[hsl(var(--primary))]">
+                  308.036 WPM
+                </p>
+                <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">
+                  2nd Highest Speed Typing WPM in Malaysia — one of only two
+                  Malaysian records. Recorded & verified by TypeRacer moderator
+                  team on October 31, 2020.
+                </p>
+              </div>
+
+              <p className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed mb-4">
+                Achieved 308 WPM on TypeRacer — a verified competitive typing
+                platform. This places the record among the top typing speeds
+                ever recorded by a Malaysian user on the platform, verified
+                officially by the TypeRacer moderator team.
+              </p>
+
+              <a
+                href="https://www.youtube.com/watch?v=_a3Wd7K3rVE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs text-[hsl(var(--primary))] hover:underline"
+              >
+                <Youtube className="h-4 w-4" />
+                Watch the record run on YouTube
+              </a>
             </div>
           </div>
         </div>
@@ -470,7 +603,6 @@ export default function ActualMe() {
         <div className="text-center animate-on-scroll">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] text-xs">
             <span>If you made it here, you are definitely a smart ass.</span>
-            {/* Knows about Sitemap Explorer & robots.txt */}
             <span>🤝</span>
           </div>
           <p className="mt-4 text-xs text-[hsl(var(--muted-foreground))]">
