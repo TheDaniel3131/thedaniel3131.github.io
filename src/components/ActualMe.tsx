@@ -475,13 +475,11 @@ export default function ActualMe() {
                 </a>
               </div>
               <p className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed mb-4">
-                Active osu! player. Primarily plays standard mode. Also competed
-                in the 4 Digit Catch World Cup (4CWC) 2021 tournament
-                representing Team Malaysia.
+                Semi-active, casual osu! player. Competed in the 4 Digit Catch
+                World Cup (4CWC) 2021 tournament representing Team Malaysia.
               </p>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "osu!standard",
                   "osu!catch",
                   "4CWC 2021",
                   "Tournament Player",
