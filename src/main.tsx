@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import ActualMe from "./components/ActualMe.tsx";
 import NotFound from "./components/NotFound.tsx";
 import Space from "./components/Space.tsx";
+import SubpagesWithLoader from "./components/SubpagesWithLoader.tsx";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import CustomCursor from "./components/CustomCursor.tsx";
 import "./index.css";
@@ -16,9 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <CustomCursor />
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/actualme" element={<ActualMe />} />
-          <Route path="/space" element={<Space />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/actualme" element={<SubpagesWithLoader><ActualMe /></SubpagesWithLoader>} />
+          <Route path="/space" element={<SubpagesWithLoader><Space /></SubpagesWithLoader>} />
+          <Route path="*" element={<SubpagesWithLoader><NotFound /></SubpagesWithLoader>} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
