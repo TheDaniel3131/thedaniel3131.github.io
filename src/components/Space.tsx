@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, X, Codesandbox, RotateCcw } from "lucide-react";
+import {
+  ArrowLeft,
+  Plus,
+  X,
+  Codesandbox,
+  RotateCcw,
+  Compass,
+} from "lucide-react";
 
 interface Thought {
   id: string;
@@ -78,6 +85,28 @@ const AXIS_LENGTH = 8;
 const GRID_SIZE = 10;
 const GRID_DIVISIONS = 10;
 
+// ── Map constants ──────────────────────────────────────────
+const MAP_PANEL_SIZE = 140; // px, square panel
+const MAP_WORLD_RANGE = 10; // world units shown edge-to-edge on minimap
+const RADAR_WORLD_RANGE = 14; // world units shown edge-to-edge on radar
+const HUES = [0.9, 0.6, 0.15, 0.45, 0.75, 0.05, 0.55, 0.3, 0.85, 0.2];
+
+type MapMode = "mini" | "radar";
+
+interface MapPoint {
+  id: string;
+  cx: number;
+  cy: number;
+  color: string;
+}
+
+interface MapData {
+  points: MapPoint[];
+  camX: number; // panel-space
+  camY: number; // panel-space
+  camAngleDeg: number; // rotation for the camera marker (minimap only)
+}
+
 export default function Space() {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -98,6 +127,17 @@ export default function Space() {
   const [selected, setSelected] = useState<Thought | null>(null);
   const [adding, setAdding] = useState(false);
   const [newText, setNewText] = useState("");
+  const [mapMode, setMapMode] = useState<MapMode>("mini");
+  const [mapData, setMapData] = useState<MapData>({
+    points: [],
+    camX: MAP_PANEL_SIZE / 2,
+    camY: MAP_PANEL_SIZE / 2,
+    camAngleDeg: 0,
+  });
+  const mapModeRef = useRef<MapMode>("mini");
+  useEffect(() => {
+    mapModeRef.current = mapMode;
+  }, [mapMode]);
 
   // Load thoughts
   useEffect(() => {
@@ -249,10 +289,9 @@ export default function Space() {
 
     // ── Thought spheres ─────────────────────────────────────
     spheresRef.current = [];
-    const hues = [0.9, 0.6, 0.15, 0.45, 0.75, 0.05, 0.55, 0.3, 0.85, 0.2];
     thoughts.forEach((t, i) => {
       const geo = new THREE.SphereGeometry(0.12, 20, 20);
-      const color = new THREE.Color().setHSL(hues[i % hues.length], 0.85, 0.65);
+      const color = new THREE.Color().setHSL(HUES[i % HUES.length], 0.85, 0.65);
       const mat = new THREE.MeshBasicMaterial({
         color,
         transparent: true,
@@ -386,6 +425,57 @@ export default function Space() {
       });
       setLabels(newLabels);
 
+      // ── Minimap / radar ─────────────────────────────────
+      const camX = camera.position.x;
+      const camZ = camera.position.z;
+      // direction the camera is looking, on the XZ plane (it always looks at origin)
+      const fwdX = -camX;
+      const fwdZ = -camZ;
+      const angFwd = Math.atan2(fwdX, fwdZ);
+      const half = MAP_PANEL_SIZE / 2;
+
+      let points: MapPoint[];
+      let camPanelX = half;
+      let camPanelY = half;
+      let camAngleDeg = 0;
+
+      if (mapModeRef.current === "mini") {
+        // fixed north-up world map
+        const scale = half / MAP_WORLD_RANGE;
+        points = thoughts.map((th, i) => ({
+          id: th.id,
+          cx: half + th.x * scale,
+          cy: half + th.z * scale,
+          color: `hsl(${HUES[i % HUES.length] * 360}, 85%, 65%)`,
+        }));
+        camPanelX = half + camX * scale;
+        camPanelY = half + camZ * scale;
+        // arrow points where the camera is looking
+        camAngleDeg = (angFwd * 180) / Math.PI;
+      } else {
+        // self-centered radar: forward is always "up"
+        const scale = half / RADAR_WORLD_RANGE;
+        points = thoughts.map((th, i) => {
+          const dx = th.x - camX;
+          const dz = th.z - camZ;
+          const dist = Math.sqrt(dx * dx + dz * dz);
+          const angPoint = Math.atan2(dx, dz);
+          const rel = angPoint - angFwd;
+          const r = Math.min(dist * scale, half - 6);
+          return {
+            id: th.id,
+            cx: half + Math.sin(rel) * r,
+            cy: half - Math.cos(rel) * r,
+            color: `hsl(${HUES[i % HUES.length] * 360}, 85%, 65%)`,
+          };
+        });
+        camPanelX = half;
+        camPanelY = half;
+        camAngleDeg = 0; // camera marker always points "up" on the radar
+      }
+
+      setMapData({ points, camX: camPanelX, camY: camPanelY, camAngleDeg });
+
       renderer.render(scene, camera);
     };
     animate();
@@ -470,6 +560,15 @@ export default function Space() {
           ))}
       </div>
 
+      {/* Navbar backdrop scrim — prevents axis lines from bleeding through the nav */}
+      <div
+        className="absolute top-0 left-0 right-0 h-28 z-10 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, #020209 0%, rgba(2,2,9,0.85) 55%, rgba(2,2,9,0) 100%)",
+        }}
+      />
+
       {/* Navbar */}
       <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 h-20">
         <Link
@@ -485,6 +584,13 @@ export default function Space() {
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setMapMode((m) => (m === "mini" ? "radar" : "mini"))}
+            title={mapMode === "mini" ? "Switch to radar" : "Switch to minimap"}
+            className="text-white/40 hover:text-white border border-white/10 hover:border-white/30 p-2 rounded-full transition-all"
+          >
+            <Compass className="h-4 w-4" />
+          </button>
+          <button
             onClick={resetCamera}
             title="Reset camera"
             className="text-white/40 hover:text-white border border-white/10 hover:border-white/30 p-2 rounded-full transition-all"
@@ -498,6 +604,73 @@ export default function Space() {
             <Plus className="h-4 w-4" />
             Add thought
           </button>
+        </div>
+      </div>
+
+      {/* Minimap / radar panel */}
+      <div
+        className="absolute bottom-6 right-6 z-20 rounded-full overflow-hidden pointer-events-none"
+        style={{
+          width: MAP_PANEL_SIZE,
+          height: MAP_PANEL_SIZE,
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.12)",
+          backdropFilter: "blur(4px)",
+        }}
+      >
+        <svg
+          width={MAP_PANEL_SIZE}
+          height={MAP_PANEL_SIZE}
+          viewBox={`0 0 ${MAP_PANEL_SIZE} ${MAP_PANEL_SIZE}`}
+        >
+          {/* rings */}
+          <circle
+            cx={MAP_PANEL_SIZE / 2}
+            cy={MAP_PANEL_SIZE / 2}
+            r={MAP_PANEL_SIZE / 2 - 1}
+            fill="none"
+            stroke="rgba(255,255,255,0.08)"
+          />
+          <circle
+            cx={MAP_PANEL_SIZE / 2}
+            cy={MAP_PANEL_SIZE / 2}
+            r={(MAP_PANEL_SIZE / 2) * 0.6}
+            fill="none"
+            stroke="rgba(255,255,255,0.06)"
+          />
+          <circle
+            cx={MAP_PANEL_SIZE / 2}
+            cy={MAP_PANEL_SIZE / 2}
+            r={(MAP_PANEL_SIZE / 2) * 0.3}
+            fill="none"
+            stroke="rgba(255,255,255,0.06)"
+          />
+
+          {/* origin marker, minimap only */}
+          {mapMode === "mini" && (
+            <circle
+              cx={MAP_PANEL_SIZE / 2}
+              cy={MAP_PANEL_SIZE / 2}
+              r={2}
+              fill="rgba(255,255,255,0.5)"
+            />
+          )}
+
+          {/* thoughts */}
+          {mapData.points.map((p) => (
+            <circle key={p.id} cx={p.cx} cy={p.cy} r={2.5} fill={p.color} />
+          ))}
+
+          {/* camera marker (triangle pointing where you're looking) */}
+          <g
+            transform={`translate(${mapData.camX}, ${mapData.camY}) rotate(${mapData.camAngleDeg})`}
+          >
+            <polygon points="0,-6 4,5 -4,5" fill="#ffffff" opacity={0.9} />
+          </g>
+        </svg>
+
+        <div className="absolute top-1.5 left-0 right-0 text-center text-[9px] font-mono text-white/25 tracking-widest uppercase">
+          {mapMode === "mini" ? "map" : "radar"}
         </div>
       </div>
 
