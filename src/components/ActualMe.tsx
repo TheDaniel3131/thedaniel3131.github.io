@@ -478,7 +478,7 @@ export default function ActualMe() {
                 Semi-active, casual osu! player. Competed in the 4 Digit Catch
                 World Cup (4CWC) 2021 tournament representing Team Malaysia.
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {[
                   "osu!catch",
                   "4CWC 2021",
@@ -493,6 +493,15 @@ export default function ActualMe() {
                   </span>
                 ))}
               </div>
+              <a
+                href="https://osu.ppy.sh/wiki/en/Tournaments/4CWC/2021"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs text-[hsl(var(--primary))] hover:underline"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Learn more about the tournament
+              </a>
             </div>
 
             {/* TypeRacer */}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -14,11 +15,13 @@ const CustomCursor = () => {
   const isDraggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, y: 0 });
 
-  // Drag-to-scroll refs
   const lastYRef = useRef(0);
   const lastTimeRef = useRef(0);
   const velocityRef = useRef(0);
   const rafRef = useRef<number | null>(null);
+
+  const location = useLocation();
+  const isSpacePage = location.pathname === "/space";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -37,13 +40,11 @@ const CustomCursor = () => {
 
     const runMomentum = () => {
       velocityRef.current *= 0.96;
-
       if (Math.abs(velocityRef.current) < 0.5) {
         velocityRef.current = 0;
         rafRef.current = null;
         return;
       }
-
       window.scrollBy(0, velocityRef.current);
       rafRef.current = requestAnimationFrame(runMomentum);
     };
@@ -62,32 +63,28 @@ const CustomCursor = () => {
 
       const isScrollbarArea = e.clientX > window.innerWidth - 20;
 
-      if (isMouseDownRef.current && !isDraggingRef.current) {
-        const dx = Math.abs(e.clientX - dragStartRef.current.x);
-        const dy = Math.abs(e.clientY - dragStartRef.current.y);
-        if (dx > 4 || dy > 4) {
-          isDraggingRef.current = true;
-          setIsDragging(true);
-          cancelMomentum();
-          // Freeze all hover:scale transforms while dragging
-          document.body.classList.add("is-dragging");
-        }
-      }
-
-      // Drag-to-scroll: scroll the page as the user drags
-      if (isDraggingRef.current) {
-        const now = performance.now();
-        const dy = e.clientY - lastYRef.current;
-        const dt = now - lastTimeRef.current;
-
-        window.scrollBy(0, -dy);
-
-        if (dt > 0) {
-          velocityRef.current = (-dy / dt) * 25;
+      // Skip drag-to-scroll logic on /space — Three.js handles it
+      if (!isSpacePage) {
+        if (isMouseDownRef.current && !isDraggingRef.current) {
+          const dx = Math.abs(e.clientX - dragStartRef.current.x);
+          const dy = Math.abs(e.clientY - dragStartRef.current.y);
+          if (dx > 4 || dy > 4) {
+            isDraggingRef.current = true;
+            setIsDragging(true);
+            cancelMomentum();
+            document.body.classList.add("is-dragging");
+          }
         }
 
-        lastYRef.current = e.clientY;
-        lastTimeRef.current = now;
+        if (isDraggingRef.current) {
+          const now = performance.now();
+          const dy = e.clientY - lastYRef.current;
+          const dt = now - lastTimeRef.current;
+          window.scrollBy(0, -dy);
+          if (dt > 0) velocityRef.current = (-dy / dt) * 25;
+          lastYRef.current = e.clientY;
+          lastTimeRef.current = now;
+        }
       }
 
       setIsOverScrollbar(isScrollbarArea);
@@ -97,7 +94,6 @@ const CustomCursor = () => {
     const handleMouseDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      // Don't hijack clicks on interactive elements
       if (
         target.tagName.toLowerCase() === "button" ||
         target.tagName.toLowerCase() === "a" ||
@@ -107,8 +103,10 @@ const CustomCursor = () => {
         return;
       }
 
-      // Prevent browser's native drag on text, images, etc.
-      e.preventDefault();
+      // On /space, don't preventDefault — let Three.js handle the drag
+      if (!isSpacePage) {
+        e.preventDefault();
+      }
 
       isMouseDownRef.current = true;
       isDraggingRef.current = false;
@@ -125,8 +123,11 @@ const CustomCursor = () => {
       isMouseDownRef.current = false;
       document.body.classList.remove("is-dragging");
 
-      // Kick off momentum if there's velocity
-      if (isDraggingRef.current && Math.abs(velocityRef.current) > 0.5) {
+      if (
+        !isSpacePage &&
+        isDraggingRef.current &&
+        Math.abs(velocityRef.current) > 0.5
+      ) {
         rafRef.current = requestAnimationFrame(runMomentum);
       }
 
@@ -175,14 +176,30 @@ const CustomCursor = () => {
       document.removeEventListener("dragstart", handleNativeDragStart);
       window.removeEventListener("blur", handleMouseUp);
     };
-  }, []);
+  }, [isSpacePage]);
 
-  // Don't render on mobile/touch devices
   if (
     typeof window !== "undefined" &&
     window.matchMedia("(pointer: coarse)").matches
   ) {
     return null;
+  }
+
+  // On /space show a simple crosshair cursor instead
+  if (isSpacePage) {
+    return (
+      <div
+        className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+      >
+        <div className="absolute w-4 h-4 -translate-x-2 -translate-y-2">
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-white/40" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/40" />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -197,23 +214,13 @@ const CustomCursor = () => {
             a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
               cursor: ${isOverScrollbar ? "default" : "none"} !important;
             }
-            /* Disable transitions while drag-scrolling so hover effects
-               do not interfere — but do NOT freeze transform or layout */
             body.is-dragging * {
               transition: none !important;
             }
-            ::-webkit-scrollbar {
-              cursor: default !important;
-            }
-            ::-webkit-scrollbar-thumb {
-              background: #888;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-              background: #555 !important;
-            }
-            ::-webkit-scrollbar-track {
-              cursor: default !important;
-            }
+            ::-webkit-scrollbar { cursor: default !important; }
+            ::-webkit-scrollbar-thumb { background: #888; }
+            ::-webkit-scrollbar-thumb:hover { background: #555 !important; }
+            ::-webkit-scrollbar-track { cursor: default !important; }
           `,
         }}
       />
@@ -221,12 +228,8 @@ const CustomCursor = () => {
         className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${
           isVisible && !isOverScrollbar ? "opacity-100" : "opacity-0"
         }`}
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-        }}
+        style={{ left: `${position.x}px`, top: `${position.y}px` }}
       >
-        {/* Outer ring */}
         <div
           className={`absolute rounded-full border border-[hsl(var(--primary))] transition-all duration-200 ${
             isDragging
@@ -235,9 +238,7 @@ const CustomCursor = () => {
                 ? "w-8 h-8 -translate-x-4 -translate-y-4"
                 : "w-10 h-10 -translate-x-5 -translate-y-5"
           } ${isClicking && !isDragging ? "scale-75 opacity-70" : "scale-100 opacity-100"}`}
-        ></div>
-
-        {/* Inner dot */}
+        />
         <div
           className={`absolute bg-[hsl(var(--primary))] rounded-full transition-all duration-200 ${
             isDragging
@@ -246,7 +247,7 @@ const CustomCursor = () => {
                 ? "w-2 h-2 -translate-x-1 -translate-y-1"
                 : "w-1 h-1 -translate-x-0.5 -translate-y-0.5"
           } ${isClicking && !isDragging ? "scale-150 opacity-70" : "scale-100 opacity-100"}`}
-        ></div>
+        />
       </div>
     </>
   );

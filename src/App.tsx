@@ -8,7 +8,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import CustomCursor from "./components/CustomCursor";
+// import CustomCursor from "./components/CustomCursor";
 import ScrollToTop from "./components/ScrollToTop";
 import Loader from "./components/Loader";
 import { useAnalytics } from "@/hooks/google-analytics/GoogleAnalytics";
@@ -25,7 +25,7 @@ function App() {
           loading ? "opacity-0" : "opacity-100"
         }`}
       >
-        <CustomCursor />
+        {/* <CustomCursor /> */}
         <ScrollToTop />
         <Navbar />
         <main>
