@@ -44,7 +44,7 @@ export default function Experience() {
       period: "Aug 2025 - Present",
       roleType: "Full Time",
       description:
-        "Develop and build scalable internal systems for clients using modern web technologies. Collaborate with cross-functional teams to design, implement, and maintain software solutions that meet business requirements. Participate in code reviews, testing, and debugging to ensure high-quality deliverables.",
+        "Develop and build scalable internal systems for clients using modern web technologies. Collaborate with cross-functional teams and vendors to design, implement, and maintain software solutions that meet business requirements. Participate in code reviews, testing, and debugging to ensure high-quality deliverables.",
       technologies: [
         "HTML",
         "CSS",
@@ -105,7 +105,7 @@ export default function Experience() {
         "Node.js",
         "PostgreSQL",
         "Git",
-        "GitHub",
+        // "GitHub",
         "Agile Methodology",
         "Postman",
         "Responsive Design",
@@ -120,7 +120,7 @@ export default function Experience() {
       period: "Oct 2022 - Jan 2023",
       roleType: "Internship",
       description:
-        "Collaborated with the Product Manager on research and technical documentation using Confluence. Assisted in the design and development of mobile UI prototypes, contributing to the overall user experience. Managed and organized digital content using Strapi CMS for web application integration.",
+        "Collaborated with the Product Manager on research and technical documentation using Confluence. Assisted in the design and development of mobile UI prototypes, contributing to the overall user experience. Managed and organized digital content using Strapi CMS for web application integration. Joined daily stand-ups and team meetings to discuss project progress, challenges, and solutions, fostering effective communication and collaboration within the team.",
       technologies: [
         "Web Development",
         "Mobile Development",
@@ -132,9 +132,9 @@ export default function Experience() {
         "Figma",
         "Documentation",
         "Agile Methodology",
-        "Communication",
+        // "Communication",
         "Teamwork",
-        "Collaboration",
+        // "Collaboration",
         "Time Management",
         "Problem-Solving",
       ],
