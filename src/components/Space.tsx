@@ -8,7 +8,7 @@ import {
   Plus,
   X,
   Codesandbox,
-  RotateCcw,
+  // RotateCcw,
   Compass,
 } from "lucide-react";
 
@@ -23,72 +23,19 @@ interface Thought {
 const HARDCODED_THOUGHTS: Thought[] = [
   {
     id: "h1",
-    text: "what if we're all just loading screens for something bigger",
+    text: "What is time if I don't even have one?",
     x: 2,
     y: 1.5,
     z: -3,
-  },
-  {
-    id: "h2",
-    text: "the best ideas come at 3am and are gone by morning",
-    x: -3,
-    y: 0.5,
-    z: -2,
-  },
-  {
-    id: "h3",
-    text: "every bug is just an undocumented feature",
-    x: 1,
-    y: -2,
-    z: -4,
-  },
-  { id: "h4", text: "silence is underrated", x: -2, y: 2, z: -5 },
-  {
-    id: "h5",
-    text: "you don't finish games, you abandon them at a good point",
-    x: 3,
-    y: -1,
-    z: -3,
-  },
-  {
-    id: "h6",
-    text: "design is just problem solving with opinions",
-    x: -1,
-    y: -1.5,
-    z: -2,
-  },
-  {
-    id: "h7",
-    text: "music is the only language that needs no translation",
-    x: 0,
-    y: 2.5,
-    z: -6,
-  },
-  {
-    id: "h8",
-    text: "the internet never forgets but people always do",
-    x: 2.5,
-    y: -0.5,
-    z: -5,
-  },
-  { id: "h9", text: "sleeping is just saving the game", x: -3.5, y: 1, z: -4 },
-  {
-    id: "h10",
-    text: "most problems are communication problems in disguise",
-    x: 1.5,
-    y: 1,
-    z: -7,
   },
 ];
 
 const AXIS_LENGTH = 8;
 const GRID_SIZE = 10;
 const GRID_DIVISIONS = 10;
-
-// ── Map constants ──────────────────────────────────────────
-const MAP_PANEL_SIZE = 140; // px, square panel
-const MAP_WORLD_RANGE = 10; // world units shown edge-to-edge on minimap
-const RADAR_WORLD_RANGE = 14; // world units shown edge-to-edge on radar
+const MAP_PANEL_SIZE = 120;
+const MAP_WORLD_RANGE = 10;
+const RADAR_WORLD_RANGE = 14;
 const HUES = [0.9, 0.6, 0.15, 0.45, 0.75, 0.05, 0.55, 0.3, 0.85, 0.2];
 
 type MapMode = "mini" | "radar";
@@ -99,23 +46,19 @@ interface MapPoint {
   cy: number;
   color: string;
 }
-
 interface MapData {
   points: MapPoint[];
-  camX: number; // panel-space
-  camY: number; // panel-space
-  camAngleDeg: number; // rotation for the camera marker (minimap only)
+  camX: number;
+  camY: number;
+  camAngleDeg: number;
 }
 
 export default function Space() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameRef = useRef<number>(0);
   const spheresRef = useRef<{ mesh: THREE.Mesh; id: string }[]>([]);
-
-  // Orbit state
   const isDraggingRef = useRef(false);
   const lastMouseRef = useRef({ x: 0, y: 0 });
   const sphericalRef = useRef({ theta: 0.4, phi: 1.0, radius: 12 });
@@ -139,7 +82,6 @@ export default function Space() {
     mapModeRef.current = mapMode;
   }, [mapMode]);
 
-  // Load thoughts
   useEffect(() => {
     const stored = localStorage.getItem("space-thoughts");
     const extra: Thought[] = stored ? JSON.parse(stored) : [];
@@ -153,37 +95,29 @@ export default function Space() {
     setThoughts([...HARDCODED_THOUGHTS, ...userThoughts]);
   }, []);
 
-  // Build scene
   useEffect(() => {
     if (!mountRef.current || thoughts.length === 0) return;
-
     const el = mountRef.current;
     const w = el.clientWidth;
     const h = el.clientHeight;
 
-    // Scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x020209);
     scene.fog = new THREE.FogExp2(0x020209, 0.018);
-    sceneRef.current = scene;
 
-    // Camera
     const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 500);
     cameraRef.current = camera;
 
-    // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(w, h);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     el.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // ── Stars ──────────────────────────────────────────────
+    // Stars
     const starGeo = new THREE.BufferGeometry();
-    const starCount = 3000;
-    const starPos = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount * 3; i++)
-      starPos[i] = (Math.random() - 0.5) * 300;
+    const starPos = new Float32Array(3000 * 3);
+    for (let i = 0; i < 3000 * 3; i++) starPos[i] = (Math.random() - 0.5) * 300;
     starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
     scene.add(
       new THREE.Points(
@@ -197,7 +131,7 @@ export default function Space() {
       ),
     );
 
-    // ── Grid (XZ plane, Y=0) ────────────────────────────────
+    // Grid
     const gridHelper = new THREE.GridHelper(
       GRID_SIZE * 2,
       GRID_DIVISIONS * 2,
@@ -208,66 +142,52 @@ export default function Space() {
     (gridHelper.material as THREE.Material).opacity = 0.8;
     scene.add(gridHelper);
 
-    // ── Axes ────────────────────────────────────────────────
-    const mkAxis = (dir: THREE.Vector3, color: number) => {
+    // Axes
+    const mkAxis = (dir: THREE.Vector3, color: number, opacity = 0.9) => {
       const mat = new THREE.LineBasicMaterial({
         color,
         transparent: true,
-        opacity: 0.9,
+        opacity,
       });
-      const pts = [
-        new THREE.Vector3(0, 0, 0),
-        dir.clone().multiplyScalar(AXIS_LENGTH),
-      ];
-      return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat);
+      return new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(0, 0, 0),
+          dir.clone().multiplyScalar(AXIS_LENGTH),
+        ]),
+        mat,
+      );
     };
-    scene.add(mkAxis(new THREE.Vector3(1, 0, 0), 0xff4466)); // X red
-    scene.add(mkAxis(new THREE.Vector3(0, 1, 0), 0x44ff88)); // Y green
-    scene.add(mkAxis(new THREE.Vector3(0, 0, 1), 0x4488ff)); // Z blue
+    scene.add(mkAxis(new THREE.Vector3(1, 0, 0), 0xff4466));
+    scene.add(mkAxis(new THREE.Vector3(0, 1, 0), 0x44ff88));
+    scene.add(mkAxis(new THREE.Vector3(0, 0, 1), 0x4488ff));
+    scene.add(mkAxis(new THREE.Vector3(-1, 0, 0), 0xff4466, 0.3));
+    scene.add(mkAxis(new THREE.Vector3(0, -1, 0), 0x44ff88, 0.3));
+    scene.add(mkAxis(new THREE.Vector3(0, 0, -1), 0x4488ff, 0.3));
 
-    // Negative axes (dimmer)
-    const mkAxisNeg = (dir: THREE.Vector3, color: number) => {
-      const mat = new THREE.LineBasicMaterial({
-        color,
-        transparent: true,
-        opacity: 0.3,
-      });
-      const pts = [
-        new THREE.Vector3(0, 0, 0),
-        dir.clone().multiplyScalar(AXIS_LENGTH),
-      ];
-      return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat);
-    };
-    scene.add(mkAxisNeg(new THREE.Vector3(-1, 0, 0), 0xff4466));
-    scene.add(mkAxisNeg(new THREE.Vector3(0, -1, 0), 0x44ff88));
-    scene.add(mkAxisNeg(new THREE.Vector3(0, 0, -1), 0x4488ff));
-
-    // Axis tick marks
     const mkTicks = (axis: "x" | "y" | "z", color: number) => {
       const pts: THREE.Vector3[] = [];
       for (let i = -AXIS_LENGTH; i <= AXIS_LENGTH; i++) {
         if (i === 0) continue;
-        const a = new THREE.Vector3();
-        const b = new THREE.Vector3();
-        const TICK = 0.1;
+        const a = new THREE.Vector3(),
+          b = new THREE.Vector3();
+        const T = 0.1;
         if (axis === "x") {
-          a.set(i, -TICK, 0);
-          b.set(i, TICK, 0);
+          a.set(i, -T, 0);
+          b.set(i, T, 0);
         }
         if (axis === "y") {
-          a.set(-TICK, i, 0);
-          b.set(TICK, i, 0);
+          a.set(-T, i, 0);
+          b.set(T, i, 0);
         }
         if (axis === "z") {
-          a.set(0, -TICK, i);
-          b.set(0, TICK, i);
+          a.set(0, -T, i);
+          b.set(0, T, i);
         }
         pts.push(a, b);
       }
-      const geo = new THREE.BufferGeometry().setFromPoints(pts);
       scene.add(
         new THREE.LineSegments(
-          geo,
+          new THREE.BufferGeometry().setFromPoints(pts),
           new THREE.LineBasicMaterial({
             color,
             transparent: true,
@@ -280,28 +200,27 @@ export default function Space() {
     mkTicks("y", 0x44ff88);
     mkTicks("z", 0x4488ff);
 
-    // Origin sphere
-    const origin = new THREE.Mesh(
-      new THREE.SphereGeometry(0.06, 16, 16),
-      new THREE.MeshBasicMaterial({ color: 0xffffff }),
+    scene.add(
+      new THREE.Mesh(
+        new THREE.SphereGeometry(0.06, 16, 16),
+        new THREE.MeshBasicMaterial({ color: 0xffffff }),
+      ),
     );
-    scene.add(origin);
 
-    // ── Thought spheres ─────────────────────────────────────
+    // Thought spheres
     spheresRef.current = [];
     thoughts.forEach((t, i) => {
-      const geo = new THREE.SphereGeometry(0.12, 20, 20);
       const color = new THREE.Color().setHSL(HUES[i % HUES.length], 0.85, 0.65);
-      const mat = new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity: 0.95,
-      });
-      const mesh = new THREE.Mesh(geo, mat);
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.12, 20, 20),
+        new THREE.MeshBasicMaterial({
+          color,
+          transparent: true,
+          opacity: 0.95,
+        }),
+      );
       mesh.position.set(t.x, t.y, t.z);
       scene.add(mesh);
-
-      // Glow ring
       const ring = new THREE.Mesh(
         new THREE.RingGeometry(0.16, 0.22, 32),
         new THREE.MeshBasicMaterial({
@@ -312,11 +231,9 @@ export default function Space() {
         }),
       );
       mesh.add(ring);
-
       spheresRef.current.push({ mesh, id: t.id });
     });
 
-    // ── Camera position ──────────────────────────────────────
     const updateCamera = () => {
       const { theta, phi, radius } = sphericalRef.current;
       camera.position.set(
@@ -328,7 +245,6 @@ export default function Space() {
     };
     updateCamera();
 
-    // ── Orbit mouse handlers ─────────────────────────────────
     const onMouseDown = (e: MouseEvent) => {
       isDraggingRef.current = true;
       lastMouseRef.current = { x: e.clientX, y: e.clientY };
@@ -356,7 +272,6 @@ export default function Space() {
       updateCamera();
     };
 
-    // Touch orbit
     let lastTouch = { x: 0, y: 0 };
     const onTouchStart = (e: TouchEvent) => {
       lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -380,9 +295,7 @@ export default function Space() {
     renderer.domElement.addEventListener("touchstart", onTouchStart);
     renderer.domElement.addEventListener("touchmove", onTouchMove);
 
-    // ── Resize ───────────────────────────────────────────────
     const onResize = () => {
-      if (!el || !renderer || !camera) return;
       const w = el.clientWidth,
         h = el.clientHeight;
       camera.aspect = w / h;
@@ -391,20 +304,15 @@ export default function Space() {
     };
     window.addEventListener("resize", onResize);
 
-    // ── Animate ──────────────────────────────────────────────
     let t = 0;
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate);
       t += 0.005;
-
-      // Gentle float on spheres
       spheresRef.current.forEach(({ mesh }, i) => {
         mesh.position.y += Math.sin(t + i * 0.8) * 0.001;
-        // Billboard glow ring toward camera
         if (mesh.children[0]) mesh.children[0].lookAt(camera.position);
       });
 
-      // Project to screen for labels
       const size = new THREE.Vector2();
       renderer.getSize(size);
       const newLabels = thoughts.map((th) => {
@@ -413,34 +321,29 @@ export default function Space() {
           return { id: th.id, x: 0, y: 0, text: th.text, visible: false };
         const pos = sphere.mesh.position.clone();
         pos.project(camera);
-        // Check if behind camera
         const visible = pos.z < 1;
-        return {
-          id: th.id,
-          x: ((pos.x + 1) / 2) * size.x,
-          y: ((-pos.y + 1) / 2) * size.y,
-          text: th.text,
-          visible,
-        };
+        // Clamp labels to stay within screen bounds with margin
+        const rawX = ((pos.x + 1) / 2) * size.x;
+        const rawY = ((-pos.y + 1) / 2) * size.y;
+        const x = Math.max(70, Math.min(size.x - 70, rawX));
+        const y = Math.max(80, Math.min(size.y - 80, rawY));
+        return { id: th.id, x, y, text: th.text, visible };
       });
       setLabels(newLabels);
 
-      // ── Minimap / radar ─────────────────────────────────
       const camX = camera.position.x;
       const camZ = camera.position.z;
-      // direction the camera is looking, on the XZ plane (it always looks at origin)
-      const fwdX = -camX;
-      const fwdZ = -camZ;
+      const fwdX = -camX,
+        fwdZ = -camZ;
       const angFwd = Math.atan2(fwdX, fwdZ);
       const half = MAP_PANEL_SIZE / 2;
 
       let points: MapPoint[];
-      let camPanelX = half;
-      let camPanelY = half;
-      let camAngleDeg = 0;
+      let camPanelX = half,
+        camPanelY = half,
+        camAngleDeg = 0;
 
       if (mapModeRef.current === "mini") {
-        // fixed north-up world map
         const scale = half / MAP_WORLD_RANGE;
         points = thoughts.map((th, i) => ({
           id: th.id,
@@ -450,17 +353,14 @@ export default function Space() {
         }));
         camPanelX = half + camX * scale;
         camPanelY = half + camZ * scale;
-        // arrow points where the camera is looking
         camAngleDeg = (angFwd * 180) / Math.PI;
       } else {
-        // self-centered radar: forward is always "up"
         const scale = half / RADAR_WORLD_RANGE;
         points = thoughts.map((th, i) => {
-          const dx = th.x - camX;
-          const dz = th.z - camZ;
+          const dx = th.x - camX,
+            dz = th.z - camZ;
           const dist = Math.sqrt(dx * dx + dz * dz);
-          const angPoint = Math.atan2(dx, dz);
-          const rel = angPoint - angFwd;
+          const rel = Math.atan2(dx, dz) - angFwd;
           const r = Math.min(dist * scale, half - 6);
           return {
             id: th.id,
@@ -469,13 +369,8 @@ export default function Space() {
             color: `hsl(${HUES[i % HUES.length] * 360}, 85%, 65%)`,
           };
         });
-        camPanelX = half;
-        camPanelY = half;
-        camAngleDeg = 0; // camera marker always points "up" on the radar
       }
-
       setMapData({ points, camX: camPanelX, camY: camPanelY, camAngleDeg });
-
       renderer.render(scene, camera);
     };
     animate();
@@ -511,23 +406,23 @@ export default function Space() {
     setAdding(false);
   }, [newText]);
 
-  const resetCamera = () => {
-    sphericalRef.current = { theta: 0.4, phi: 1.0, radius: 12 };
-  };
+  // const resetCamera = () => {
+  //   sphericalRef.current = { theta: 0.4, phi: 1.0, radius: 12 };
+  // };
 
   return (
     <div
       className="relative w-full h-screen overflow-hidden"
       style={{ background: "#020209" }}
     >
-      {/* Three.js canvas */}
+      {/* Canvas */}
       <div
         ref={mountRef}
         className="absolute inset-0 cursor-grab active:cursor-grabbing"
       />
 
-      {/* Axis legend */}
-      <div className="absolute bottom-16 left-4 z-10 flex flex-col gap-1 pointer-events-none">
+      {/* Axis legend — bottom left, above bottom controls */}
+      <div className="absolute bottom-20 left-4 z-10 flex flex-col gap-1 pointer-events-none">
         <div className="flex items-center gap-2 text-xs">
           <div className="w-4 h-0.5 bg-[#ff4466]" />
           <span className="text-[#ff4466] font-mono">X</span>
@@ -542,25 +437,25 @@ export default function Space() {
         </div>
       </div>
 
-      {/* Floating labels */}
+      {/* Floating labels — clamped within viewport */}
       <div className="absolute inset-0 pointer-events-none select-none">
         {labels
           .filter((l) => l.visible)
           .map((l) => (
             <button
               key={l.id}
-              className="absolute pointer-events-auto transform -translate-x-1/2 -translate-y-1/2 text-white/60 hover:text-white text-[11px] max-w-[130px] text-center leading-tight transition-colors duration-150 cursor-pointer bg-transparent border-0 px-1"
+              className="absolute pointer-events-auto transform -translate-x-1/2 -translate-y-1/2 text-white/60 hover:text-white text-[10px] max-w-[110px] text-center leading-tight transition-colors duration-150 cursor-pointer bg-transparent border-0 px-1"
               style={{ left: l.x, top: l.y + 20 }}
               onClick={() =>
                 setSelected(thoughts.find((t) => t.id === l.id) ?? null)
               }
             >
-              {l.text.length > 36 ? l.text.slice(0, 36) + "…" : l.text}
+              {l.text.length > 30 ? l.text.slice(0, 30) + "…" : l.text}
             </button>
           ))}
       </div>
 
-      {/* Navbar backdrop scrim — prevents axis lines from bleeding through the nav */}
+      {/* Navbar scrim */}
       <div
         className="absolute top-0 left-0 right-0 h-28 z-10 pointer-events-none"
         style={{
@@ -569,20 +464,25 @@ export default function Space() {
         }}
       />
 
-      {/* Navbar */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 h-20">
+      {/* ── Navbar ── */}
+      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 h-16">
+        {/* Left: back */}
         <Link
           to="/"
-          className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-base font-medium"
+          className="flex items-center gap-1.5 text-white/50 hover:text-white transition-colors text-sm font-medium shrink-0"
         >
-          <ArrowLeft className="h-5 w-5" />
-          Back
+          <ArrowLeft className="h-4 w-4" />
+          <span className="hidden sm:inline">Back</span>
         </Link>
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
-          <Codesandbox className="h-6 w-6 text-white/60" />
-          <span className="text-white/60 font-bold text-2xl">DPTF</span>
+
+        {/* Center: logo */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+          <Codesandbox className="h-5 w-5 text-white/60" />
+          <span className="text-white/60 font-bold text-xl">DPTF</span>
         </div>
-        <div className="flex items-center gap-2">
+
+        {/* Right: icon-only action buttons */}
+        <div className="flex items-center gap-1.5 shrink-0">
           <button
             onClick={() => setMapMode((m) => (m === "mini" ? "radar" : "mini"))}
             title={mapMode === "mini" ? "Switch to radar" : "Switch to minimap"}
@@ -590,29 +490,34 @@ export default function Space() {
           >
             <Compass className="h-4 w-4" />
           </button>
-          <button
+          {/* <button
             onClick={resetCamera}
             title="Reset camera"
             className="text-white/40 hover:text-white border border-white/10 hover:border-white/30 p-2 rounded-full transition-all"
           >
             <RotateCcw className="h-4 w-4" />
-          </button>
+          </button> */}
+          {/* Add thought: icon on mobile, icon+text on sm+ */}
           <button
             onClick={() => setAdding(true)}
-            className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white border border-white/10 hover:border-white/30 px-3 py-1.5 rounded-full transition-all"
+            title="Add thought"
+            className="flex items-center gap-1.5 text-white/50 hover:text-white border border-white/10 hover:border-white/30 p-2 sm:px-3 sm:py-1.5 rounded-full transition-all"
           >
             <Plus className="h-4 w-4" />
-            Add thought
+            <span className="hidden sm:inline text-sm">Add thought</span>
           </button>
         </div>
       </div>
 
-      {/* Minimap / radar panel */}
+      {/* ── Minimap — bottom left, above axis legend ── */}
       <div
-        className="absolute bottom-6 right-6 z-20 rounded-full overflow-hidden pointer-events-none"
+        className="absolute z-20 rounded-full overflow-hidden pointer-events-none"
         style={{
           width: MAP_PANEL_SIZE,
           height: MAP_PANEL_SIZE,
+          // On mobile: bottom-left so it doesn't fight the controls hint center
+          bottom: "4.5rem",
+          right: "1rem",
           background: "rgba(255,255,255,0.03)",
           border: "1px solid rgba(255,255,255,0.12)",
           backdropFilter: "blur(4px)",
@@ -623,7 +528,6 @@ export default function Space() {
           height={MAP_PANEL_SIZE}
           viewBox={`0 0 ${MAP_PANEL_SIZE} ${MAP_PANEL_SIZE}`}
         >
-          {/* rings */}
           <circle
             cx={MAP_PANEL_SIZE / 2}
             cy={MAP_PANEL_SIZE / 2}
@@ -645,8 +549,6 @@ export default function Space() {
             fill="none"
             stroke="rgba(255,255,255,0.06)"
           />
-
-          {/* origin marker, minimap only */}
           {mapMode === "mini" && (
             <circle
               cx={MAP_PANEL_SIZE / 2}
@@ -655,39 +557,34 @@ export default function Space() {
               fill="rgba(255,255,255,0.5)"
             />
           )}
-
-          {/* thoughts */}
           {mapData.points.map((p) => (
             <circle key={p.id} cx={p.cx} cy={p.cy} r={2.5} fill={p.color} />
           ))}
-
-          {/* camera marker (triangle pointing where you're looking) */}
           <g
             transform={`translate(${mapData.camX}, ${mapData.camY}) rotate(${mapData.camAngleDeg})`}
           >
             <polygon points="0,-6 4,5 -4,5" fill="#ffffff" opacity={0.9} />
           </g>
         </svg>
-
-        <div className="absolute top-1.5 left-0 right-0 text-center text-[9px] font-mono text-white/25 tracking-widest uppercase">
+        <div className="absolute top-1.5 left-0 right-0 text-center text-[8px] font-mono text-white/25 tracking-widest uppercase">
           {mapMode === "mini" ? "map" : "radar"}
         </div>
       </div>
 
-      {/* Controls hint */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/20 text-xs text-center pointer-events-none">
-        drag to orbit · scroll to zoom · click thought to read
+      {/* Controls hint — bottom center */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/20 text-[10px] sm:text-xs text-center pointer-events-none whitespace-nowrap">
+        drag to orbit · scroll to zoom · tap thought to read
       </div>
 
-      {/* Selected thought */}
+      {/* Selected thought modal */}
       {selected && (
         <div
-          className="absolute inset-0 z-30 flex items-center justify-center"
+          className="absolute inset-0 z-30 flex items-center justify-center px-4"
           style={{ background: "rgba(2,2,9,0.7)", backdropFilter: "blur(6px)" }}
           onClick={() => setSelected(null)}
         >
           <div
-            className="border border-white/15 rounded-2xl p-8 max-w-md mx-4 relative"
+            className="border border-white/15 rounded-2xl p-6 sm:p-8 w-full max-w-md relative"
             style={{ background: "rgba(255,255,255,0.04)" }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -697,7 +594,7 @@ export default function Space() {
             >
               <X className="h-4 w-4" />
             </button>
-            <p className="text-white text-lg leading-relaxed">
+            <p className="text-white text-base sm:text-lg leading-relaxed pr-6">
               {selected.text}
             </p>
             <p className="text-white/25 text-xs mt-4 font-mono">
@@ -708,15 +605,15 @@ export default function Space() {
         </div>
       )}
 
-      {/* Add thought */}
+      {/* Add thought modal */}
       {adding && (
         <div
-          className="absolute inset-0 z-30 flex items-center justify-center"
+          className="absolute inset-0 z-30 flex items-center justify-center px-4"
           style={{ background: "rgba(2,2,9,0.7)", backdropFilter: "blur(6px)" }}
           onClick={() => setAdding(false)}
         >
           <div
-            className="border border-white/15 rounded-2xl p-8 max-w-md w-full mx-4 relative"
+            className="border border-white/15 rounded-2xl p-6 sm:p-8 w-full max-w-md relative"
             style={{ background: "rgba(255,255,255,0.04)" }}
             onClick={(e) => e.stopPropagation()}
           >
