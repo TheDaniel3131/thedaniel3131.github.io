@@ -9,12 +9,16 @@ export default function Hero() {
 
   useEffect(() => {
     const professions = [
+      "Software Developer",
       "Full Stack Developer",
+      "DevOps Engineer",
       "Frontend Developer",
       "Backend Developer",
       "Web Developer",
+      "Cloud Engineer",
+      "AI Developer",
+      "Machine Learning Enthusiast",
       "AI Enthusiast",
-      "Software Developer",
       "Problem Solver",
     ];
 
