@@ -10,6 +10,9 @@ import { ThemeProvider } from "./components/theme-provider.tsx";
 import CustomCursor from "./components/CustomCursor.tsx";
 import "./index.css";
 
+// if domain expired then use https://d3ffiliates.vercel.app/
+const AffiliatesRedirect = () => { window.location.href = "http://affiliates.danielpoh.com"; return null; };
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -19,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<App />} />
           <Route path="/actualme" element={<SubpagesWithLoader><ActualMe /></SubpagesWithLoader>} />
           <Route path="/space" element={<SubpagesWithLoader><Space /></SubpagesWithLoader>} />
+          <Route path="/affiliates" element={<AffiliatesRedirect />} />
           <Route path="*" element={<SubpagesWithLoader><NotFound /></SubpagesWithLoader>} />
         </Routes>
       </ThemeProvider>
