@@ -110,9 +110,9 @@ export default function ActualMe() {
 
   const currentlyInto = [
     { label: "Watching", value: "Too many YouTube channels to list" },
-    { label: "Playing", value: "Same Old Games" },
-    { label: "Chess", value: "Chess is not boring" },
-    { label: "Editing", value: "Random and small projects" },
+    { label: "Playing", value: "Chess & Video Games" },
+    // { label: "Chess", value: "Chess is not boring" },
+    { label: "Editing", value: "Main content & some small projects" },
     { label: "Listening", value: "EDM/Future Bass/Drum & Bass/Hip-Hop" },
     { label: "Learning", value: "Always something new, and repetitively" },
   ];
@@ -188,6 +188,38 @@ export default function ActualMe() {
       icon: <SiIndiehackers className="h-5 w-5" />,
       color: "text-[hsl(var(--foreground))]",
     },
+  ];
+
+  const youtuberTags = [
+    "YouTube",
+    "Twitch",
+    "Video Editing",
+    "Scriptwriting",
+    "Thumbnail Design",
+    "Content Strategy",
+    "Community Management",
+    "Streaming",
+    "Adobe Premiere Pro",
+    "After Effects",
+    "Camtasia",
+    "Windows Movie Maker",
+    "Adobe Audition",
+    "Adobe Media Encoder",
+  ];
+
+  const graphicDesignerTags = [
+    "Photoshop",
+    "Illustrator",
+    "Figma",
+    "Canva",
+    "Branding",
+    "Thumbnail Design",
+    "Social Media Assets",
+    "Typography",
+    "Digital Illustration",
+    "Adobe Lightroom",
+    "Image Editing",
+    "Color Schemes",
   ];
 
   if (!mounted) return null;
@@ -368,16 +400,7 @@ export default function ActualMe() {
                     strategy are all self-managed.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {[
-                      "YouTube",
-                      "Twitch",
-                      "Video Editing",
-                      "Scriptwriting",
-                      "Thumbnail Design",
-                      "Content Strategy",
-                      "Community Management",
-                      "Streaming",
-                    ].map((tag, i) => (
+                    {youtuberTags.map((tag, i) => (
                       <span
                         key={i}
                         className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
@@ -422,17 +445,7 @@ export default function ActualMe() {
                     media assets, branding, and digital illustrations.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {[
-                      "Photoshop",
-                      "Illustrator",
-                      "Figma",
-                      "Canva",
-                      "Branding",
-                      "Thumbnail Design",
-                      "Social Media Assets",
-                      "Typography",
-                      "Digital Illustration",
-                    ].map((tag, i) => (
+                    {graphicDesignerTags.map((tag, i) => (
                       <span
                         key={i}
                         className="px-2 sm:px-3 py-1 bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] rounded-full text-xs sm:text-sm"
@@ -609,7 +622,7 @@ export default function ActualMe() {
         {/* Footer note */}
         <div className="text-center animate-on-scroll">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] text-xs">
-            <span>If you made it here, you are definitely a smart ass.</span>
+            <span>If you made it here, you are definitely the real deal.</span>
             <span>🤝</span>
           </div>
           <p className="mt-4 text-xs text-[hsl(var(--muted-foreground))]">
