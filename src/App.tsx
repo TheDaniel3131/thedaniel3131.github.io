@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { ThemeProvider } from "./components/theme-provider";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -8,7 +7,6 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-// import CustomCursor from "./components/CustomCursor";
 import ScrollToTop from "./components/ScrollToTop";
 import Loader from "./components/Loader";
 import { useAnalytics } from "@/hooks/google-analytics/GoogleAnalytics";
@@ -17,17 +15,25 @@ function App() {
   useAnalytics(import.meta.env.VITE_GA_MEASUREMENT_ID || "");
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (loading) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [loading]);
+
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+    <>
       {loading && <Loader onDone={() => setLoading(false)} />}
       <div
         className={`min-h-screen bg-[hsl(var(--background))] transition-opacity duration-300 ${
           loading ? "opacity-0" : "opacity-100"
         }`}
       >
-        {/* <CustomCursor /> */}
         <ScrollToTop />
-        <Navbar />
+        {!loading && <Navbar />}
         <main>
           <section
             id="home"
@@ -35,44 +41,31 @@ function App() {
           >
             <Hero />
           </section>
-
           <section id="about" className="py-16 sm:py-20 scroll-mt-20">
-            <div className="animate-fade-in-up">
-              <About />
-            </div>
+            <About />
           </section>
-
           <section
             id="skills"
             className="py-16 sm:py-20 bg-[hsl(var(--muted))] scroll-mt-20"
           >
-            <div className="animate-fade-in-up">
-              <SkillsTechnologies />
-            </div>
+            <SkillsTechnologies />
           </section>
-
           <section id="experience" className="py-16 sm:py-20 scroll-mt-20">
-            <div className="animate-fade-in-up">
-              <Experience />
-            </div>
+            <Experience />
           </section>
-
           <section
             id="projects"
             className="py-16 sm:py-20 bg-[hsl(var(--muted))] scroll-mt-20"
           >
-            <div className="animate-fade-in-up">
-              <Projects />
-            </div>
+            <Projects />
           </section>
-
           <section id="contact" className="py-16 sm:py-20 scroll-mt-20">
             <Contact />
           </section>
         </main>
         <Footer />
       </div>
-    </ThemeProvider>
+    </>
   );
 }
 

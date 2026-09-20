@@ -7,12 +7,18 @@ export default function Loader({ onDone }: { onDone: () => void }) {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    // Start fade out after 700ms, then call onDone after fade completes
+    document.body.classList.add("loading");
+
     const fadeTimer = setTimeout(() => setFading(true), 700);
-    const doneTimer = setTimeout(() => onDone(), 1000);
+    const doneTimer = setTimeout(() => {
+      document.body.classList.remove("loading");
+      onDone();
+    }, 1000);
+
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(doneTimer);
+      document.body.classList.remove("loading");
     };
   }, [onDone]);
 

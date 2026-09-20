@@ -1,35 +1,119 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isOverScrollbar, setIsOverScrollbar] = useState(false);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const crosshairRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const isMouseDownRef = useRef(false);
   const isDraggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, y: 0 });
-
   const lastYRef = useRef(0);
   const lastTimeRef = useRef(0);
   const velocityRef = useRef(0);
   const rafRef = useRef<number | null>(null);
+  const isPointerRef = useRef(false);
+  const isDraggingStateRef = useRef(false);
+  const isClickingRef = useRef(false);
+  const loadingRef = useRef(true);
 
   const location = useLocation();
   const isSpacePage = location.pathname === "/space";
+  const isSpacePageRef = useRef(isSpacePage);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPosition({
-        x: Math.round(window.innerWidth / 2),
-        y: Math.round(window.innerHeight / 2),
-      });
+    isSpacePageRef.current = isSpacePage;
+  }, [isSpacePage]);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      return;
     }
+
+    const styleEl = document.createElement("style");
+    styleEl.textContent = `
+      body { cursor: none !important; }
+      a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] { cursor: none !important; }
+      body.is-dragging * { transition: none !important; }
+      ::-webkit-scrollbar { cursor: default !important; }
+      ::-webkit-scrollbar-thumb { background: #888; }
+      ::-webkit-scrollbar-thumb:hover { background: #555 !important; }
+      ::-webkit-scrollbar-track { cursor: default !important; }
+    `;
+    document.head.appendChild(styleEl);
+
+    // Watch for loading class on body
+    const observer = new MutationObserver(() => {
+      const isLoading = document.body.classList.contains("loading");
+      loadingRef.current = isLoading;
+      if (wrapperRef.current) {
+        wrapperRef.current.style.opacity = isLoading ? "0" : "1";
+      }
+      if (crosshairRef.current) {
+        crosshairRef.current.style.opacity = isLoading ? "0" : "1";
+      }
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Set initial state
+    loadingRef.current = document.body.classList.contains("loading");
+
+    const setVisible = (v: boolean) => {
+      if (wrapperRef.current) {
+        wrapperRef.current.style.opacity = v && !loadingRef.current ? "1" : "0";
+      }
+    };
+
+    const applyOuterClasses = () => {
+      const outer = outerRef.current;
+      const inner = innerRef.current;
+      if (!outer || !inner) return;
+
+      const dragging = isDraggingStateRef.current;
+      const pointer = isPointerRef.current;
+      const clicking = isClickingRef.current;
+
+      if (dragging) {
+        outer.style.width = "36px";
+        outer.style.height = "36px";
+        outer.style.transform = "translate(-18px, -18px) scale(0.95)";
+        outer.style.backgroundColor = "hsl(var(--primary) / 0.1)";
+        inner.style.width = "12px";
+        inner.style.height = "12px";
+        inner.style.transform = "translate(-6px, -6px)";
+        inner.style.opacity = "0.9";
+      } else if (pointer) {
+        outer.style.width = "32px";
+        outer.style.height = "32px";
+        outer.style.transform = "translate(-16px, -16px) scale(1)";
+        outer.style.backgroundColor = "";
+        inner.style.width = "8px";
+        inner.style.height = "8px";
+        inner.style.transform = "translate(-4px, -4px)";
+        inner.style.opacity = "1";
+      } else {
+        outer.style.width = "40px";
+        outer.style.height = "40px";
+        outer.style.transform = `translate(-20px, -20px) scale(${clicking ? "0.75" : "1"})`;
+        outer.style.backgroundColor = "";
+        outer.style.opacity = clicking ? "0.7" : "1";
+        inner.style.width = "4px";
+        inner.style.height = "4px";
+        inner.style.transform = "translate(-2px, -2px)";
+        inner.style.opacity = clicking ? "0.7" : "1";
+      }
+    };
 
     const cancelMomentum = () => {
       if (rafRef.current !== null) {
@@ -50,7 +134,20 @@ const CustomCursor = () => {
     };
 
     const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      const isScrollbarArea = e.clientX > window.innerWidth - 20;
+
+      if (wrapperRef.current) {
+        wrapperRef.current.style.left = `${e.clientX}px`;
+        wrapperRef.current.style.top = `${e.clientY}px`;
+        if (!loadingRef.current) {
+          wrapperRef.current.style.opacity = isScrollbarArea ? "0" : "1";
+        }
+      }
+
+      if (crosshairRef.current) {
+        crosshairRef.current.style.left = `${e.clientX}px`;
+        crosshairRef.current.style.top = `${e.clientY}px`;
+      }
 
       const target = e.target as HTMLElement;
       const isClickable = !!(
@@ -61,16 +158,15 @@ const CustomCursor = () => {
         window.getComputedStyle(target).cursor === "pointer"
       );
 
-      const isScrollbarArea = e.clientX > window.innerWidth - 20;
+      isPointerRef.current = isClickable && !isScrollbarArea;
 
-      // Skip drag-to-scroll logic on /space — Three.js handles it
-      if (!isSpacePage) {
+      if (!isSpacePageRef.current) {
         if (isMouseDownRef.current && !isDraggingRef.current) {
           const dx = Math.abs(e.clientX - dragStartRef.current.x);
           const dy = Math.abs(e.clientY - dragStartRef.current.y);
           if (dx > 4 || dy > 4) {
             isDraggingRef.current = true;
-            setIsDragging(true);
+            isDraggingStateRef.current = true;
             cancelMomentum();
             document.body.classList.add("is-dragging");
           }
@@ -87,26 +183,20 @@ const CustomCursor = () => {
         }
       }
 
-      setIsOverScrollbar(isScrollbarArea);
-      setIsPointer(isClickable && !isScrollbarArea);
+      applyOuterClasses();
     };
 
     const handleMouseDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-
       if (
         target.tagName.toLowerCase() === "button" ||
         target.tagName.toLowerCase() === "a" ||
         target.closest("button") ||
         target.closest("a")
-      ) {
+      )
         return;
-      }
 
-      // On /space, don't preventDefault — let Three.js handle the drag
-      if (!isSpacePage) {
-        e.preventDefault();
-      }
+      if (!isSpacePageRef.current) e.preventDefault();
 
       isMouseDownRef.current = true;
       isDraggingRef.current = false;
@@ -115,8 +205,9 @@ const CustomCursor = () => {
       lastTimeRef.current = performance.now();
       velocityRef.current = 0;
       cancelMomentum();
-      setIsClicking(true);
-      setIsDragging(false);
+      isClickingRef.current = true;
+      isDraggingStateRef.current = false;
+      applyOuterClasses();
     };
 
     const handleMouseUp = () => {
@@ -124,7 +215,7 @@ const CustomCursor = () => {
       document.body.classList.remove("is-dragging");
 
       if (
-        !isSpacePage &&
+        !isSpacePageRef.current &&
         isDraggingRef.current &&
         Math.abs(velocityRef.current) > 0.5
       ) {
@@ -132,28 +223,23 @@ const CustomCursor = () => {
       }
 
       isDraggingRef.current = false;
-      setIsClicking(false);
-      setIsDragging(false);
+      isClickingRef.current = false;
+      isDraggingStateRef.current = false;
+      applyOuterClasses();
     };
 
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseEnter = () => setVisible(true);
     const handleMouseLeave = () => {
-      setIsVisible(false);
+      setVisible(false);
       cancelMomentum();
     };
-
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        setIsVisible(false);
+        setVisible(false);
         cancelMomentum();
       }
     };
-
-    const handleNativeDragStart = (e: DragEvent) => {
-      e.preventDefault();
-    };
-
-    setIsVisible(true);
+    const handleNativeDragStart = (e: DragEvent) => e.preventDefault();
 
     document.addEventListener("mousemove", updatePosition, true);
     document.addEventListener("mousedown", handleMouseDown, true);
@@ -166,7 +252,9 @@ const CustomCursor = () => {
 
     return () => {
       cancelMomentum();
+      observer.disconnect();
       document.body.classList.remove("is-dragging");
+      document.head.removeChild(styleEl);
       document.removeEventListener("mousemove", updatePosition, true);
       document.removeEventListener("mousedown", handleMouseDown, true);
       document.removeEventListener("mouseup", handleMouseUp, true);
@@ -176,7 +264,7 @@ const CustomCursor = () => {
       document.removeEventListener("dragstart", handleNativeDragStart);
       window.removeEventListener("blur", handleMouseUp);
     };
-  }, [isSpacePage]);
+  }, []);
 
   if (
     typeof window !== "undefined" &&
@@ -185,14 +273,12 @@ const CustomCursor = () => {
     return null;
   }
 
-  // On /space show a simple crosshair cursor instead
   if (isSpacePage) {
     return (
       <div
-        className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+        ref={crosshairRef}
+        className="fixed pointer-events-none z-[9999] opacity-0 transition-opacity duration-300"
+        style={{ left: "50%", top: "50%" }}
       >
         <div className="absolute w-4 h-4 -translate-x-2 -translate-y-2">
           <div className="absolute top-1/2 left-0 right-0 h-px bg-white/40" />
@@ -203,53 +289,34 @@ const CustomCursor = () => {
   }
 
   return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            body {
-              cursor: ${isOverScrollbar ? "default" : "none"} !important;
-              ${isClicking ? "user-select: none !important;" : ""}
-            }
-            a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
-              cursor: ${isOverScrollbar ? "default" : "none"} !important;
-            }
-            body.is-dragging * {
-              transition: none !important;
-            }
-            ::-webkit-scrollbar { cursor: default !important; }
-            ::-webkit-scrollbar-thumb { background: #888; }
-            ::-webkit-scrollbar-thumb:hover { background: #555 !important; }
-            ::-webkit-scrollbar-track { cursor: default !important; }
-          `,
+    <div
+      ref={wrapperRef}
+      className="fixed pointer-events-none z-[9999] opacity-0"
+      style={{ left: "0px", top: "0px" }}
+    >
+      <div
+        ref={outerRef}
+        className="absolute rounded-full border border-[hsl(var(--primary))]"
+        style={{
+          width: "40px",
+          height: "40px",
+          transform: "translate(-20px, -20px)",
+          transition:
+            "width 200ms, height 200ms, transform 200ms, opacity 200ms, background-color 200ms",
         }}
       />
       <div
-        className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${
-          isVisible && !isOverScrollbar ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ left: `${position.x}px`, top: `${position.y}px` }}
-      >
-        <div
-          className={`absolute rounded-full border border-[hsl(var(--primary))] transition-all duration-200 ${
-            isDragging
-              ? "w-9 h-9 -translate-x-[18px] -translate-y-[18px] scale-95 bg-[hsl(var(--primary))]/10"
-              : isPointer
-                ? "w-8 h-8 -translate-x-4 -translate-y-4"
-                : "w-10 h-10 -translate-x-5 -translate-y-5"
-          } ${isClicking && !isDragging ? "scale-75 opacity-70" : "scale-100 opacity-100"}`}
-        />
-        <div
-          className={`absolute bg-[hsl(var(--primary))] rounded-full transition-all duration-200 ${
-            isDragging
-              ? "w-3 h-3 -translate-x-1.5 -translate-y-1.5 opacity-90"
-              : isPointer
-                ? "w-2 h-2 -translate-x-1 -translate-y-1"
-                : "w-1 h-1 -translate-x-0.5 -translate-y-0.5"
-          } ${isClicking && !isDragging ? "scale-150 opacity-70" : "scale-100 opacity-100"}`}
-        />
-      </div>
-    </>
+        ref={innerRef}
+        className="absolute bg-[hsl(var(--primary))] rounded-full"
+        style={{
+          width: "4px",
+          height: "4px",
+          transform: "translate(-2px, -2px)",
+          transition:
+            "width 200ms, height 200ms, transform 200ms, opacity 200ms",
+        }}
+      />
+    </div>
   );
 };
 

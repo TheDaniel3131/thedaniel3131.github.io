@@ -1,17 +1,22 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.tsx";
-import ActualMe from "./components/ActualMe.tsx";
-import NotFound from "./components/NotFound.tsx";
-import Space from "./components/Space.tsx";
-import SubpagesWithLoader from "./components/SubpagesWithLoader.tsx";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import CustomCursor from "./components/CustomCursor.tsx";
 import "./index.css";
 
-// if domain expired then use https://d3ffiliates.vercel.app/
-const AffiliatesRedirect = () => { window.location.href = "http://affiliates.danielpoh.com"; return null; };
+const ActualMe = lazy(() => import("./components/ActualMe.tsx"));
+const NotFound = lazy(() => import("./components/NotFound.tsx"));
+const Space = lazy(() => import("./components/Space.tsx"));
+const SubpagesWithLoader = lazy(
+  () => import("./components/SubpagesWithLoader.tsx"),
+);
+
+const AffiliatesRedirect = () => {
+  window.location.href = "http://affiliates.danielpoh.com";
+  return null;
+};
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -20,10 +25,37 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <CustomCursor />
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/actualme" element={<SubpagesWithLoader><ActualMe /></SubpagesWithLoader>} />
-          <Route path="/space" element={<SubpagesWithLoader><Space /></SubpagesWithLoader>} />
+          <Route
+            path="/actualme"
+            element={
+              <Suspense fallback={null}>
+                <SubpagesWithLoader>
+                  <ActualMe />
+                </SubpagesWithLoader>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/space"
+            element={
+              <Suspense fallback={null}>
+                <SubpagesWithLoader>
+                  <Space />
+                </SubpagesWithLoader>
+              </Suspense>
+            }
+          />
           <Route path="/affiliates" element={<AffiliatesRedirect />} />
-          <Route path="*" element={<SubpagesWithLoader><NotFound /></SubpagesWithLoader>} />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={null}>
+                <SubpagesWithLoader>
+                  <NotFound />
+                </SubpagesWithLoader>
+              </Suspense>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

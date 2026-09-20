@@ -12,6 +12,16 @@ import {
   Zap,
   ChevronLeft,
   ChevronRight,
+  MessageCircle,
+  Target,
+  Brain,
+  Clock3,
+  RefreshCw,
+  Sparkles,
+  SearchCheck,
+  Crown,
+  HeartHandshake,
+  BookOpen,
 } from "lucide-react";
 import {
   SiHtml5,
@@ -555,18 +565,18 @@ const skillCategories = [
 ];
 
 const softSkills = [
-  { name: "Communication", icon: "💬" },
-  { name: "Teamwork", icon: "🎯" },
-  { name: "Problem Solving", icon: "🤔" },
-  { name: "Time Management", icon: "⏰" },
-  { name: "Adaptability", icon: "🔄" },
-  { name: "Creativity", icon: "💡" },
-  { name: "Critical Thinking", icon: "🧠" },
-  { name: "Attention to Detail", icon: "🔍" },
-  { name: "Leadership", icon: "👑" },
-  { name: "Emotional Intelligence", icon: "🩵" },
-  { name: "Self-Learning", icon: "📚" },
-  { name: "Analytical Thinking", icon: "📈" },
+  { name: "Communication", icon: MessageCircle },
+  { name: "Teamwork", icon: Target },
+  { name: "Problem Solving", icon: Brain },
+  { name: "Time Management", icon: Clock3 },
+  { name: "Adaptability", icon: RefreshCw },
+  { name: "Creativity", icon: Sparkles },
+  { name: "Critical Thinking", icon: Brain },
+  { name: "Attention to Detail", icon: SearchCheck },
+  { name: "Leadership", icon: Crown },
+  { name: "Emotional Intelligence", icon: HeartHandshake },
+  { name: "Self-Learning", icon: BookOpen },
+  { name: "Analytical Thinking", icon: Lightbulb },
 ];
 
 // const aiTools = [
@@ -757,11 +767,12 @@ export default function SkillsTechnologies() {
           {softSkills.map((skill, index) => (
             <div
               key={index}
-              className="flex flex-col items-center bg-[hsl(var(--card))] p-3 sm:p-4 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:scale-105 text-center group"
+              className="relative flex flex-col items-center bg-[hsl(var(--card))] p-3 sm:p-4 rounded-lg shadow-md border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center group overflow-hidden"
             >
+              <div className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-[hsl(var(--primary))] transition-transform duration-300 group-hover:scale-x-100" />
               <div className="flex justify-center mb-2">
-                <div className="p-2 bg-[hsl(var(--primary))]/10 rounded-full text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))]/20 transition-colors">
-                  <span className="text-lg">{skill.icon}</span>
+                <div className="p-2 bg-[hsl(var(--primary))]/10 rounded-full text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))]/20 group-hover:rotate-6 transition-all duration-300">
+                  <skill.icon className="h-5 w-5" aria-hidden="true" />
                 </div>
               </div>
               <span className="text-xs sm:text-sm font-medium text-center">
