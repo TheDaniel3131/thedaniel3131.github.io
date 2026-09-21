@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useLocation } from "react-router-dom";
 
 const CustomCursor = () => {
@@ -19,7 +20,9 @@ const CustomCursor = () => {
   const isPointerRef = useRef(false);
   const isDraggingStateRef = useRef(false);
   const isClickingRef = useRef(false);
+  const isScrollbarRef = useRef(false);
   const loadingRef = useRef(true);
+  const lastMousePosRef = useRef({ x: -1, y: -1 });
 
   const location = useLocation();
   const isSpacePage = location.pathname === "/space";
@@ -39,25 +42,43 @@ const CustomCursor = () => {
 
     const styleEl = document.createElement("style");
     styleEl.textContent = `
-      body { cursor: none !important; }
-      a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] { cursor: none !important; }
-      body.is-dragging * { transition: none !important; }
-      ::-webkit-scrollbar { cursor: default !important; }
-      ::-webkit-scrollbar-thumb { background: #888; }
-      ::-webkit-scrollbar-thumb:hover { background: #555 !important; }
-      ::-webkit-scrollbar-track { cursor: default !important; }
-    `;
+    body { cursor: none !important; }
+    a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] { cursor: none !important; }
+    body.is-dragging * { transition: none !important; }
+    body.is-dragging,
+    body.is-dragging * { cursor: grabbing !important; }
+    body.is-scrollbar-interaction,
+    body.is-scrollbar-interaction * { cursor: grab !important; }
+    body.is-scrollbar-interaction:active,
+    body.is-scrollbar-interaction:active * { cursor: grabbing !important; }
+    body.is-scrollbar-interaction [data-custom-cursor] {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    html.is-scrollbar-interaction,
+    body.is-scrollbar-interaction { scrollbar-width: auto !important; scrollbar-color: auto !important; }
+    html.is-scrollbar-interaction::-webkit-scrollbar { width: auto !important; height: auto !important; }
+    html.is-scrollbar-interaction::-webkit-scrollbar-track,
+    html.is-scrollbar-interaction::-webkit-scrollbar-thumb { background: initial !important; border-radius: initial !important; }
+  `;
     document.head.appendChild(styleEl);
 
-    // Watch for loading class on body
     const observer = new MutationObserver(() => {
       const isLoading = document.body.classList.contains("loading");
       loadingRef.current = isLoading;
       if (wrapperRef.current) {
-        wrapperRef.current.style.opacity = isLoading ? "0" : "1";
+        wrapperRef.current.style.opacity =
+          isLoading || isScrollbarRef.current ? "0" : "1";
+        wrapperRef.current.style.visibility = isScrollbarRef.current
+          ? "hidden"
+          : "visible";
       }
       if (crosshairRef.current) {
-        crosshairRef.current.style.opacity = isLoading ? "0" : "1";
+        crosshairRef.current.style.opacity =
+          isLoading || isScrollbarRef.current ? "0" : "1";
+        crosshairRef.current.style.visibility = isScrollbarRef.current
+          ? "hidden"
+          : "visible";
       }
     });
 
@@ -66,12 +87,30 @@ const CustomCursor = () => {
       attributeFilter: ["class"],
     });
 
-    // Set initial state
     loadingRef.current = document.body.classList.contains("loading");
 
     const setVisible = (v: boolean) => {
+      if (isScrollbarRef.current) return;
       if (wrapperRef.current) {
         wrapperRef.current.style.opacity = v && !loadingRef.current ? "1" : "0";
+      }
+    };
+
+    const setScrollbarInteraction = (active: boolean) => {
+      isScrollbarRef.current = active;
+      document.body.classList.toggle("is-scrollbar-interaction", active);
+      document.documentElement.classList.toggle(
+        "is-scrollbar-interaction",
+        active,
+      );
+      if (wrapperRef.current) {
+        wrapperRef.current.style.opacity =
+          active || loadingRef.current ? "0" : "1";
+        wrapperRef.current.style.visibility = active ? "hidden" : "visible";
+      }
+      if (crosshairRef.current) {
+        crosshairRef.current.style.opacity = active ? "0" : "1";
+        crosshairRef.current.style.visibility = active ? "hidden" : "visible";
       }
     };
 
@@ -134,13 +173,19 @@ const CustomCursor = () => {
     };
 
     const updatePosition = (e: MouseEvent) => {
-      const isScrollbarArea = e.clientX > window.innerWidth - 20;
+      lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+
+      const overScrollbar = e.clientX >= document.documentElement.clientWidth;
+      if (overScrollbar !== isScrollbarRef.current) {
+        setScrollbarInteraction(overScrollbar);
+      }
+      if (overScrollbar) return;
 
       if (wrapperRef.current) {
         wrapperRef.current.style.left = `${e.clientX}px`;
         wrapperRef.current.style.top = `${e.clientY}px`;
         if (!loadingRef.current) {
-          wrapperRef.current.style.opacity = isScrollbarArea ? "0" : "1";
+          wrapperRef.current.style.opacity = "1";
         }
       }
 
@@ -158,7 +203,7 @@ const CustomCursor = () => {
         window.getComputedStyle(target).cursor === "pointer"
       );
 
-      isPointerRef.current = isClickable && !isScrollbarArea;
+      isPointerRef.current = isClickable;
 
       if (!isSpacePageRef.current) {
         if (isMouseDownRef.current && !isDraggingRef.current) {
@@ -187,6 +232,11 @@ const CustomCursor = () => {
     };
 
     const handleMouseDown = (e: MouseEvent) => {
+      if (e.clientX >= document.documentElement.clientWidth) {
+        setScrollbarInteraction(true);
+        return;
+      }
+
       const target = e.target as HTMLElement;
       if (
         target.tagName.toLowerCase() === "button" ||
@@ -212,6 +262,7 @@ const CustomCursor = () => {
 
     const handleMouseUp = () => {
       isMouseDownRef.current = false;
+      setScrollbarInteraction(false);
       document.body.classList.remove("is-dragging");
 
       if (
@@ -254,6 +305,8 @@ const CustomCursor = () => {
       cancelMomentum();
       observer.disconnect();
       document.body.classList.remove("is-dragging");
+      document.body.classList.remove("is-scrollbar-interaction");
+      document.documentElement.classList.remove("is-scrollbar-interaction");
       document.head.removeChild(styleEl);
       document.removeEventListener("mousemove", updatePosition, true);
       document.removeEventListener("mousedown", handleMouseDown, true);
@@ -274,25 +327,33 @@ const CustomCursor = () => {
   }
 
   if (isSpacePage) {
-    return (
+    return createPortal(
       <div
         ref={crosshairRef}
-        className="fixed pointer-events-none z-[9999] opacity-0 transition-opacity duration-300"
+        data-custom-cursor
+        className="fixed pointer-events-none z-[9999] opacity-0 invisible transition-opacity duration-300"
         style={{ left: "50%", top: "50%" }}
       >
         <div className="absolute w-4 h-4 -translate-x-2 -translate-y-2">
           <div className="absolute top-1/2 left-0 right-0 h-px bg-white/40" />
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/40" />
         </div>
-      </div>
+      </div>,
+      document.body,
     );
   }
 
-  return (
+  return createPortal(
     <div
       ref={wrapperRef}
+      data-custom-cursor
       className="fixed pointer-events-none z-[9999] opacity-0"
-      style={{ left: "0px", top: "0px" }}
+      style={{
+        left: "0px",
+        top: "0px",
+        overflow: "visible",
+        visibility: "hidden",
+      }}
     >
       <div
         ref={outerRef}
@@ -301,8 +362,9 @@ const CustomCursor = () => {
           width: "40px",
           height: "40px",
           transform: "translate(-20px, -20px)",
+          overflow: "visible",
           transition:
-            "width 200ms, height 200ms, transform 200ms, opacity 200ms, background-color 200ms",
+            "width 200ms, height 200ms, opacity 200ms, background-color 200ms",
         }}
       />
       <div
@@ -312,11 +374,11 @@ const CustomCursor = () => {
           width: "4px",
           height: "4px",
           transform: "translate(-2px, -2px)",
-          transition:
-            "width 200ms, height 200ms, transform 200ms, opacity 200ms",
+          transition: "width 200ms, height 200ms, opacity 200ms",
         }}
       />
-    </div>
+    </div>,
+    document.body,
   );
 };
 

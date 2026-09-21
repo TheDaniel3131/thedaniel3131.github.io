@@ -241,7 +241,9 @@ html {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
 }
 
 .animate-on-scroll.animate-fade-in-up {
@@ -257,15 +259,43 @@ html {
   }
 }
 
-/* Smooth transitions for all interactive elements */
-* {
-  transition: color 0.2s ease, background-color 0.2s ease,
-    border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+/* Scoped transitions — only on interactive elements, not everything */
+a,
+button,
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+input,
+textarea,
+select,
+label {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
 /* Custom scrollbar */
+/* Keep custom cursor overlays independent of scrolling and scrollbar interaction. */
+.custom-cursor,
+[data-custom-cursor] {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+/* html,
+body {
+  cursor: default;
+} */
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -273,11 +303,17 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary));
+  background: hsl(var(--muted-foreground) / 0.4);
   border-radius: 4px;
+  min-height: 150px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  transition: background-color 0.8s ease;
-  background: hsl(var(--primary-foreground));
+  background: hsl(var(--muted-foreground) / 0.7);
 }
+
+/* ::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  cursor: default;
+} */
