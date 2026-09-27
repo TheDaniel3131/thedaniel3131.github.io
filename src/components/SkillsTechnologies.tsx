@@ -219,12 +219,12 @@ const skillCategories = [
       },
       {
         name: "Vue.js",
-        level: "Basic",
+        level: "Intermediate",
         icon: <SiVuedotjs className="text-[#4FC08D]" />,
       },
       {
         name: "Laravel",
-        level: "Basic",
+        level: "Intermediate",
         icon: <SiLaravel className="text-[#FF2D20]" />,
       },
       {
