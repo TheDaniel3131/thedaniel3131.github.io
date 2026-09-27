@@ -1,6 +1,7 @@
 name: dptf-portfolio
 services:
   portfolio:
+    image: dptf-portfolio
     build:
       context: .
       dockerfile: Dockerfile.dev
