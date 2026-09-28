@@ -138,7 +138,7 @@ export default function Navbar() {
             </button>
 
             <a
-              href="https://github.com/danielpohtingfong"
+              href="https://github.com/TheDaniel3131"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors"
